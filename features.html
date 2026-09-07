@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0d12" />
+    <title>Features | Imnota</title>
+    <meta
+      name="description"
+      content="Explore Imnota features: local screenshot collections, editable annotations, non-destructive crop, Markdown and PNG prompt bundles, and workspace appearance."
+    />
+    <link rel="canonical" href="https://imnota.xyz/features.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Imnota" />
+    <meta property="og:title" content="Features | Imnota" />
+    <meta
+      property="og:description"
+      content="Explore Imnota features: local screenshot collections, editable annotations, non-destructive crop, Markdown and PNG prompt bundles, and workspace appearance."
+    />
+    <meta property="og:url" content="https://imnota.xyz/features.html" />
+    <meta
+      property="og:image"
+      content="https://imnota.xyz/assets/social-preview.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Imnota. Screenshots that AI understands. An annotated project settings example."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="assets/fonts/plex-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/plex-semibold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css?v=0.2.4" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="./" aria-label="Imnota home"
+        ><img src="assets/logo.svg" width="36" height="36" alt="" /><span
+          >Imnota</span
+        ></a
+      >
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="features.html" aria-current="page">Features</a
+        ><a href="changelog.html">Changelog</a
+        ><a href="/#how-it-works">How it works</a
+        ><a href="/#installation">Installation</a
+        ><a href="/#open-source">Open source</a>
+      </nav>
+      <a class="button button-small" href="/#installation"
+        >Install Imnota <span aria-hidden="true">↗</span></a
+      >
+      <details class="mobile-menu">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="features.html" aria-current="page">Features</a
+          ><a href="changelog.html">Changelog</a
+          ><a href="/#how-it-works">How it works</a
+          ><a href="/#installation">Installation</a
+          ><a href="/#open-source">Open source</a>
+        </nav>
+      </details>
+    </header>
+    <main id="main">
+      <section class="page-intro wrap">
+        <p class="eyebrow">Imnota features</p>
+        <h1>Every detail.<br />In the handoff.</h1>
+        <p class="page-lead">
+          A local workspace for collecting screenshots, marking what matters and
+          giving your coding agent the context it needs.
+        </p>
+        <div class="actions">
+          <a class="button" href="/#installation">Install Imnota</a
+          ><a class="text-link" href="changelog.html"
+            >What changed in 0.2.4 <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+      <nav class="section-nav wrap" aria-label="Feature categories">
+        <a href="#capture">Capture &amp; organize</a
+        ><a href="#annotate">Annotate &amp; refine</a
+        ><a href="#handoff">Context &amp; export</a
+        ><a href="#workspace">Your workspace</a>
+      </nav>
+      <section
+        class="feature-group section wrap"
+        id="capture"
+        aria-labelledby="capture-heading"
+      >
+        <div>
+          <h2 id="capture-heading">Capture &amp; organize</h2>
+          <p>Bring the screens together before explaining the changes.</p>
+        </div>
+        <dl class="feature-definitions">
+          <div>
+            <dt>Import, paste or drag and drop</dt>
+            <dd>
+              Add PNG, JPEG and WebP screenshots in the way that fits your
+              workflow.
+            </dd>
+          </div>
+          <div>
+            <dt>Collections with shared context</dt>
+            <dd>
+              Keep related screenshots together and give the collection one
+              overall instruction. Archive and restore collections as the work
+              moves on.
+            </dd>
+          </div>
+          <div>
+            <dt>Keep it, without exporting it</dt>
+            <dd>
+              Include or exclude individual screenshots from a prompt bundle
+              without deleting them from the collection.
+            </dd>
+          </div>
+          <div>
+            <dt>Recover from a deletion</dt>
+            <dd>
+              Screenshot deletion uses the operating-system trash. Imnota's Undo
+              recovery gives you a way back.
+            </dd>
+          </div>
+        </dl>
+      </section>
+      <figure class="wide-product wrap">
+        <img
+          src="assets/screenshots/workbench-024.webp"
+          srcset="
+            assets/screenshots/workbench-small-024.webp 1000w,
+            assets/screenshots/workbench-024.webp       1600w
+          "
+          sizes="(max-width: 767px) 100vw, 88vw"
+          width="1600"
+          height="1000"
+          loading="lazy"
+          alt="Actual Imnota 0.2.4 workspace showing a screenshot collection, annotation canvas and description inspector."
+        />
+        <figcaption>
+          Actual Imnota 0.2.4 renderer with example project content.
+        </figcaption>
+      </figure>
+      <section
+        class="feature-group section wrap"
+        id="annotate"
+        aria-labelledby="annotate-heading"
+      >
+        <div>
+          <h2 id="annotate-heading">Annotate &amp; refine</h2>
+          <p>Point to the exact change. Keep the source intact.</p>
+        </div>
+        <dl class="feature-definitions">
+          <div>
+            <dt>A complete annotation layer</dt>
+            <dd>
+              Use arrows, lines, shapes, highlights, text, callouts and numbered
+              steps. Mark sensitive areas with masks.
+            </dd>
+          </div>
+          <div>
+            <dt>Non-destructive cropping</dt>
+            <dd>
+              Adjust the crop using resize handles, then Apply, Cancel or Reset.
+              Your original screenshot is preserved.
+            </dd>
+          </div>
+          <div>
+            <dt>Editable marks, undo and redo</dt>
+            <dd>
+              Move and resize annotations without baking them into the source
+              image. Undo and redo annotation edits as you refine the feedback.
+            </dd>
+          </div>
+          <div>
+            <dt>Canvas controls that stay out of the way</dt>
+            <dd>
+              Pan and zoom, return to actual size and collapse workspace
+              navigation when you need more canvas.
+            </dd>
+          </div>
+        </dl>
+      </section>
+      <section
+        class="feature-group section wrap"
+        id="handoff"
+        aria-labelledby="handoff-heading"
+      >
+        <div>
+          <h2 id="handoff-heading">Context &amp; export</h2>
+          <p>The image shows where. Your words explain what and why.</p>
+        </div>
+        <dl class="feature-definitions">
+          <div>
+            <dt>Descriptions and priorities</dt>
+            <dd>
+              Add an optional Markdown description to each screenshot and set
+              Low, Medium or High priority for your agent.
+            </dd>
+          </div>
+          <div>
+            <dt>Markdown and PNG prompt bundles</dt>
+            <dd>
+              Export the current collection as timestamped Markdown and
+              high-resolution prompt images, including screenshot references and
+              your annotations.
+            </dd>
+          </div>
+          <div>
+            <dt>Readable exports for larger collections</dt>
+            <dd>
+              Large collections split automatically into readable bundles on a
+              white background.
+            </dd>
+          </div>
+          <div>
+            <dt>Copy the format your tool accepts</dt>
+            <dd>
+              Copy Markdown, the image or both. Combined clipboard support
+              depends on the receiving editor; separate copy actions remain
+              available.
+            </dd>
+          </div>
+        </dl>
+      </section>
+      <section
+        class="appearance-story section wrap"
+        aria-labelledby="appearance-heading"
+      >
+        <figure>
+          <img
+            src="assets/art/workspace-slate.webp"
+            width="1536"
+            height="864"
+            loading="lazy"
+            alt="Original graphite mountain backdrop with a fine violet mineral seam, created with GPT Image for the Imnota example workspace."
+          />
+          <figcaption>
+            Original GPT Image artwork for a local workspace backdrop.
+          </figcaption>
+        </figure>
+        <div>
+          <h2 id="appearance-heading">A background<br />of your own.</h2>
+          <p>
+            Choose a local image and use one backdrop across the app. Keep your
+            uploaded images in a local library, with grouped appearance controls
+            in Settings.
+          </p>
+          <p class="small">
+            Desktop glass is optional <strong>Beta</strong>. Rendering can
+            glitch during scrolling or transparency. Select
+            <strong>No image</strong> or <strong>Solid surfaces</strong> to turn
+            it off.
+          </p>
+        </div>
+      </section>
+      <section
+        class="feature-group section wrap"
+        id="workspace"
+        aria-labelledby="workspace-heading"
+      >
+        <div>
+          <h2 id="workspace-heading">Your workspace</h2>
+          <p>Your files and your tools, on your machine.</p>
+        </div>
+        <dl class="feature-definitions">
+          <div>
+            <dt>Plain local files</dt>
+            <dd>
+              Projects use JSON, Markdown and image files in folders you can
+              copy, back up or version-control. No account, cloud storage
+              dependency or built-in AI service is required.
+            </dd>
+          </div>
+          <div>
+            <dt>Light, dark or system</dt>
+            <dd>
+              Choose the appearance that suits your workspace, including curated
+              settings and local backdrops.
+            </dd>
+          </div>
+          <div>
+            <dt>Stable releases or opt-in previews</dt>
+            <dd>
+              Check for updates on demand. Stay on Stable or choose Nightly for
+              previews. Available install actions depend on your platform and
+              package.
+            </dd>
+          </div>
+          <div>
+            <dt>Open source, from the start</dt>
+            <dd>
+              Imnota is MIT licensed, with Windows, macOS and Linux downloads.
+              Inspect the source, build it locally or contribute an improvement.
+            </dd>
+          </div>
+        </dl>
+      </section>
+      <section class="reference-note wrap">
+        <p>
+          Feature details reflect
+          <a href="https://github.com/Dytschgo/imnota/blob/v0.2.4/README.md"
+            >Imnota v0.2.4</a
+          >. See the
+          <a
+            href="https://github.com/Dytschgo/imnota/blob/v0.2.4/docs/user-guide.md"
+            >user guide</a
+          >
+          for controls and the <a href="changelog.html">changelog</a> for
+          release-specific notes.
+        </p>
+        <a class="button" href="/#installation">Download the stable release</a>
+      </section>
+    </main>
+    <footer class="site-footer wrap">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="./"
+            ><img src="assets/logo.svg" width="36" height="36" alt="" /><span
+              >Imnota</span
+            ></a
+          >
+          <p>
+            A local-first tool for turning annotated screenshots<br />into
+            AI-ready prompt bundles.
+          </p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <a href="features.html">Features</a
+          ><a href="changelog.html">Changelog</a
+          ><a href="https://github.com/Dytschgo/imnota">GitHub</a
+          ><a href="https://github.com/Dytschgo/imnota/releases/latest"
+            >Releases</a
+          ><a href="https://github.com/Dytschgo/imnota#readme">README</a
+          ><a href="https://github.com/Dytschgo/imnota/blob/main/LICENSE"
+            >MIT licence</a
+          >
+        </nav>
+      </div>
+      <p class="footer-note">
+        Made for clearer handoffs between people, screens and AI.
+      </p>
+    </footer>
+  </body>
+</html>
