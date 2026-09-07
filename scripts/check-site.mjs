@@ -268,13 +268,24 @@ for (const route of ["features.html", "changelog.html"]) {
 await page.goto(`${baseURL}/changelog.html#v0-2-4`);
 assert.match(await page.locator("#v0-2-4").innerText(), /Beta/);
 assert.match(await page.locator("#v0-2-4").innerText(), /Back up/);
-assert.equal(await page.locator(".release-entry").count(), 5);
+assert.equal(await page.locator(".release-entry").count(), 6);
+assert.match(await page.locator("#v0-2-5").innerText(), /schema 4/);
+assert.match(await page.locator("#v0-2-5").innerText(), /Text-only/);
 await page.goto(baseURL);
 await page.locator('.desktop-nav a[href="features.html"]').click();
 assert.equal(new URL(page.url()).pathname, "/features.html");
 await page.locator('.desktop-nav a[href="changelog.html"]').click();
 assert.equal(new URL(page.url()).pathname, "/changelog.html");
 assert.deepEqual(errors, []);
+await page.goto(baseURL);
+const stableLinks = await page
+  .locator(".download-links a")
+  .evaluateAll((links) => links.map((link) => link.href));
+assert.equal(stableLinks.length, 3);
+assert.ok(
+  stableLinks.every((link) => link.includes("/releases/download/v0.2.5/")),
+  "Download links must point to stable 0.2.5",
+);
 const motion = await checkMotion(browser, baseURL);
 const report = {
   motion,
