@@ -28,10 +28,11 @@ Production is https://imnota.xyz/. The release process runs browser checks local
 
 ## Content and visuals
 
+- The hero uses a straight selection frame with four square handles, replacing the decorative cursor, dot and doubled underline. Its 600 ms reveal settles once; reduced-motion, Save-Data and no-JavaScript views show the complete static frame. Desktop, tablet and mobile captures were inspected after this correction.
 - The homepage, feature page and public changelog use the published stable v0.2.5 release and versioned upstream sources.
 - The changelog covers six downloadable stable releases. The unpublished 0.2.3 tag is explained rather than presented as a download; Nightly builds are clearly separated.
 - Current workbench, drawing and Markdown screenshots were captured from v0.2.5 commit `bd33da45fac5bf05f20e6cdb9f66c5db709b3bdf`, with deterministic example data. Retained 0.2.4 captures originate from `b918a6a819fd31d26470301334aa3a9ade4a4f86`. The workbench's local GPT Image backdrop uses Balanced surfaces at 42% opacity; native Desktop glass is off.
-- The screenshot capture confirms the renderer configured the local backdrop. The only upstream renderer console messages were React development warnings about spread key props. No bridge or page errors occurred.
+- The workbench capture confirms the renderer configured the local backdrop. Its only upstream renderer console messages were React development warnings about spread key props. No bridge or page errors occurred. The drawing capture's unused remote-font CSP warnings are documented in ASSETS.md.
 - GPT Image created two original artworks, both saved in the repository and integrated into the site. Their full prompts and provenance are in ASSETS.md.
 - Desktop and mobile captures were reviewed for the homepage, feature reference and changelog. Versioned screenshot filenames and stylesheet URLs prevent existing visitors from retaining the previous release assets.
 
