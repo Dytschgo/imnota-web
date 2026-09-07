@@ -2,6 +2,10 @@ import { chromium } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
+const baseURL = (process.env.SITE_URL || "http://127.0.0.1:4173").replace(
+  /\/$/,
+  "",
+);
 await mkdir(".qa", { recursive: true });
 const browser = await chromium.launch();
 const context = await browser.newContext({
@@ -13,7 +17,7 @@ page.on("pageerror", (error) => errors.push(error.message));
 const results = [];
 for (const width of [320, 768, 1024, 1440]) {
   await page.setViewportSize({ width, height: 900 });
-  await page.goto("http://127.0.0.1:4173");
+  await page.goto(baseURL);
   await page.evaluate(() => document.fonts.ready);
   await page.locator(".site-footer").scrollIntoViewIfNeeded();
   await page.evaluate(() =>
@@ -121,7 +125,7 @@ assert.equal(
     .evaluate((el) => getComputedStyle(el).animationName),
   "none",
 );
-await page.goto("http://127.0.0.1:4173/#install-manual");
+await page.goto(`${baseURL}/#install-manual`);
 assert.equal(await page.locator("#install-manual").isVisible(), true);
 assert.deepEqual(errors, []);
 const nojs = await browser.newContext({
@@ -129,7 +133,7 @@ const nojs = await browser.newContext({
   viewport: { width: 320, height: 740 },
 });
 const plain = await nojs.newPage();
-await plain.goto("http://127.0.0.1:4173");
+await plain.goto(baseURL);
 for (const id of ["unix", "windows", "manual"])
   assert.equal(await plain.locator(`#install-${id}`).isVisible(), true);
 assert.equal(await plain.locator(".copy-button:visible").count(), 0);
@@ -146,7 +150,7 @@ assert.equal(
   false,
 );
 await plain.screenshot({ path: ".qa/no-js-no-images.png", fullPage: true });
-await page.goto("http://127.0.0.1:4173/404.html");
+await page.goto(`${baseURL}/404.html`);
 assert.equal(await page.locator("h1").textContent(), "This page is missing.");
 const report = {
   layouts: results,

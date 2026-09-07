@@ -12,19 +12,27 @@ Open http://localhost:4173. Reading, navigation, installation commands and FAQ w
 
 ## Hostinger deployment
 
-1. Push this website repository to GitHub on `main`.
-2. In Hostinger hPanel, open the website dashboard, then **Advanced > Git**.
-3. Connect GitHub, authorize this repository, select it and choose `main`.
-4. Deploy the repository root to `public_html`. `index.html` is already in that root. Use a dedicated website directory because deployment can overwrite existing files there.
-5. There is **no build command**. Do not run `npm install` on the host. The development dependencies only support local verification and screenshot capture. A Node.js server or Node.js Web App plan is unnecessary.
-6. Enable automatic deployment in the Git settings, or configure the Hostinger webhook if that option is available on your plan. Manual **Redeploy** also pulls the selected branch.
-7. Confirm the custom domain, HTTPS, favicon, Open Graph preview and mobile layout after the first deployment. Test a missing URL: `.htaccess` supplies `/404.html` on Apache/LiteSpeed hosts that permit overrides. Otherwise configure the host's custom error page to use `404.html`.
+Production domain: https://imnota.xyz/.
 
-Before deployment, replace every `https://imnota.example/` occurrence in `index.html` with the actual HTTPS domain. This explicitly reserved placeholder appears in the canonical, Open Graph URL and Open Graph image URL. No production domain has been assumed.
+Create the ready-to-serve static archive:
 
-Deployment is prepared but Hostinger is not connected by this repository. Current setup reference: [Hostinger Git deployment documentation](https://www.hostinger.com/support/1583302-how-to-deploy-a-git-repository-in-hostinger/).
+```bash
+python scripts/package-site.py
+```
 
-If migrating to a generator later, document its exact build command and deploy only its static output. Do not assume standard Git hosting builds a Node application.
+The script writes a timestamped ZIP and prints its SHA-256 under ignored `.qa/`. It includes only HTML, CSS, browser JavaScript, crawler files, `.htaccess`, licensed assets and `LICENSE`. Development dependencies, source-capture scripts, Git metadata and internal reports are excluded. No build command, `npm install` or Node server is needed on the host.
+
+Deploy that archive with the Hostinger MCP `hosting_deployStaticWebsite` tool, using `imnota.xyz` as the domain and the printed absolute ZIP path as `archivePath`. The tool uploads and extracts it directly. Deployment replaces the site's existing contents, so retain the previous working archive for recovery and confirm the domain before deploying. To roll back, deploy the retained archive to the same domain.
+
+After deployment, check HTTPS, canonical and Open Graph URLs, assets, installation controls, and a nonexistent nested URL. `.htaccess` configures the custom `/404.html` response on Apache/LiteSpeed. Run the full browser suite against production from PowerShell:
+
+```powershell
+$env:SITE_URL = 'https://imnota.xyz'
+npm test
+Remove-Item Env:SITE_URL
+```
+
+The production URL is set in `index.html`, `robots.txt` and `sitemap.xml`. If the domain changes, update all three before packaging. This archive workflow does not configure Git automatic deployment. See `VERIFICATION.md` for observed deployment checks.
 
 ## Content and asset provenance
 

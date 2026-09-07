@@ -1,6 +1,6 @@
 # Website verification
 
-Verified locally on 7 September 2026 with the static files served by `python -m http.server 4173`. The website is ready to connect to Hostinger; no Hostinger deployment has been performed.
+Published to https://imnota.xyz/ through the Hostinger MCP on 7 September 2026. The full browser suite passed both locally and against the live HTTPS site. Local preview used `python -m http.server 4173`.
 
 ## Automated checks
 
@@ -14,7 +14,7 @@ Verified locally on 7 September 2026 with the static files served by `python -m 
 - No browser runtime errors or broken images/fonts in the checked layouts.
 - No visible em dash or en dash in the page text.
 - Manual-build fragment links activate the correct panel, including direct initial navigation.
-- The standalone 404 page renders correctly. Apache/LiteSpeed error routing remains a hosting-side check.
+- The standalone 404 page renders correctly. A nonexistent nested production URL returns HTTP 404 with the custom page.
 
 ## Lighthouse mobile lab result
 
@@ -39,10 +39,18 @@ Reviewed full-page desktop and mobile captures, the hero, installation controls 
 
 The GitHub source capture uses an isolated copy of upstream commit `63ddf578141ee2114dbd24c31c36c44950f7dfc1`. Existing uncommitted desktop app work was neither changed nor included.
 
-## Owner's deployment follow-up
+## Production verification
 
-1. Connect `Dytschgo/imnota-web`, branch `main`, to the Hostinger site and deploy the repository root.
-2. Supply the final domain so the explicit `https://imnota.example/` canonical and Open Graph placeholders can be replaced.
-3. Verify HTTPS, production asset loading, clipboard permission, favicon, social crawler image and the 404 response after deployment.
+- Hostinger accepted the static archive deployment; subsequent file inventory and live HTTP checks confirmed the update.
+- Canonical and Open Graph URLs use `https://imnota.xyz/`; `robots.txt` advertises the matching sitemap.
+- All 18 public files tested over HTTPS returned HTTP 200. Non-raster response bytes match local files. Raster images match decoded pixels; Hostinger adds metadata/re-encodes the social PNG without changing its pixels.
+- HTTP redirects to HTTPS with status 301. A nonexistent nested URL returns the custom page with status 404.
+- The full production browser suite passes at 320, 768, 1024 and 1440 pixel widths with zero axe violations and no runtime errors. Installation tabs, keyboard navigation, clipboard success/failure, mobile menu, no-JavaScript reading and reduced motion pass.
+- The deployed inventory contains only the public package. Development dependencies, scripts and repository documentation were removed by the static deployment.
+- Terra independently reviewed the website. Sol independently reviewed the final archive and deployment/recovery plan before publication. The placeholder metadata finding was resolved.
 
-Raw reports and review screenshots are generated under ignored `.qa/`. Run the documented checks to reproduce them.
+Published archive: `.qa/imnota-web_20260907_134926.zip`, SHA-256 `6f3deb88301b3892aef99fc5fa7e5de7fa2b29e2fdc4770f0623e4da5ff21ace`.
+
+The prior static site is retained locally as `.qa/imnota-baseline-7206ac1.zip` for recovery. It includes the prior placeholder metadata, so use the published archive above for a recovery that preserves the final domain configuration. Redeploy a retained archive with `hosting_deployStaticWebsite`; see README.md for the packaging workflow.
+
+Raw reports and review screenshots are generated under ignored `.qa/`. Production file checks are recorded in `.qa/production-verification.json`; browser results are in `.qa/check-results.json`, with the local run retained as `.qa/local-check-results.json`. Lighthouse scores above are local lab measurements. External social platforms' cached previews and search indexing were not measured. Git automatic deployment was not configured by this archive deployment.
