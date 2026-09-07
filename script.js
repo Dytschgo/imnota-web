@@ -121,7 +121,7 @@ if (heroVisual) {
       image.height * Number(source.dataset.annotationY);
     const endX = card.left - figure.left;
     const endY = label.bottom - figure.top;
-    const elbowX = stacked ? Math.min(startX, endX) - 16 : (startX + endX) / 2;
+    const elbowX = stacked ? Math.min(startX, endX) - 16 : endX - 12;
     line.setAttribute("viewBox", `0 0 ${figure.width} ${figure.height}`);
     line
       .querySelector("path")
