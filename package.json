@@ -1,0 +1,26 @@
+{
+  "name": "imnota-web",
+  "version": "1.0.0",
+  "description": "Static marketing website for Imnota",
+  "scripts": {
+    "preview": "python -m http.server 4173",
+    "format": "prettier --write index.html 404.html styles.css script.js scripts README.md VERIFICATION.md package.json .htmlvalidate.json",
+    "format:check": "prettier --check index.html 404.html styles.css script.js scripts README.md VERIFICATION.md package.json .htmlvalidate.json",
+    "validate": "html-validate index.html 404.html",
+    "test": "node scripts/check-site.mjs",
+    "audit:performance": "node scripts/audit-performance.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "html-validate": "^11.14.0",
+    "lighthouse": "^13.4.1",
+    "playwright": "^1.63.0",
+    "prettier": "^3.9.6",
+    "sharp": "^0.35.4"
+  }
+}

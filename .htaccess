@@ -1,0 +1,13 @@
+ErrorDocument 404 /404.html
+
+# Keep development and repository metadata out of the public web surface.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(?:\.git|\.github|\.qa|node_modules|scripts|test-results)(?:/|$) - [F,L]
+  RewriteRule ^(?:package(?:-lock)?\.json|README\.md|VERIFICATION\.md|\.gitignore|\.prettierignore|\.htmlvalidate\.json)$ - [F,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

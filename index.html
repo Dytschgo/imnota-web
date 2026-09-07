@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0d12" />
+    <title>Imnota | Screenshots that AI understands</title>
+    <meta
+      name="description"
+      content="Imnota is a local-first open-source desktop tool for annotating screenshots and turning them into AI-ready prompt bundles for coding agents."
+    />
+    <!-- Replace https://imnota.example/ with the production URL before deployment. -->
+    <link rel="canonical" href="https://imnota.example/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Imnota" />
+    <meta
+      property="og:title"
+      content="Imnota | Screenshots that AI understands"
+    />
+    <meta
+      property="og:description"
+      content="Annotate what matters. Add context. Hand your coding agent a prompt bundle it can use."
+    />
+    <meta property="og:url" content="https://imnota.example/" />
+    <meta
+      property="og:image"
+      content="https://imnota.example/assets/social-preview.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Imnota. Screenshots that AI understands. An annotated project settings example."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="assets/fonts/plex-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/plex-semibold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="./" aria-label="Imnota home"
+        ><img src="assets/logo.svg" width="36" height="36" alt="" /><span
+          >Imnota</span
+        ></a
+      >
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#how-it-works">How it works</a
+        ><a href="#installation">Installation</a
+        ><a href="#open-source">Open source</a>
+      </nav>
+      <a class="button button-small" href="#installation"
+        >Install Imnota <span aria-hidden="true">↗</span></a
+      >
+      <details class="mobile-menu">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="#how-it-works">How it works</a
+          ><a href="#installation">Installation</a
+          ><a href="#open-source">Open source</a>
+        </nav>
+      </details>
+    </header>
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="hero-heading">
+        <div class="hero-intro">
+          <h1 id="hero-heading">
+            Screenshots that<br />AI
+            <span class="marked-word"
+              >understands<span
+                class="mark-corner"
+                aria-hidden="true"
+              ></span></span
+            >.
+          </h1>
+          <div class="hero-copy">
+            <p class="lead">
+              Annotate what matters, add the missing context, and hand your
+              coding agent a prompt bundle it can actually use.
+            </p>
+            <div class="actions">
+              <a class="button" href="#installation"
+                >Install Imnota <span aria-hidden="true">↓</span></a
+              ><a class="text-link" href="https://github.com/Dytschgo/imnota"
+                >View source on GitHub <span aria-hidden="true">↗</span></a
+              >
+            </div>
+            <p class="trust-line">
+              <span class="local-indicator" aria-hidden="true"></span
+              >Local-first desktop app. Open source. No account required.
+            </p>
+          </div>
+        </div>
+        <figure class="hero-visual">
+          <div class="workbench-frame">
+            <img
+              class="workbench"
+              src="assets/screenshots/workbench.webp"
+              srcset="
+                assets/screenshots/workbench-small.webp 1000w,
+                assets/screenshots/workbench.webp       1600w
+              "
+              sizes="(max-width: 767px) 100vw, 76vw"
+              width="1600"
+              height="1000"
+              alt="Imnota workbench with a collection rail, annotated project settings screenshot and inspector with a description and High agent priority."
+              fetchpriority="high"
+            />
+          </div>
+          <svg
+            class="handoff-line"
+            viewBox="0 0 500 170"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d="M4 8 H175 V135 H493" pathLength="1"></path>
+            <circle cx="4" cy="8" r="5"></circle>
+            <circle cx="493" cy="135" r="5"></circle>
+          </svg>
+          <div class="prompt-preview">
+            <div class="preview-label">
+              <span>Markdown handoff</span
+              ><span class="file-type">.md + .png</span>
+            </div>
+            <div class="prompt-content">
+              <p class="md-heading"># Settings review</p>
+              <p class="md-heading">## Overall context</p>
+              <p>
+                Improve clarity and keyboard accessibility in the project
+                settings.
+              </p>
+              <p class="priority">Priority for agent: High</p>
+              <p>
+                Make Save changes the primary action. Align the buttons with the
+                fields and increase the button contrast.
+              </p>
+              <div class="preview-note">
+                <span>1</span> Make the primary action clear.
+              </div>
+            </div>
+            <div class="bundle-footer">
+              Your screenshot. Your context. Ready to paste.
+            </div>
+          </div>
+          <figcaption>
+            Actual Imnota interface with example project content. Markdown
+            excerpt shown beside it.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="problem section wrap" aria-labelledby="problem-heading">
+        <div class="section-heading">
+          <p class="eyebrow">Give the picture a point.</p>
+          <h2 id="problem-heading">
+            A screenshot shows the symptom.<br /><span class="muted"
+              >Your agent still needs the context.</span
+            >
+          </h2>
+          <p>
+            A raw screenshot leaves the important parts implicit. What is wrong?
+            What should change? Which part matters? Imnota helps you make it
+            explicit, right in your local workflow.
+          </p>
+        </div>
+        <div class="comparison">
+          <figure class="before">
+            <div class="image-label">
+              Just the screenshot <span>Where should I look?</span>
+            </div>
+            <div class="comparison-image">
+              <img
+                src="assets/screenshots/example-before.webp"
+                width="960"
+                height="600"
+                alt="Example project settings screen. The Save changes button has low contrast and the action row is misaligned."
+                loading="lazy"
+              /><span class="question q-one" aria-hidden="true">?</span
+              ><span class="question q-two" aria-hidden="true">?</span
+              ><span class="question q-three" aria-hidden="true">?</span>
+            </div>
+            <figcaption>
+              The screen is visible. The intention is missing.
+            </figcaption>
+          </figure>
+          <figure class="after">
+            <div class="image-label">
+              With Imnota <span>Here. This. Because.</span>
+            </div>
+            <div class="comparison-image">
+              <img
+                src="assets/screenshots/example-after.webp"
+                width="960"
+                height="600"
+                alt="The same example with an indigo rectangle around the action row, an arrow pointing at Save changes and a numbered annotation."
+                loading="lazy"
+              />
+            </div>
+            <figcaption>
+              <span class="annotation-number">1</span> Make Save changes the
+              primary action. Align it with the fields.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section
+        class="workflow section wrap"
+        id="how-it-works"
+        aria-labelledby="workflow-heading"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">From seeing it to explaining it.</p>
+          <h2 id="workflow-heading">Four steps. One clear handoff.</h2>
+        </div>
+        <ol class="workflow-list">
+          <li>
+            <span class="step-number">01</span>
+            <h3>Collect</h3>
+            <p>Import, paste or drag in PNG, JPEG or WebP screenshots.</p>
+            <div class="step-fragment formats">
+              <span>PNG</span><span>JPEG</span><span>WebP</span>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">02</span>
+            <h3>Mark</h3>
+            <p>
+              Add arrows, lines, shapes, highlights, text, callouts, steps or
+              sensitive-area masks.
+            </p>
+            <div
+              class="step-fragment annotation-tools"
+              role="img"
+              aria-label="Arrow, rectangle and numbered step"
+            >
+              <span aria-hidden="true">↗</span
+              ><span class="rectangle-tool" aria-hidden="true"></span
+              ><span class="annotation-number" aria-hidden="true">1</span>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">03</span>
+            <h3>Describe</h3>
+            <p>
+              Add collection context, screenshot descriptions and agent
+              priority.
+            </p>
+            <div class="step-fragment priority-fragment">
+              <span>Priority for agent</span><strong>High</strong>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">04</span>
+            <h3>Copy</h3>
+            <p>
+              Export timestamped Markdown and high-resolution PNG prompt
+              bundles.
+            </p>
+            <div class="step-fragment formats">
+              <span>.md</span><span>+</span><span>.png</span>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section
+        class="product-detail section wrap"
+        aria-labelledby="detail-heading"
+      >
+        <h2 id="detail-heading">
+          Less explaining around the image.<br /><span class="muted"
+            >More context inside it.</span
+          >
+        </h2>
+        <div class="detail-layout">
+          <figure class="detail-image">
+            <img
+              src="assets/screenshots/detail.webp"
+              width="1000"
+              height="850"
+              alt="Close view of the actual Imnota canvas and inspector, showing annotations alongside the screenshot description and agent priority."
+              loading="lazy"
+            />
+            <figcaption>
+              Annotations and context, side by side. Example project.
+            </figcaption>
+          </figure>
+          <div class="capabilities">
+            <article>
+              <span class="annotation-number">1</span>
+              <div>
+                <h3>Make visual feedback precise</h3>
+                <p>
+                  Point directly at the part of a screen that needs attention.
+                  Keep editable annotations separate from the original
+                  screenshot.
+                </p>
+              </div>
+            </article>
+            <article>
+              <span class="annotation-number">2</span>
+              <div>
+                <h3>Keep project context together</h3>
+                <p>
+                  Organize related screenshots into local collections. Add
+                  shared context, then archive and restore collections as the
+                  work changes.
+                </p>
+              </div>
+            </article>
+            <article>
+              <span class="annotation-number">3</span>
+              <div>
+                <h3>Export a handoff your agent can read</h3>
+                <p>
+                  Copy Markdown, image or both. Large collections split
+                  automatically into readable prompt bundles.
+                </p>
+                <p class="small">
+                  The receiving editor chooses which clipboard formats it
+                  accepts. Separate copy actions are always available.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="local-first section" aria-labelledby="local-heading">
+        <div class="wrap local-layout">
+          <div>
+            <p class="eyebrow local-text">Local-first, by design.</p>
+            <h2 id="local-heading">
+              Your project stays a folder on your machine.
+            </h2>
+            <p class="local-description">
+              Plain files you can copy, back up and version-control. Keep your
+              screenshots and context together, in a workspace you choose.
+            </p>
+            <ul class="local-facts">
+              <li>No account required</li>
+              <li>No cloud storage dependency</li>
+              <li>No built-in AI provider connection</li>
+              <li>No telemetry by default</li>
+              <li>Portable JSON, Markdown and image files</li>
+              <li>Source screenshots are not overwritten</li>
+            </ul>
+          </div>
+          <figure class="folder-diagram">
+            <div class="folder-heading">
+              <span aria-hidden="true">▱</span> My Project/
+            </div>
+            <ul class="file-tree">
+              <li><span>project.json</span><small>Project metadata</small></li>
+              <li>
+                <span>collections/</span>
+                <ul>
+                  <li>
+                    <span>001-collection/</span>
+                    <ul>
+                      <li>screenshots/</li>
+                      <li>annotations/</li>
+                      <li class="export-folder">
+                        exports/
+                        <div class="export-formats">
+                          Markdown <span>+</span> PNG
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <figcaption>
+              Your local collection becomes a portable prompt bundle.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section
+        class="installation section wrap"
+        id="installation"
+        aria-labelledby="install-heading"
+      >
+        <div class="install-intro">
+          <p class="eyebrow">Ready when you are.</p>
+          <h2 id="install-heading">Install Imnota.</h2>
+          <p>
+            One command to download the latest desktop build. Then make your
+            first screenshot useful.
+          </p>
+          <a
+            class="text-link"
+            href="https://github.com/Dytschgo/imnota/releases/latest"
+            >Browse all releases <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <div class="install-options">
+          <div
+            class="install-tabs"
+            role="group"
+            aria-label="Installation method"
+          >
+            <a href="#install-unix" id="tab-unix">macOS / Linux</a
+            ><a href="#install-windows" id="tab-windows">Windows</a
+            ><a href="#install-manual" id="tab-manual">Manual build</a>
+          </div>
+          <section
+            class="install-panel"
+            id="install-unix"
+            aria-labelledby="tab-unix"
+          >
+            <h3>macOS / Linux</h3>
+            <div class="code-block">
+              <div class="code-heading">
+                <span>Terminal</span
+                ><button
+                  type="button"
+                  class="copy-button"
+                  data-copy="command-unix"
+                  aria-label="Copy macOS and Linux installation command"
+                  hidden
+                >
+                  Copy
+                </button>
+              </div>
+              <pre
+                tabindex="0"
+                aria-label="macOS and Linux installation command"
+              ><code id="command-unix">curl -fsSL https://raw.githubusercontent.com/Dytschgo/imnota/main/scripts/install.sh | bash</code></pre>
+            </div>
+            <p class="small">
+              No Node.js, pnpm, Electron or development dependencies needed.
+            </p>
+            <a
+              class="text-link small"
+              href="https://github.com/Dytschgo/imnota/releases/latest/download/Imnota-mac.zip"
+              >Download the macOS ZIP <span aria-hidden="true">↗</span></a
+            >
+          </section>
+          <section
+            class="install-panel"
+            id="install-windows"
+            aria-labelledby="tab-windows"
+          >
+            <h3>Windows</h3>
+            <div class="code-block">
+              <div class="code-heading">
+                <span>PowerShell</span
+                ><button
+                  type="button"
+                  class="copy-button"
+                  data-copy="command-windows"
+                  aria-label="Copy Windows installation command"
+                  hidden
+                >
+                  Copy
+                </button>
+              </div>
+              <pre
+                tabindex="0"
+                aria-label="Windows installation command"
+              ><code id="command-windows">irm https://raw.githubusercontent.com/Dytschgo/imnota/main/scripts/install.ps1 | iex</code></pre>
+            </div>
+            <p class="small">
+              No Node.js, pnpm, Electron or development dependencies needed.
+            </p>
+          </section>
+          <section
+            class="install-panel"
+            id="install-manual"
+            aria-labelledby="tab-manual"
+          >
+            <h3>Manual build</h3>
+            <p class="small">
+              Clone
+              <a href="https://github.com/Dytschgo/imnota"
+                >the source repository</a
+              >
+              and open its folder in your terminal. Use Node.js 20+ and
+              Corepack, then run the packaging command for your operating
+              system.
+            </p>
+            <div class="code-block">
+              <div class="code-heading">
+                <span>From the Imnota source folder</span
+                ><button
+                  type="button"
+                  class="copy-button"
+                  data-copy="command-manual"
+                  aria-label="Copy manual build commands"
+                  hidden
+                >
+                  Copy
+                </button>
+              </div>
+              <pre
+                tabindex="0"
+                aria-label="Manual build commands"
+              ><code id="command-manual">corepack enable
+corepack pnpm install
+corepack pnpm package:win   # Windows
+corepack pnpm package:mac   # macOS
+corepack pnpm package:linux # Linux</code></pre>
+            </div>
+            <p class="small">
+              The last three lines are alternatives. Run only the target you
+              need.
+            </p>
+          </section>
+          <p class="mac-notice">
+            <strong>A note for macOS.</strong> The current release is not
+            Apple-notarised. If macOS blocks it, follow the
+            <a href="https://github.com/Dytschgo/imnota#installation"
+              >README opening guidance</a
+            >.
+          </p>
+          <p
+            id="copy-status"
+            class="copy-status small"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </div>
+      </section>
+
+      <section
+        class="open-source section wrap"
+        id="open-source"
+        aria-labelledby="source-heading"
+      >
+        <div class="source-symbol" aria-hidden="true">&lt;/&gt;</div>
+        <div>
+          <p class="eyebrow">MIT licensed. Yours to inspect.</p>
+          <h2 id="source-heading">
+            Built in the open,<br />designed for real workflows.
+          </h2>
+          <p>
+            An open-source screenshot annotation tool built with Electron, React
+            and TypeScript. Desktop targets for Windows, macOS and Linux. Read
+            the code, build it yourself or contribute a focused improvement.
+          </p>
+          <div class="actions">
+            <a
+              class="button button-secondary"
+              href="https://github.com/Dytschgo/imnota"
+              >View on GitHub <span aria-hidden="true">↗</span></a
+            ><a
+              class="text-link"
+              href="https://github.com/Dytschgo/imnota/releases/latest"
+              >Releases</a
+            ><a
+              class="text-link"
+              href="https://github.com/Dytschgo/imnota/blob/main/CONTRIBUTING.md"
+              >Contribution guide <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="faq section wrap" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">A few practical answers.</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Does Imnota upload my screenshots?</summary>
+            <p>
+              No. Imnota’s core workflow uses local files and has no cloud sync
+              or cloud storage dependency. You decide where to paste or share an
+              exported bundle.
+            </p>
+          </details>
+          <details>
+            <summary>Do I need an AI account to use it?</summary>
+            <p>
+              No. Imnota has no account requirement and no built-in AI provider
+              connection. It prepares context for the assistant or coding agent
+              you already use.
+            </p>
+          </details>
+          <details>
+            <summary>Which operating systems are supported?</summary>
+            <p>
+              Imnota’s development and packaging targets are Windows, macOS and
+              Linux. Check
+              <a href="https://github.com/Dytschgo/imnota/releases/latest"
+                >the latest release</a
+              >
+              for available desktop downloads.
+            </p>
+          </details>
+          <details>
+            <summary>What does the export contain?</summary>
+            <p>
+              A fresh, timestamped Markdown and high-resolution PNG set for the
+              current collection. The Markdown includes collection context,
+              screenshot descriptions, agent priorities and text or callout
+              notes. Large collections may split automatically. You can copy
+              Markdown, image or both, depending on what your receiving editor
+              accepts.
+            </p>
+          </details>
+          <details>
+            <summary>Can I build Imnota from source?</summary>
+            <p>
+              Yes. You need Node.js 20+, Corepack and a platform-supported
+              Electron environment. Follow the
+              <a href="#install-manual" data-install-target="manual"
+                >manual build instructions</a
+              >
+              or the
+              <a href="https://github.com/Dytschgo/imnota#development"
+                >development README</a
+              >.
+            </p>
+          </details>
+          <details>
+            <summary>Is Imnota Apple-notarised?</summary>
+            <p>
+              The current release is not Apple-notarised. The README explains
+              how to open it through System Settings, Privacy &amp; Security,
+              Open Anyway. Read the
+              <a href="https://github.com/Dytschgo/imnota#installation"
+                >macOS installation guidance</a
+              >. Do not disable Gatekeeper.
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer wrap">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="./"
+            ><img src="assets/logo.svg" width="36" height="36" alt="" /><span
+              >Imnota</span
+            ></a
+          >
+          <p>
+            A local-first tool for turning annotated screenshots<br />into
+            AI-ready prompt bundles.
+          </p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <a href="https://github.com/Dytschgo/imnota">GitHub</a
+          ><a href="https://github.com/Dytschgo/imnota/releases/latest"
+            >Releases</a
+          ><a href="https://github.com/Dytschgo/imnota#readme">README</a
+          ><a href="https://github.com/Dytschgo/imnota/blob/main/LICENSE"
+            >MIT licence</a
+          >
+        </nav>
+      </div>
+      <p class="footer-note">
+        Made for clearer handoffs between people, screens and AI.
+      </p>
+    </footer>
+  </body>
+</html>
