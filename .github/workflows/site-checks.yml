@@ -1,0 +1,36 @@
+name: Site checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run validate
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Run browser checks against the production build
+        run: |
+          python -m http.server 4173 --directory dist > /tmp/imnota-server.log 2>&1 &
+          for attempt in {1..10}; do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              npm test
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/imnota-server.log
+          exit 1
