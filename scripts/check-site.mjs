@@ -1,3 +1,4 @@
+import { checkMotion } from "./check-motion.mjs";
 import { chromium } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
 import assert from "node:assert/strict";
@@ -274,7 +275,9 @@ assert.equal(new URL(page.url()).pathname, "/features.html");
 await page.locator('.desktop-nav a[href="changelog.html"]').click();
 assert.equal(new URL(page.url()).pathname, "/changelog.html");
 assert.deepEqual(errors, []);
+const motion = await checkMotion(browser, baseURL);
 const report = {
+  motion,
   layouts: results,
   referencePages,
   keyboard: true,

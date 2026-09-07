@@ -2,6 +2,14 @@
 
 The v0.2.4 website update was verified locally on 7 September 2026. Production is https://imnota.xyz/. The release process also runs the same browser suite against that domain after deployment; raw run records are stored in ignored `.qa/` and GitHub CI records the reviewed source revision.
 
+## SVG motion update
+
+- The headline uses a finite SVG annotation drawing. The workflow illustration follows native scroll position and reverses when scrolling back; phone layouts use a vertical illustration with readable labels.
+- Motion uses native SVG/CSS and a throttled animation frame, with no new dependency. Real screenshots and the Collection 08 connector geometry remain intact.
+- Dedicated browser checks verify finite animation, visible route drawing, forward/reverse scroll, live reduced-motion changes, Save-Data and no-JavaScript fallbacks. The full page suite passes at 320, 768, 1024 and 1440 pixels with zero axe violations, overflow or runtime errors.
+- Desktop and mobile drawings were inspected during animation and at rest. A local simulated-mobile Lighthouse run reports Performance 97, Accessibility 100, Best Practices 100 and SEO 100; LCP 2.4s, CLS 0 and total blocking time 0ms. These are lab measurements, not production field data.
+- Recovery baseline is Collection 08 at `5b0468f3c5754998b8d016fb7250ac820fe0371f`, with archive `.qa/imnota-web_20260907_222211.zip`, SHA-256 `10c7587dfa811d7df20de1806fc3133639f0a0295f7d7df8baee526ceb9547a6`.
+
 ## Collection 08 corrections
 
 - Annotation source geometry is shared across captures. Save changes has a fitted rectangle, a clear step marker and a callout fully inside the image.

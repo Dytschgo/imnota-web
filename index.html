@@ -47,8 +47,8 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="styles.css?v=c08" />
-    <script src="script.js?v=c08" defer></script>
+    <link rel="stylesheet" href="styles.css?v=motion1" />
+    <script src="script.js?v=motion1" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -85,10 +85,35 @@
           <h1 id="hero-heading">
             Screenshots that<br />AI
             <span class="marked-word"
-              >understands<span
-                class="mark-corner"
+              >understands<span class="mark-corner" aria-hidden="true"></span
+              ><svg
+                class="hero-annotation"
+                viewBox="0 0 244 96"
+                preserveAspectRatio="none"
+                fill="none"
                 aria-hidden="true"
-              ></span></span
+              >
+                <path
+                  class="hero-annotation-frame"
+                  pathLength="1"
+                  d="M7 52V15h37M200 15h37v37"
+                />
+                <path
+                  class="hero-annotation-rule"
+                  pathLength="1"
+                  d="M20 76h168"
+                />
+                <path
+                  class="hero-annotation-cursor"
+                  pathLength="1"
+                  d="m201 73 17 20 5-11 12 5-11-20-7 10-16-6Z"
+                />
+                <circle
+                  class="hero-annotation-point"
+                  cx="201"
+                  cy="73"
+                  r="4"
+                /></svg></span
             >.
           </h1>
           <div class="hero-copy">
@@ -282,6 +307,144 @@
             </div>
           </li>
         </ol>
+        <figure
+          class="handoff-diagram"
+          id="handoff-diagram"
+          data-motion-state="static"
+          role="img"
+          aria-label="An annotation is combined with written context and exported as a PNG and Markdown prompt bundle."
+        >
+          <svg viewBox="0 0 1120 266" fill="none" aria-hidden="true">
+            <path
+              class="handoff-route"
+              pathLength="1"
+              d="M236 133H390M702 133h154"
+            />
+            <path
+              class="handoff-route handoff-route-secondary"
+              pathLength="1"
+              d="m829 112 27 21-27 21M675 112l27 21-27 21"
+            />
+            <g class="handoff-stage handoff-stage-image">
+              <rect x="22" y="31" width="214" height="204" rx="5" />
+              <rect
+                x="48"
+                y="58"
+                width="162"
+                height="106"
+                rx="2"
+                class="handoff-screen"
+              />
+              <rect
+                x="104"
+                y="107"
+                width="69"
+                height="28"
+                rx="1"
+                class="handoff-selection"
+              />
+              <circle cx="183" cy="147" r="12" class="handoff-callout" />
+              <path d="M83 181h93M83 197h57" class="handoff-copy-line" />
+              <text x="48" y="219">ANNOTATION</text>
+            </g>
+            <g class="handoff-stage handoff-stage-context">
+              <rect x="390" y="31" width="312" height="204" rx="5" />
+              <path
+                d="M420 81h154M420 108h239M420 135h187"
+                class="handoff-copy-line"
+              />
+              <rect
+                x="420"
+                y="157"
+                width="142"
+                height="35"
+                rx="2"
+                class="handoff-context-tag"
+              />
+              <text x="420" y="181">PRIORITY: HIGH</text>
+              <text x="420" y="219">WRITTEN CONTEXT</text>
+            </g>
+            <g class="handoff-stage handoff-stage-bundle">
+              <rect x="856" y="31" width="242" height="204" rx="5" />
+              <path
+                d="M884 72h74v96h-74zM975 72h94M975 96h65M975 120h78M975 144h47"
+                class="handoff-copy-line"
+              />
+              <text x="884" y="195">PNG</text>
+              <text x="975" y="195">MARKDOWN</text>
+              <text x="884" y="219">PROMPT BUNDLE</text>
+            </g>
+            <circle class="handoff-token" cx="236" cy="133" r="6" />
+          </svg>
+          <svg
+            class="handoff-diagram-mobile"
+            viewBox="0 0 320 690"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              class="handoff-route"
+              pathLength="1"
+              d="M160 210v68M160 454v68"
+            />
+            <path
+              class="handoff-route handoff-route-secondary"
+              pathLength="1"
+              d="m142 260 18 18 18-18m-36 244 18 18 18-18"
+            />
+            <g class="handoff-stage handoff-stage-image">
+              <rect x="16" y="16" width="288" height="194" rx="5" />
+              <rect
+                x="43"
+                y="42"
+                width="234"
+                height="95"
+                rx="2"
+                class="handoff-screen"
+              />
+              <rect
+                x="136"
+                y="80"
+                width="92"
+                height="28"
+                rx="1"
+                class="handoff-selection"
+              />
+              <circle cx="242" cy="121" r="12" class="handoff-callout" />
+              <path d="M68 158h132M68 177h81" class="handoff-copy-line" />
+              <text x="43" y="198">ANNOTATION</text>
+            </g>
+            <g class="handoff-stage handoff-stage-context">
+              <rect x="16" y="278" width="288" height="176" rx="5" />
+              <path d="M43 324h148M43 352h222" class="handoff-copy-line" />
+              <rect
+                x="43"
+                y="375"
+                width="150"
+                height="37"
+                rx="2"
+                class="handoff-context-tag"
+              />
+              <text x="55" y="399">PRIORITY: HIGH</text>
+              <text x="43" y="435">WRITTEN CONTEXT</text>
+            </g>
+            <g class="handoff-stage handoff-stage-bundle">
+              <rect x="16" y="522" width="288" height="152" rx="5" />
+              <path
+                d="M43 547h72v67H43zM142 547h130M142 572h91M142 597h110"
+                class="handoff-copy-line"
+              />
+              <text x="43" y="640">PNG</text>
+              <text x="142" y="640">MARKDOWN</text>
+              <text x="43" y="660">PROMPT BUNDLE</text>
+            </g>
+            <circle class="handoff-token" cx="160" cy="210" r="6" />
+          </svg>
+          <figcaption>
+            The visual instruction and the explanation travel together, so the
+            handoff remains specific after the screenshot leaves Imnota.
+          </figcaption>
+        </figure>
       </section>
 
       <section
