@@ -4,7 +4,7 @@ import sharp from "sharp";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
-// Serve an isolated checkout of v0.2.4 on port 4176 before running.
+// Serve an isolated checkout of v0.2.5 on port 4177 before running.
 const output = new URL("../.qa/stable-capture/", import.meta.url);
 const outPath = (name) => fileURLToPath(new URL(name, output));
 await mkdir(output, { recursive: true });
@@ -175,7 +175,7 @@ await page.addInitScript(
       ],
       loadProject: async () => snapshot,
       onUpdateStatus: () => () => {},
-      getUpdateStatus: async () => ({ state: "idle", currentVersion: "0.2.4" }),
+      getUpdateStatus: async () => ({ state: "idle", currentVersion: "0.2.5" }),
       loadScreenshotContent: async ({ screenshot }) => ({
         image: {
           filename: screenshot.storedFilename,
@@ -226,7 +226,7 @@ await page.addInitScript(
   },
   { dataUrl, annotations, snapshot, settings, preferences },
 );
-await page.goto("http://127.0.0.1:4176/", { waitUntil: "networkidle" });
+await page.goto("http://127.0.0.1:4177/", { waitUntil: "networkidle" });
 await page.locator(".workspace").waitFor({ timeout: 15000 });
 await page.waitForTimeout(1000);
 await page.getByTestId("settings-button").click();
@@ -279,8 +279,8 @@ await sharp(outPath("detail.png"))
   .webp({ quality: 90 })
   .toFile(outPath("detail.webp"));
 const metadata = {
-  tag: "v0.2.4",
-  commit: "b918a6a819fd31d26470301334aa3a9ade4a4f86",
+  tag: "v0.2.5",
+  commit: "bd33da45fac5bf05f20e6cdb9f66c5db709b3bdf",
   viewport: "1600x1000",
   backdrop: "local GPT Image artwork via data URL",
   desktopGlass: false,

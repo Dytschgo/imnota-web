@@ -7,7 +7,7 @@
     <title>Features | Imnota</title>
     <meta
       name="description"
-      content="Explore Imnota features: local screenshot collections, editable annotations, non-destructive crop, Markdown and PNG prompt bundles, and workspace appearance."
+      content="Explore Imnota features: screenshots, standalone drawings, Markdown items, editable annotations, mixed-content prompt bundles and local workspaces."
     />
     <link rel="canonical" href="https://imnota.xyz/features.html" />
     <meta property="og:type" content="website" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Features | Imnota" />
     <meta
       property="og:description"
-      content="Explore Imnota features: local screenshot collections, editable annotations, non-destructive crop, Markdown and PNG prompt bundles, and workspace appearance."
+      content="Explore Imnota features: screenshots, standalone drawings, Markdown items, editable annotations, mixed-content prompt bundles and local workspaces."
     />
     <meta property="og:url" content="https://imnota.xyz/features.html" />
     <meta
@@ -44,7 +44,7 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="styles.css?v=motion1" />
+    <link rel="stylesheet" href="styles.css?v=selection2" />
     <script src="script.js?v=motion1" defer></script>
   </head>
   <body>
@@ -81,13 +81,13 @@
         <p class="eyebrow">Imnota features</p>
         <h1>Every detail.<br />In the handoff.</h1>
         <p class="page-lead">
-          A local workspace for collecting screenshots, marking what matters and
-          giving your coding agent the context it needs.
+          A local workspace for screenshots, drawings and written explanations.
+          Give your coding agent the whole idea in one ordered collection.
         </p>
         <div class="actions">
           <a class="button" href="/#installation">Install Imnota</a
           ><a class="text-link" href="changelog.html"
-            >What changed in 0.2.4 <span aria-hidden="true">↗</span></a
+            >What changed in 0.2.5 <span aria-hidden="true">↗</span></a
           >
         </div>
       </section>
@@ -115,44 +115,60 @@
             </dd>
           </div>
           <div>
+            <dt>Standalone drawings</dt>
+            <dd>
+              Start with a blank drawing, use essential Excalidraw tools and
+              connect shapes with attached connectors. Imnota saves editable
+              JSON and a cropped PNG with a white background and padding.
+            </dd>
+          </div>
+          <div>
+            <dt>Markdown items with preview</dt>
+            <dd>
+              Write a standalone explanation in Markdown and switch between
+              editing and preview. Text and drawing editors autosave with a
+              saving indicator.
+            </dd>
+          </div>
+          <div>
             <dt>Collections with shared context</dt>
             <dd>
-              Keep related screenshots together and give the collection one
-              overall instruction. Archive and restore collections as the work
-              moves on.
+              Keep screenshots, drawings and Markdown in a shared order and give
+              the collection one overall instruction. Archive and restore
+              collections as the work moves on.
             </dd>
           </div>
           <div>
             <dt>Keep it, without exporting it</dt>
             <dd>
-              Include or exclude individual screenshots from a prompt bundle
-              without deleting them from the collection.
+              Include or exclude individual collection items from a prompt
+              bundle without deleting them from the collection.
             </dd>
           </div>
           <div>
             <dt>Recover from a deletion</dt>
             <dd>
-              Screenshot deletion uses the operating-system trash. Imnota's Undo
-              recovery gives you a way back.
+              Duplicate screenshots, drawings and text, or delete them with
+              recoverable trash and Undo controls.
             </dd>
           </div>
         </dl>
       </section>
       <figure class="wide-product wrap">
         <img
-          src="assets/screenshots/workbench-c08.webp"
+          src="assets/screenshots/workbench-025.webp"
           srcset="
-            assets/screenshots/workbench-small-c08.webp 1000w,
-            assets/screenshots/workbench-c08.webp       1600w
+            assets/screenshots/workbench-small-025.webp 1000w,
+            assets/screenshots/workbench-025.webp       1600w
           "
           sizes="(max-width: 767px) 100vw, 88vw"
           width="1600"
           height="1000"
           loading="lazy"
-          alt="Actual Imnota 0.2.4 workspace showing a screenshot collection, annotation canvas and description inspector."
+          alt="Actual Imnota 0.2.5 workspace showing a screenshot collection, annotation canvas, description inspector and Add drawing and Add text controls."
         />
         <figcaption>
-          Actual Imnota 0.2.4 renderer with example project content.
+          Actual Imnota 0.2.5 renderer with example project content.
         </figcaption>
       </figure>
       <section
@@ -195,6 +211,22 @@
           </div>
         </dl>
       </section>
+      <figure class="wide-product wrap">
+        <a
+          href="assets/screenshots/markdown-025.webp"
+          aria-label="View the Imnota Markdown editor at full size"
+          ><img
+            src="assets/screenshots/markdown-025.webp"
+            width="1600"
+            height="1000"
+            loading="lazy"
+            alt="Actual Imnota 0.2.5 Markdown item editor with written context alongside a standalone drawing in the collection."
+        /></a>
+        <figcaption>
+          Actual Imnota 0.2.5. Written context has its own item, with editing
+          and preview.
+        </figcaption>
+      </figure>
       <section
         class="feature-group section wrap"
         id="handoff"
@@ -215,9 +247,16 @@
           <div>
             <dt>Markdown and PNG prompt bundles</dt>
             <dd>
-              Export the current collection as timestamped Markdown and
-              high-resolution prompt images, including screenshot references and
-              your annotations.
+              Export screenshots, drawings and written explanations in
+              collection order as timestamped Markdown and high-resolution
+              prompt images.
+            </dd>
+          </div>
+          <div>
+            <dt>Text-only handoffs</dt>
+            <dd>
+              A collection containing only text exports Markdown directly,
+              without creating placeholder images.
             </dd>
           </div>
           <div>
@@ -313,11 +352,11 @@
       <section class="reference-note wrap">
         <p>
           Feature details reflect
-          <a href="https://github.com/Dytschgo/imnota/blob/v0.2.4/README.md"
-            >Imnota v0.2.4</a
+          <a href="https://github.com/Dytschgo/imnota/blob/v0.2.5/CHANGELOG.md"
+            >Imnota v0.2.5</a
           >. See the
           <a
-            href="https://github.com/Dytschgo/imnota/blob/v0.2.4/docs/user-guide.md"
+            href="https://github.com/Dytschgo/imnota/blob/v0.2.5/docs/user-guide.md"
             >user guide</a
           >
           for controls and the <a href="changelog.html">changelog</a> for

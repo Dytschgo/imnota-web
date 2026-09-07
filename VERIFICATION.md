@@ -1,6 +1,14 @@
 # Website verification
 
-The v0.2.4 website update was verified locally on 7 September 2026. Production is https://imnota.xyz/. The release process also runs the same browser suite against that domain after deployment; raw run records are stored in ignored `.qa/` and GitHub CI records the reviewed source revision.
+Production is https://imnota.xyz/. The release process runs browser checks locally and against that domain after deployment; raw run records are stored in ignored `.qa/` and GitHub CI records the reviewed source revision.
+
+## Stable 0.2.5 update
+
+- Latest stable tag `v0.2.5` resolves to `bd33da45fac5bf05f20e6cdb9f66c5db709b3bdf`, published on 7 September 2026 at 21:55 UTC. The Windows installer, universal Mac ZIP and Linux AppImage links match its published assets.
+- Homepage highlights, the feature list and the new changelog entry cover standalone drawings, Markdown editing/preview, shared collection order, autosave, mixed-content exports and Markdown-only exports. The schema 4 upgrade and retained schema 3 backup are explained at installation and in release notes.
+- Real tagged editor captures demonstrate the new content types. Historical export and T3 examples keep their original version labels. Their native filesystem/clipboard limitations remain documented in ASSETS.md.
+- The existing SVG motion and responsive checks remain part of the release suite. New assertions check six stable changelog entries, the 0.2.5 upgrade/export notes and all three current download URLs.
+- Recovery baseline is `753ad0cb239afb09e6c53dca9e5173114f032f40`, archive `.qa/imnota-web_20260907_224214.zip`, SHA-256 `9f7ba12da0335983de914c046844b86a8432553e87edd5635a8336befc45f1eb`.
 
 ## SVG motion update
 
@@ -20,17 +28,18 @@ The v0.2.4 website update was verified locally on 7 September 2026. Production i
 
 ## Content and visuals
 
-- The homepage, feature page and public changelog use the published stable v0.2.4 release and versioned upstream sources.
-- The changelog covers five downloadable stable releases. The unpublished 0.2.3 tag is explained rather than presented as a download; Nightly builds are clearly separated.
-- Real product screenshots were captured from v0.2.4 commit `b918a6a819fd31d26470301334aa3a9ade4a4f86`, with deterministic example data. The selected local GPT Image backdrop uses Balanced surfaces at 42% opacity; native Desktop glass is off.
-- The screenshot capture confirms the renderer configured the local backdrop. The only upstream renderer console messages were React development warnings about spread key props. No bridge or page errors occurred.
+- The hero uses a straight selection frame with four square handles, replacing the decorative cursor, dot and doubled underline. Its 600 ms reveal settles once; reduced-motion, Save-Data and no-JavaScript views show the complete static frame. Desktop, tablet and mobile captures were inspected after this correction.
+- The homepage, feature page and public changelog use the published stable v0.2.5 release and versioned upstream sources.
+- The changelog covers six downloadable stable releases. The unpublished 0.2.3 tag is explained rather than presented as a download; Nightly builds are clearly separated.
+- Current workbench, drawing and Markdown screenshots were captured from v0.2.5 commit `bd33da45fac5bf05f20e6cdb9f66c5db709b3bdf`, with deterministic example data. Retained 0.2.4 captures originate from `b918a6a819fd31d26470301334aa3a9ade4a4f86`. The workbench's local GPT Image backdrop uses Balanced surfaces at 42% opacity; native Desktop glass is off.
+- The workbench capture confirms the renderer configured the local backdrop. Its only upstream renderer console messages were React development warnings about spread key props. No bridge or page errors occurred. The drawing capture's unused remote-font CSP warnings are documented in ASSETS.md.
 - GPT Image created two original artworks, both saved in the repository and integrated into the site. Their full prompts and provenance are in ASSETS.md.
 - Desktop and mobile captures were reviewed for the homepage, feature reference and changelog. Versioned screenshot filenames and stylesheet URLs prevent existing visitors from retaining the previous release assets.
 
 ## Automated checks
 
 - Prettier formatting and HTML validation pass for all four HTML pages and the checked source files.
-- `npm run build` creates a static-only `dist` directory. `npm run package` creates the matching archive with 28 public files, excluding dependencies, developer scripts, source checkout, documentation and repository metadata.
+- `npm run build` creates a static-only `dist` directory. `npm run package` creates the matching archive with 32 public files, excluding dependencies, developer scripts, source checkout, documentation and repository metadata.
 - The browser suite passes against `dist` served on port 4174, across 320, 768, 1024 and 1440 pixel widths for the homepage, Features and Changelog.
 - Axe reports zero WCAG A/AA violations across those 12 page/viewport combinations. No horizontal overflow, broken image decode or browser runtime errors occurred.
 - Installation tabs support arrow keys, Home and End. Clipboard success and denial fallbacks pass; the mobile menu, Escape handling, FAQ, reduced motion and no-JavaScript content checks pass.

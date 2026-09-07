@@ -7,7 +7,7 @@
     <title>Imnota | Screenshots that AI understands</title>
     <meta
       name="description"
-      content="Imnota is a local-first open-source desktop tool for annotating screenshots and turning them into AI-ready prompt bundles for coding agents."
+      content="Imnota is a local-first open-source desktop tool for combining annotated screenshots, drawings and Markdown into prompt bundles for coding agents."
     />
     <link rel="canonical" href="https://imnota.xyz/" />
     <meta property="og:type" content="website" />
@@ -47,7 +47,7 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="styles.css?v=motion1" />
+    <link rel="stylesheet" href="styles.css?v=selection2" />
     <script src="script.js?v=motion1" defer></script>
   </head>
   <body>
@@ -85,41 +85,28 @@
           <h1 id="hero-heading">
             Screenshots that<br />AI
             <span class="marked-word"
-              >understands<span class="mark-corner" aria-hidden="true"></span
-              ><svg
+              >understands<svg
                 class="hero-annotation"
                 viewBox="0 0 244 96"
                 preserveAspectRatio="none"
                 fill="none"
                 aria-hidden="true"
               >
-                <path
+                <rect
                   class="hero-annotation-frame"
-                  pathLength="1"
-                  d="M7 52V15h37M200 15h37v37"
-                />
-                <path
-                  class="hero-annotation-rule"
-                  pathLength="1"
-                  d="M20 76h168"
-                />
-                <path
-                  class="hero-annotation-cursor"
-                  pathLength="1"
-                  d="m201 73 17 20 5-11 12 5-11-20-7 10-16-6Z"
-                />
-                <circle
-                  class="hero-annotation-point"
-                  cx="201"
-                  cy="73"
-                  r="4"
-                /></svg></span
+                  x="1"
+                  y="1"
+                  width="242"
+                  height="94"
+                /></svg
+              ><span class="selection-handles" aria-hidden="true"
+                ><i></i><i></i><i></i><i></i></span></span
             >.
           </h1>
           <div class="hero-copy">
             <p class="lead">
-              Annotate what matters, add the missing context, and hand your
-              coding agent a prompt bundle it can actually use.
+              Annotate screenshots, sketch an idea or write it out. Bring it all
+              together in a prompt bundle your coding agent can use.
             </p>
             <div class="actions">
               <a class="button" href="#installation"
@@ -141,10 +128,10 @@
               data-annotation-x="0.588125"
               data-annotation-left-x="0.514375"
               data-annotation-y="0.667"
-              src="assets/screenshots/workbench-c08.webp"
+              src="assets/screenshots/workbench-025.webp"
               srcset="
-                assets/screenshots/workbench-small-c08.webp 1000w,
-                assets/screenshots/workbench-c08.webp       1600w
+                assets/screenshots/workbench-small-025.webp 1000w,
+                assets/screenshots/workbench-025.webp       1600w
               "
               sizes="(max-width: 767px) 100vw, 76vw"
               width="1600"
@@ -188,7 +175,7 @@
             </div>
           </div>
           <figcaption>
-            Imnota 0.2.4 with example project content. Markdown excerpt shown
+            Imnota 0.2.5 with example project content. Markdown excerpt shown
             beside it.
           </figcaption>
         </figure>
@@ -262,7 +249,10 @@
           <li>
             <span class="step-number">01</span>
             <h3>Collect</h3>
-            <p>Import, paste or drag in PNG, JPEG or WebP screenshots.</p>
+            <p>
+              Import, paste or drop screenshots. Or start a standalone drawing
+              or Markdown item.
+            </p>
             <div class="step-fragment formats">
               <span>PNG</span><span>JPEG</span><span>WebP</span>
             </div>
@@ -548,48 +538,65 @@
       >
         <div class="release-heading">
           <p class="eyebrow">New in the stable release</p>
-          <h2 id="release-heading">More room for<br />the work itself.</h2>
+          <h2 id="release-heading">
+            Sketch it. Write it.<br />Keep it together.
+          </h2>
           <p>
-            Imnota 0.2.4 brings a calmer workspace, more direct editing controls
-            and collections that become complete prompt bundles.
+            Imnota 0.2.5 adds standalone drawings and Markdown items. Mix them
+            with screenshots in one collection, then export the handoff in the
+            order you chose.
           </p>
-          <a class="text-link" href="changelog.html#v0-2-4"
-            >Read the 0.2.4 release notes <span aria-hidden="true">↗</span></a
+          <a class="text-link" href="changelog.html#v0-2-5"
+            >Read the 0.2.5 release notes
+            <span aria-hidden="true">&#8599;</span></a
           >
         </div>
         <figure class="release-screenshot">
-          <img
-            src="assets/screenshots/settings-024.webp"
-            width="1600"
-            height="1000"
-            loading="lazy"
-            alt="Imnota 0.2.4 Settings with grouped appearance controls and a local workspace backdrop."
-          />
-          <figcaption>Actual v0.2.4 Settings. Example workspace.</figcaption>
+          <a
+            href="assets/screenshots/drawing-025.webp"
+            aria-label="View the Imnota drawing editor at full size"
+            ><img
+              src="assets/screenshots/drawing-025.webp"
+              width="1600"
+              height="1000"
+              loading="lazy"
+              alt="Actual Imnota 0.2.5 standalone drawing editor with an example diagram in a mixed collection."
+          /></a>
+          <figcaption>
+            Actual Imnota 0.2.5 drawing editor. Example collection.
+          </figcaption>
         </figure>
         <dl class="release-improvements">
           <div>
-            <dt>Crop with confidence</dt>
+            <dt>Draw without a screenshot</dt>
             <dd>
-              Resize the crop, apply it, cancel or reset. The original
-              screenshot stays intact.
+              Sketch with essential Excalidraw tools and connectors that stay
+              attached to shapes. Keep editable drawing data alongside the
+              exported PNG.
             </dd>
           </div>
           <div>
-            <dt>A workspace you can shape</dt>
+            <dt>Give an explanation its own space</dt>
             <dd>
-              Collapse navigation, group related screenshots and choose one
-              backdrop across the app.
+              Add a Markdown item with editing and preview. Drawing and text
+              editors autosave with a saving indicator.
             </dd>
           </div>
           <div>
-            <dt>Decide what goes into the handoff</dt>
+            <dt>Keep the order you chose</dt>
             <dd>
-              Keep a screenshot in your collection while excluding it from the
-              exported prompt bundle.
+              Reorder screenshots, drawings and text together. Mixed exports
+              preserve that order; text-only collections produce Markdown
+              without placeholder images.
             </dd>
           </div>
         </dl>
+        <p class="release-caveat">
+          <strong>Before upgrading:</strong> back up your workspace. Adding a
+          drawing or text item upgrades the project format and keeps a backup of
+          the previous format. Older Imnota versions cannot open the upgraded
+          project.
+        </p>
         <p class="release-caveat">
           Desktop glass is optional and still <strong>Beta</strong>. If
           scrolling or transparency glitches, choose
@@ -608,7 +615,9 @@
         <div class="feature-index-list">
           <a href="features.html#capture"
             ><span>Capture &amp; organize</span>
-            <p>Paste, import or drop screenshots into local collections.</p>
+            <p>
+              Screenshots, standalone drawings and Markdown in one collection.
+            </p>
             <span aria-hidden="true">↗</span></a
           >
           <a href="features.html#annotate"
@@ -709,23 +718,24 @@
           <div
             class="download-links"
             role="group"
-            aria-label="Stable 0.2.4 downloads"
+            aria-label="Stable 0.2.5 downloads"
           >
             <a
-              href="https://github.com/Dytschgo/imnota/releases/download/v0.2.4/Imnota-Setup-0.2.4.exe"
-              >Windows installer <span>0.2.4 · .exe</span></a
+              href="https://github.com/Dytschgo/imnota/releases/download/v0.2.5/Imnota-Setup-0.2.5.exe"
+              >Windows installer <span>0.2.5 · .exe</span></a
             ><a
-              href="https://github.com/Dytschgo/imnota/releases/download/v0.2.4/Imnota-0.2.4-universal-mac.zip"
+              href="https://github.com/Dytschgo/imnota/releases/download/v0.2.5/Imnota-0.2.5-universal-mac.zip"
               >macOS universal <span>Intel + Apple Silicon · .zip</span></a
             ><a
-              href="https://github.com/Dytschgo/imnota/releases/download/v0.2.4/Imnota-0.2.4.AppImage"
-              >Linux AppImage <span>0.2.4 · x64</span></a
+              href="https://github.com/Dytschgo/imnota/releases/download/v0.2.5/Imnota-0.2.5.AppImage"
+              >Linux AppImage <span>0.2.5 · x64</span></a
             >
           </div>
           <p class="upgrade-note">
-            Upgrading? Back up your workspace folders first. Older app versions
-            may not support newer project data.
-            <a href="changelog.html#v0-2-4">Release notes</a>
+            Upgrading? Back up your workspace folders first. Adding drawings or
+            text upgrades the project format. Older app versions cannot open the
+            upgraded project.
+            <a href="changelog.html#v0-2-5">Release notes</a>
           </p>
           <div
             class="install-tabs"
@@ -922,12 +932,13 @@ corepack pnpm package:linux # Linux</code></pre>
           <details>
             <summary>What does the export contain?</summary>
             <p>
-              A fresh, timestamped Markdown and high-resolution PNG set for the
-              current collection. The Markdown includes collection context,
-              screenshot descriptions, agent priorities and text or callout
-              notes. Large collections may split automatically. You can copy
-              Markdown, image or both, depending on what your receiving editor
-              accepts.
+              A fresh, timestamped export in collection order, with Markdown and
+              high-resolution PNGs for visual items. Text-only collections
+              export Markdown without placeholder images. The Markdown includes
+              collection context, screenshot descriptions, agent priorities and
+              text or callout notes. Large collections may split automatically.
+              You can copy Markdown, image or both, depending on what your
+              receiving editor accepts.
             </p>
           </details>
           <details>

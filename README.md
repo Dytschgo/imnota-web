@@ -45,7 +45,7 @@ To roll back normal Git deployment, revert the release commit through a reviewed
 
 ## Content and asset provenance
 
-The homepage, feature list and public changelog reflect stable [Imnota v0.2.4](https://github.com/Dytschgo/imnota/releases/tag/v0.2.4), commit `b918a6a819fd31d26470301334aa3a9ade4a4f86`. Claims were checked against its versioned README, user guide, changelog and published release notes. The changelog lists downloadable stable releases only. The unpublished 0.2.3 tag and Nightly previews are not listed as stable releases.
+The homepage, feature list and public changelog reflect stable [Imnota v0.2.5](https://github.com/Dytschgo/imnota/releases/tag/v0.2.5), commit `bd33da45fac5bf05f20e6cdb9f66c5db709b3bdf`. New drawing, Markdown, export and migration claims were checked against its tagged changelog, implementation and published release notes. The changelog lists downloadable stable releases only. The unpublished 0.2.3 tag and Nightly previews are not listed as stable releases.
 
 Product images show the actual tagged React/Konva renderer with deterministic example data. GPT Image created the workspace backdrop and release artwork. Image prompts, provenance, licenses and capture instructions are in [ASSETS.md](ASSETS.md).
 

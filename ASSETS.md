@@ -1,6 +1,6 @@
 # Website imagery
 
-The website uses real Imnota v0.2.4 renderer captures and two original GPT Image assets. Generated artwork is supporting illustration, not an app screenshot.
+The website uses real Imnota renderer captures and two original GPT Image assets. Each product capture records its source version below. Generated artwork is supporting illustration, not an app screenshot.
 
 ## GPT Image
 
@@ -19,9 +19,13 @@ Use case: ads-marketing. Asset type: public changelog release artwork for Imnota
 
 ## Product captures
 
+`drawing-025.webp` and `markdown-025.webp` show the actual Imnota v0.2.5 renderer at commit `bd33da45fac5bf05f20e6cdb9f66c5db709b3bdf`. The example contains a standalone drawing and Markdown item in a shared collection. The drawing uses attached connectors and system-font labels; the Markdown preview contains an authored checkout review. Captures retain the full 1600 by 1000 application frame.
+
+`scripts/capture-content-025.mjs` reproduces these captures with an isolated tagged renderer served on port 4177. It uses an in-memory replacement for Electron file access. It demonstrates the drawing and Markdown editors, not native on-disk persistence or export validation. The drawing editor emits upstream CSP warnings for unused remote font URLs; CSP was not relaxed and the example uses the system font. Existing 0.2.4 export and T3 examples retain their explicit version labels.
+
 `workbench-c08.webp`, `workbench-small-c08.webp` and `settings-024.webp` show the actual renderer at stable tag `v0.2.4`, commit `b918a6a819fd31d26470301334aa3a9ade4a4f86`. An isolated source checkout and a deterministic native bridge provide an authored example project. The screenshot inside the canvas is sample project-settings content. No private workspace is used.
 
-`scripts/capture-stable.mjs` records these images with the isolated renderer served on port 4176. Install the tagged app's dependencies and run its Vite renderer before capture. Outputs go to `.qa/stable-capture/` for inspection before copying into `assets/screenshots/`.
+The current `scripts/capture-stable.mjs` records `workbench-025.webp` and `workbench-small-025.webp` with the isolated v0.2.5 renderer served on port 4177. Install the tagged app's dependencies and run its Vite renderer before capture. Outputs go to `.qa/stable-capture/` for inspection before copying into `assets/screenshots/`. The 0.2.4 captures above are retained historical assets. Current workbench captures preserve the corrected annotation geometry, 80% canvas zoom and 42% backdrop opacity.
 
 The Collection 08 screenshots share `scripts/example-annotations.mjs`: the rectangle surrounds only Save changes, the step marker clears the label and the callout stays within the source image. `scripts/finish-assets.mjs` uses the stable renderer to produce `example-after-c08.webp` and refreshes `social-preview-c08.png`.
 
