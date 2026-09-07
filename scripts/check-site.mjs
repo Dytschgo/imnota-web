@@ -2,6 +2,10 @@ import { chromium } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
+const baseURL = (process.env.SITE_URL || "http://127.0.0.1:4173").replace(
+  /\/$/,
+  "",
+);
 await mkdir(".qa", { recursive: true });
 const browser = await chromium.launch();
 const context = await browser.newContext({
@@ -13,11 +17,16 @@ page.on("pageerror", (error) => errors.push(error.message));
 const results = [];
 for (const width of [320, 768, 1024, 1440]) {
   await page.setViewportSize({ width, height: 900 });
-  await page.goto("http://127.0.0.1:4173");
+  await page.goto(baseURL);
   await page.evaluate(() => document.fonts.ready);
   await page.locator(".site-footer").scrollIntoViewIfNeeded();
   await page.evaluate(() =>
-    Promise.all([...document.images].map((img) => img.decode())),
+    Promise.all(
+      [...document.images].map((img) => {
+        img.loading = "eager";
+        return img.decode();
+      }),
+    ),
   );
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   assert.equal(await page.locator("h1").count(), 1);
@@ -121,7 +130,7 @@ assert.equal(
     .evaluate((el) => getComputedStyle(el).animationName),
   "none",
 );
-await page.goto("http://127.0.0.1:4173/#install-manual");
+await page.goto(`${baseURL}/#install-manual`);
 assert.equal(await page.locator("#install-manual").isVisible(), true);
 assert.deepEqual(errors, []);
 const nojs = await browser.newContext({
@@ -129,7 +138,7 @@ const nojs = await browser.newContext({
   viewport: { width: 320, height: 740 },
 });
 const plain = await nojs.newPage();
-await plain.goto("http://127.0.0.1:4173");
+await plain.goto(baseURL);
 for (const id of ["unix", "windows", "manual"])
   assert.equal(await plain.locator(`#install-${id}`).isVisible(), true);
 assert.equal(await plain.locator(".copy-button:visible").count(), 0);
@@ -146,10 +155,80 @@ assert.equal(
   false,
 );
 await plain.screenshot({ path: ".qa/no-js-no-images.png", fullPage: true });
-await page.goto("http://127.0.0.1:4173/404.html");
+await page.goto(`${baseURL}/404.html`);
 assert.equal(await page.locator("h1").textContent(), "This page is missing.");
+const referencePages = [];
+for (const route of ["features.html", "changelog.html"]) {
+  for (const width of [320, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    const response = await page.goto(`${baseURL}/${route}`);
+    assert.equal(response.status(), 200, route);
+    await page.evaluate(() => document.fonts.ready);
+    await page.locator(".site-footer").scrollIntoViewIfNeeded();
+    await page.evaluate(() =>
+      Promise.all(
+        [...document.images].map((img) => {
+          img.loading = "eager";
+          return img.decode();
+        }),
+      ),
+    );
+    assert.equal(await page.locator("h1").count(), 1);
+    assert.equal(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth > innerWidth,
+      ),
+      false,
+      `${route} overflow at ${width}`,
+    );
+    assert.doesNotMatch(
+      await page.locator("body").innerText(),
+      /[\u2013\u2014]/,
+    );
+    const axe = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+      .analyze();
+    assert.deepEqual(
+      axe.violations.map((v) => ({
+        id: v.id,
+        nodes: v.nodes.map((n) => n.target),
+      })),
+      [],
+      `${route} accessibility at ${width}`,
+    );
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+    await page.screenshot({
+      path: `.qa/${route}-${width}.png`,
+      fullPage: true,
+    });
+    referencePages.push({ route, width, axeViolations: 0, overflow: false });
+  }
+  const brokenAnchors = await page.evaluate(() =>
+    [...document.querySelectorAll('a[href^="#"]')]
+      .filter((a) => !document.getElementById(a.hash.slice(1)))
+      .map((a) => a.hash),
+  );
+  assert.deepEqual(brokenAnchors, [], `${route} fragment links`);
+  await plain.goto(`${baseURL}/${route}`);
+  assert.equal(await plain.locator("h1").count(), 1);
+  assert.ok(
+    (await plain.locator("main").innerText()).length > 1000,
+    `${route} without JavaScript`,
+  );
+}
+await page.goto(`${baseURL}/changelog.html#v0-2-4`);
+assert.match(await page.locator("#v0-2-4").innerText(), /Beta/);
+assert.match(await page.locator("#v0-2-4").innerText(), /Back up/);
+assert.equal(await page.locator(".release-entry").count(), 5);
+await page.goto(baseURL);
+await page.locator('.desktop-nav a[href="features.html"]').click();
+assert.equal(new URL(page.url()).pathname, "/features.html");
+await page.locator('.desktop-nav a[href="changelog.html"]').click();
+assert.equal(new URL(page.url()).pathname, "/changelog.html");
+assert.deepEqual(errors, []);
 const report = {
   layouts: results,
+  referencePages,
   keyboard: true,
   clipboardSuccessAndFailure: true,
   noJavaScript: true,

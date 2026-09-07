@@ -2,3 +2,4 @@ node_modules
 .qa
 assets
 package-lock.json
+scripts/package-site.py

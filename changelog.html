@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0d12" />
+    <title>Changelog | Imnota</title>
+    <meta
+      name="description"
+      content="Read the public Imnota changelog. Stable release notes for screenshot collections, annotation tools, prompt bundles, workspace design and desktop updates."
+    />
+    <link rel="canonical" href="https://imnota.xyz/changelog.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Imnota" />
+    <meta property="og:title" content="Changelog | Imnota" />
+    <meta
+      property="og:description"
+      content="Read the public Imnota changelog. Stable release notes for screenshot collections, annotation tools, prompt bundles, workspace design and desktop updates."
+    />
+    <meta property="og:url" content="https://imnota.xyz/changelog.html" />
+    <meta
+      property="og:image"
+      content="https://imnota.xyz/assets/social-preview.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Imnota. Screenshots that AI understands. An annotated project settings example."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="assets/fonts/plex-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/plex-semibold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css?v=0.2.4" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="./" aria-label="Imnota home"
+        ><img src="assets/logo.svg" width="36" height="36" alt="" /><span
+          >Imnota</span
+        ></a
+      >
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="features.html">Features</a
+        ><a href="changelog.html" aria-current="page">Changelog</a
+        ><a href="/#how-it-works">How it works</a
+        ><a href="/#installation">Installation</a
+        ><a href="/#open-source">Open source</a>
+      </nav>
+      <a class="button button-small" href="/#installation"
+        >Install Imnota <span aria-hidden="true">↗</span></a
+      >
+      <details class="mobile-menu">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="features.html">Features</a
+          ><a href="changelog.html" aria-current="page">Changelog</a
+          ><a href="/#how-it-works">How it works</a
+          ><a href="/#installation">Installation</a
+          ><a href="/#open-source">Open source</a>
+        </nav>
+      </details>
+    </header>
+    <main id="main">
+      <section class="page-intro changelog-intro wrap">
+        <div>
+          <p class="eyebrow">Public changelog</p>
+          <h1>What changed.<br />What ships.</h1>
+          <p class="page-lead">
+            The stable releases, with the changes that matter when you open
+            Imnota.
+          </p>
+          <a
+            class="text-link"
+            href="https://github.com/Dytschgo/imnota/releases"
+            >All releases on GitHub <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <img
+          src="assets/art/release-bundle.webp"
+          width="1536"
+          height="864"
+          alt=""
+        />
+      </section>
+      <div class="release-layout wrap">
+        <nav class="release-nav" aria-label="Stable releases">
+          <span>Stable releases</span
+          ><a href="#v0-2-4">0.2.4 <span>Latest</span></a
+          ><a href="#v0-2-2">0.2.2</a><a href="#v0-2-1">0.2.1</a
+          ><a href="#v0-2-0">0.2.0</a><a href="#v0-1-3">0.1.3</a>
+        </nav>
+        <div class="release-entries">
+          <article
+            class="release-entry"
+            id="v0-2-4"
+            aria-labelledby="v024-heading"
+          >
+            <div class="release-meta">
+              <time datetime="2026-09-07">7 September 2026</time
+              ><span>Latest stable</span>
+            </div>
+            <h2 id="v024-heading"><a href="#v0-2-4">0.2.4</a></h2>
+            <h3>Collections, crops and a calmer workspace.</h3>
+            <p>
+              A stable release for Windows, macOS and Linux, with more control
+              over the workspace and the exported handoff.
+            </p>
+            <ul>
+              <li>
+                Collection-based PNG prompt bundles with corresponding Markdown,
+                screenshot references and export exclusions.
+              </li>
+              <li>
+                Non-destructive crop controls with Apply, Cancel, Reset and
+                resize handles.
+              </li>
+              <li>
+                Improved annotation selection and resizing, macOS deletion
+                shortcuts and collapsible navigation.
+              </li>
+              <li>
+                Grouped Settings, one app-wide backdrop and a local
+                uploaded-image library.
+              </li>
+            </ul>
+            <aside class="release-note" aria-label="Release 0.2.4 notes">
+              <h4>Before you upgrade</h4>
+              <p>
+                Back up your workspace folders. Older versions may not support
+                newer project data.
+              </p>
+              <p>
+                Desktop glass is optional and remains <strong>Beta</strong>. If
+                scrolling or transparency glitches, choose
+                <strong>No image</strong> or <strong>Solid surfaces</strong> in
+                Settings.
+              </p>
+              <p>
+                macOS downloads support Intel and Apple Silicon. They are ad-hoc
+                signed and are not Apple-notarised. See the
+                <a href="/#installation">installation guidance</a>.
+              </p>
+            </aside>
+            <p class="small">
+              There is no downloadable 0.2.3 release. macOS release checks
+              caught temporary test-path issues; 0.2.4 corrects those fixtures,
+              and PR checks now run unit tests on each packaged platform.
+            </p>
+            <div class="release-links">
+              <a href="https://github.com/Dytschgo/imnota/releases/tag/v0.2.4"
+                >Download 0.2.4 ↗</a
+              ><a
+                href="https://github.com/Dytschgo/imnota/compare/v0.2.2...v0.2.4"
+                >Full diff ↗</a
+              >
+            </div>
+          </article>
+          <article
+            class="release-entry"
+            id="v0-2-2"
+            aria-labelledby="v022-heading"
+          >
+            <div class="release-meta">
+              <time datetime="2026-09-06">6 September 2026</time>
+            </div>
+            <h2 id="v022-heading"><a href="#v0-2-2">0.2.2</a></h2>
+            <h3>A clearer path to the next update.</h3>
+            <ul>
+              <li>
+                macOS Terminal update action and copyable command, with verified
+                downloads, graceful shutdown, rollback and retained app backups.
+              </li>
+              <li>
+                Update progress, save-before-restart protection and retryable
+                installation errors.
+              </li>
+              <li>
+                Refreshed Settings and subfolder creation, fixed project search
+                and repositioned navigation controls.
+              </li>
+              <li>
+                Nightly subscribers can receive a newer stable release while
+                retaining their preview-channel preference.
+              </li>
+            </ul>
+            <p class="small">
+              Portable Windows and Linux .deb packages retain their supported
+              manual installation paths.
+            </p>
+            <div class="release-links">
+              <a href="https://github.com/Dytschgo/imnota/releases/tag/v0.2.2"
+                >Release on GitHub ↗</a
+              >
+            </div>
+          </article>
+          <article
+            class="release-entry"
+            id="v0-2-1"
+            aria-labelledby="v021-heading"
+          >
+            <div class="release-meta">
+              <time datetime="2026-09-05">5 September 2026</time>
+            </div>
+            <h2 id="v021-heading"><a href="#v0-2-1">0.2.1</a></h2>
+            <h3>Choose your update channel.</h3>
+            <ul>
+              <li>
+                Opt-in Stable and Nightly channels with channel-specific checks
+                and verified downloads.
+              </li>
+              <li>
+                Feedback rounds renamed to subfolders, with simpler screenshot
+                descriptions.
+              </li>
+              <li>Update and sidebar controls moved into navigation.</li>
+              <li>
+                Experimental combined text-and-image copying with explicit
+                fallback actions.
+              </li>
+            </ul>
+            <div class="release-links">
+              <a href="https://github.com/Dytschgo/imnota/releases/tag/v0.2.1"
+                >Release on GitHub ↗</a
+              >
+            </div>
+          </article>
+          <article
+            class="release-entry"
+            id="v0-2-0"
+            aria-labelledby="v020-heading"
+          >
+            <div class="release-meta">
+              <time datetime="2026-09-05">5 September 2026</time>
+            </div>
+            <h2 id="v020-heading"><a href="#v0-2-0">0.2.0</a></h2>
+            <h3>Feedback rounds and better canvas control.</h3>
+            <ul>
+              <li>
+                Feedback rounds with independent screenshots, notes, annotations
+                and exports.
+              </li>
+              <li>
+                On-demand update checks, download/install states and retry
+                controls.
+              </li>
+              <li>
+                Canvas pan, cursor-anchored zoom, actual-size view and inline
+                text editing.
+              </li>
+              <li>
+                Image clipboard actions, an AI attachment checklist and
+                migration rollback files.
+              </li>
+              <li>
+                macOS title-bar and icon fixes, plus improved modal keyboard
+                focus.
+              </li>
+            </ul>
+            <div class="release-links">
+              <a href="https://github.com/Dytschgo/imnota/releases/tag/v0.2.0"
+                >Release on GitHub ↗</a
+              >
+            </div>
+          </article>
+          <article
+            class="release-entry"
+            id="v0-1-3"
+            aria-labelledby="v013-heading"
+          >
+            <div class="release-meta">
+              <time datetime="2026-09-05">5 September 2026</time>
+            </div>
+            <h2 id="v013-heading"><a href="#v0-1-3">0.1.3</a></h2>
+            <h3>The first downloadable release.</h3>
+            <ul>
+              <li>
+                Universal Mac ZIP and DMG, Windows installers and Linux
+                packages.
+              </li>
+              <li>
+                Local projects, editable screenshot annotations, context and
+                exports.
+              </li>
+              <li>
+                Installer checksums, app backups, recovery restoration and
+                save-before-close.
+              </li>
+              <li>
+                Cropped exports, pixelation, project search and expanded
+                annotation properties.
+              </li>
+            </ul>
+            <div class="release-links">
+              <a href="https://github.com/Dytschgo/imnota/releases/tag/v0.1.3"
+                >Release on GitHub ↗</a
+              >
+            </div>
+          </article>
+        </div>
+      </div>
+      <section class="reference-note wrap">
+        <p>
+          This page covers published stable releases. Nightly builds are
+          previews and are listed separately on
+          <a href="https://github.com/Dytschgo/imnota/releases"
+            >GitHub Releases</a
+          >. Entries are summarized from the
+          <a href="https://github.com/Dytschgo/imnota/blob/v0.2.4/CHANGELOG.md"
+            >versioned upstream changelog</a
+          >.
+        </p>
+        <a class="text-link" href="/#installation"
+          >Install the latest stable release ↗</a
+        >
+      </section>
+    </main>
+    <footer class="site-footer wrap">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="./"
+            ><img src="assets/logo.svg" width="36" height="36" alt="" /><span
+              >Imnota</span
+            ></a
+          >
+          <p>
+            A local-first tool for turning annotated screenshots<br />into
+            AI-ready prompt bundles.
+          </p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <a href="features.html">Features</a
+          ><a href="changelog.html">Changelog</a
+          ><a href="https://github.com/Dytschgo/imnota">GitHub</a
+          ><a href="https://github.com/Dytschgo/imnota/releases/latest"
+            >Releases</a
+          ><a href="https://github.com/Dytschgo/imnota#readme">README</a
+          ><a href="https://github.com/Dytschgo/imnota/blob/main/LICENSE"
+            >MIT licence</a
+          >
+        </nav>
+      </div>
+      <p class="footer-note">
+        Made for clearer handoffs between people, screens and AI.
+      </p>
+    </footer>
+  </body>
+</html>
