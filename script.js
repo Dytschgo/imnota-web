@@ -137,3 +137,77 @@ if (heroVisual) {
   [heroVisual, source, panel].forEach((element) => observer.observe(element));
   document.fonts.ready.then(positionHandoff);
 }
+
+// One scroll-linked explanation: the annotation, written context, then the bundle.
+// The complete diagram remains visible without JS and for low-power preferences.
+const handoffDiagram = document.querySelector(".handoff-diagram");
+if (handoffDiagram) {
+  const root = document.documentElement;
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const connection = navigator.connection;
+  let frame;
+  let active = false;
+  const clamp = (value) => Math.min(1, Math.max(0, value));
+  const ease = (value, start, end) => clamp((value - start) / (end - start));
+  const setStatic = () => {
+    root.classList.remove("motion-enhanced");
+    handoffDiagram.dataset.motionState = "static";
+    [
+      "route-progress",
+      "stage-1",
+      "stage-2",
+      "stage-3",
+      "token-progress",
+    ].forEach((property) =>
+      handoffDiagram.style.setProperty(`--${property}`, "1"),
+    );
+  };
+  const updateDiagram = () => {
+    frame = undefined;
+    if (!active) return;
+    const top = handoffDiagram.getBoundingClientRect().top;
+    const start = window.innerHeight * 0.78;
+    const end = window.innerHeight * 0.27;
+    const progress = clamp((start - top) / (start - end));
+    handoffDiagram.style.setProperty(
+      "--route-progress",
+      String(ease(progress, 0.1, 0.92)),
+    );
+    handoffDiagram.style.setProperty(
+      "--stage-1",
+      String(ease(progress, 0, 0.2)),
+    );
+    handoffDiagram.style.setProperty(
+      "--stage-2",
+      String(ease(progress, 0.2, 0.52)),
+    );
+    handoffDiagram.style.setProperty(
+      "--stage-3",
+      String(ease(progress, 0.55, 0.88)),
+    );
+    handoffDiagram.style.setProperty(
+      "--token-progress",
+      String(ease(progress, 0.22, 0.87)),
+    );
+  };
+  const requestUpdate = () => {
+    if (active && !frame) frame = requestAnimationFrame(updateDiagram);
+  };
+  const setMotionMode = () => {
+    const shouldReduce = reducedMotion.matches || Boolean(connection?.saveData);
+    if (shouldReduce) {
+      active = false;
+      setStatic();
+      return;
+    }
+    active = true;
+    root.classList.add("motion-enhanced");
+    handoffDiagram.dataset.motionState = "active";
+    requestUpdate();
+  };
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate, { passive: true });
+  reducedMotion.addEventListener("change", setMotionMode);
+  connection?.addEventListener?.("change", setMotionMode);
+  setMotionMode();
+}

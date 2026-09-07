@@ -53,7 +53,7 @@ Product images show the actual tagged React/Konva renderer with deterministic ex
 
 Visual thesis: make the handoff between a visual idea and an AI-ready instruction tangible. Precise, focused and quietly expressive, with variance 7/10, motion 5/10 and density 5/10. Native CSS uses the Imnota palette and a 12-column desktop hero. Major surfaces use radii of 5 to 8 pixels. Asymmetric product imagery becomes a single readable composition on mobile.
 
-The one-shot annotation line explains the transfer to Markdown and stops after drawing. Reduced motion removes it. The page remains understandable without animation or images. Green identifies local-first information, stable-release status and installation copy success.
+The motion system follows the annotation workflow: a finite SVG headline drawing and a scroll-driven illustration of a screenshot and context becoming a PNG/Markdown bundle. It uses native SVG, CSS and a throttled animation frame, with no animation dependency. Reduced motion and data-saving preferences show the complete static illustration. The page remains understandable without JavaScript or images. Green identifies local-first information, stable-release status and installation copy success.
 
 ## Development checks
 
