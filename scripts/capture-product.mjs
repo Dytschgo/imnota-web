@@ -1,3 +1,4 @@
+import { annotations } from "./example-annotations.mjs";
 // Capture the real renderer from a read-only source checkout served on port 4175.
 // The native bridge is replaced with deterministic example data, never user files.
 import { chromium } from "playwright";
@@ -18,53 +19,6 @@ await sharp(source)
   .webp({ quality: 90 })
   .toFile("assets/screenshots/example-before.webp");
 const dataUrl = `data:image/png;base64,${source.toString("base64")}`;
-const annotations = [
-  {
-    id: "box",
-    kind: "rectangle",
-    x: 306,
-    y: 435,
-    width: 305,
-    height: 72,
-    stroke: "#6857f5",
-    strokeWidth: 3,
-    zIndex: 0,
-  },
-  {
-    id: "arrow",
-    kind: "arrow",
-    x: 680,
-    y: 388,
-    points: [0, 0, -190, 60],
-    stroke: "#6857f5",
-    strokeWidth: 4,
-    zIndex: 1,
-  },
-  {
-    id: "step",
-    kind: "step",
-    x: 295,
-    y: 445,
-    stepNumber: 1,
-    fill: "#6857f5",
-    stroke: "#6857f5",
-    fontSize: 20,
-    zIndex: 2,
-  },
-  {
-    id: "note",
-    kind: "callout",
-    x: 578,
-    y: 304,
-    width: 310,
-    height: 65,
-    text: "Make the primary action clear.",
-    stroke: "#6857f5",
-    fill: "#6857f5",
-    fontSize: 18,
-    zIndex: 3,
-  },
-];
 await writeFile(
   ".qa/example-data.json",
   JSON.stringify({ dataUrl, annotations }),

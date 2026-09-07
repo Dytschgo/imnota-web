@@ -23,7 +23,7 @@
     <meta property="og:url" content="https://imnota.xyz/" />
     <meta
       property="og:image"
-      content="https://imnota.xyz/assets/social-preview.png"
+      content="https://imnota.xyz/assets/social-preview-c08.png"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -47,8 +47,8 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="styles.css?v=0.2.4" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css?v=c08" />
+    <script src="script.js?v=c08" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -113,10 +113,13 @@
           <div class="workbench-frame">
             <img
               class="workbench"
-              src="assets/screenshots/workbench-024.webp"
+              data-annotation-x="0.588125"
+              data-annotation-left-x="0.514375"
+              data-annotation-y="0.667"
+              src="assets/screenshots/workbench-c08.webp"
               srcset="
-                assets/screenshots/workbench-small-024.webp 1000w,
-                assets/screenshots/workbench-024.webp       1600w
+                assets/screenshots/workbench-small-c08.webp 1000w,
+                assets/screenshots/workbench-c08.webp       1600w
               "
               sizes="(max-width: 767px) 100vw, 76vw"
               width="1600"
@@ -127,13 +130,13 @@
           </div>
           <svg
             class="handoff-line"
-            viewBox="0 0 500 170"
+            viewBox="0 0 1200 760"
             fill="none"
             aria-hidden="true"
           >
             <path d="M4 8 H175 V135 H493" pathLength="1"></path>
-            <circle cx="4" cy="8" r="5"></circle>
-            <circle cx="493" cy="135" r="5"></circle>
+            <circle cx="4" cy="8" r="4"></circle>
+            <circle cx="493" cy="135" r="4"></circle>
           </svg>
           <div class="prompt-preview">
             <div class="preview-label">
@@ -141,16 +144,15 @@
               ><span class="file-type">.md + .png</span>
             </div>
             <div class="prompt-content">
-              <p class="md-heading"># Settings review</p>
+              <p class="md-heading"># Release review</p>
               <p class="md-heading">## Overall context</p>
               <p>
-                Improve clarity and keyboard accessibility in the project
-                settings.
+                Review the interaction details before the next product release.
               </p>
               <p class="priority">Priority for agent: High</p>
               <p>
-                Make Save changes the primary action. Align the buttons with the
-                fields and increase the button contrast.
+                Make the Save changes action prominent and align it with the
+                form fields.
               </p>
               <div class="preview-note">
                 <span>1</span> Make the primary action clear.
@@ -207,7 +209,7 @@
             </div>
             <div class="comparison-image">
               <img
-                src="assets/screenshots/example-after.webp"
+                src="assets/screenshots/example-after-c08.webp"
                 width="960"
                 height="600"
                 alt="The same example with an indigo rectangle around the action row, an arrow pointing at Save changes and a numbered annotation."
@@ -291,58 +293,89 @@
             >More context inside it.</span
           >
         </h2>
-        <div class="detail-layout">
-          <figure class="detail-image">
-            <img
-              src="assets/screenshots/detail-024.webp"
-              width="1376"
-              height="952"
-              alt="Close view of the actual Imnota canvas and inspector, showing annotations alongside the screenshot description and agent priority."
-              loading="lazy"
-            />
+        <div class="export-showcase">
+          <figure class="export-dialog detail-image">
+            <a
+              href="assets/screenshots/prompt-export-c08.webp"
+              aria-label="View the full Imnota export dialog"
+            >
+              <img
+                src="assets/screenshots/prompt-export-c08.webp"
+                width="524"
+                height="566"
+                loading="lazy"
+                alt="Actual Imnota Share prompt bundles dialog after export, with Markdown, Image and Files copy actions."
+              />
+            </a>
             <figcaption>
-              Imnota 0.2.4. Editable annotations and context in an example
-              project.
+              Imnota 0.2.4. A completed export from an example collection.
             </figcaption>
           </figure>
-          <div class="capabilities">
-            <article>
-              <span class="annotation-number">1</span>
-              <div>
-                <h3>Make visual feedback precise</h3>
-                <p>
-                  Point directly at the part of a screen that needs attention.
-                  Keep editable annotations separate from the original
-                  screenshot.
-                </p>
-              </div>
-            </article>
-            <article>
-              <span class="annotation-number">2</span>
-              <div>
-                <h3>Keep project context together</h3>
-                <p>
-                  Organize related screenshots into local collections. Add
-                  shared context, then archive and restore collections as the
-                  work changes.
-                </p>
-              </div>
-            </article>
-            <article>
-              <span class="annotation-number">3</span>
-              <div>
-                <h3>Export a handoff your agent can read</h3>
-                <p>
-                  Copy Markdown, image or both. Large collections split
-                  automatically into readable prompt bundles.
-                </p>
-                <p class="small">
-                  The receiving editor chooses which clipboard formats it
-                  accepts. Separate copy actions are always available.
-                </p>
-              </div>
-            </article>
+          <div class="export-result">
+            <p class="eyebrow">The actual prompt bundle</p>
+            <h3>One picture. The context that goes with it.</h3>
+            <p>
+              The exported PNG keeps the annotations visible. Its Markdown
+              companion carries the collection context, screenshot description,
+              priority and callout notes.
+            </p>
+            <figure class="detail-image bundle-image">
+              <a
+                href="assets/examples/prompt-1.png"
+                aria-label="View the full exported prompt image"
+              >
+                <img
+                  src="assets/examples/prompt-1.webp"
+                  width="1088"
+                  height="776"
+                  loading="lazy"
+                  alt="Actual exported PNG of the project settings example, with a fitted rectangle around Save changes, an arrow and a numbered callout."
+                />
+              </a>
+            </figure>
+            <div class="actions bundle-downloads">
+              <a class="text-link" href="assets/examples/prompt-1.md" download
+                >Download the Markdown
+                <span aria-hidden="true">&#8595;</span></a
+              >
+              <a class="text-link" href="assets/examples/prompt-1.png" download
+                >Download the PNG <span aria-hidden="true">&#8595;</span></a
+              >
+            </div>
           </div>
+        </div>
+        <div class="paste-showcase">
+          <div class="paste-copy">
+            <p class="eyebrow">From Imnota to your coding tool</p>
+            <h3>Image and instructions, in the same draft.</h3>
+            <p>
+              Here is the exported bundle in T3 Code: the image is attached and
+              the Markdown is in the composer, ready to send.
+            </p>
+            <p class="small">
+              This T3 version needs two pastes: Markdown first, then Image. Use
+              Imnota’s separate copy actions when your editor accepts only one
+              format at a time.
+            </p>
+          </div>
+          <figure class="detail-image paste-image">
+            <a
+              href="assets/screenshots/t3-draft-c08.webp"
+              aria-label="View the T3 Code draft at full size"
+            >
+              <img
+                src="assets/screenshots/t3-draft-c08.webp"
+                width="832"
+                height="420"
+                loading="lazy"
+                alt="Actual T3 Code composer draft with the exported image attached and the matching Markdown pasted into the message."
+              />
+            </a>
+            <figcaption>
+              T3 Code DEV 0.0.4. Example draft; no prompt was sent. Select an
+              image to view it at full size.
+            </figcaption>
+          </figure>
         </div>
       </section>
 

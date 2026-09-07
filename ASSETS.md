@@ -19,10 +19,15 @@ Use case: ads-marketing. Asset type: public changelog release artwork for Imnota
 
 ## Product captures
 
-`workbench-024.webp`, `workbench-small-024.webp`, `detail-024.webp` and `settings-024.webp` show the actual renderer at stable tag `v0.2.4`, commit `b918a6a819fd31d26470301334aa3a9ade4a4f86`. An isolated source checkout and a deterministic native bridge provide an authored example project. The screenshot inside the canvas is sample project-settings content. No private workspace is used.
+`workbench-c08.webp`, `workbench-small-c08.webp` and `settings-024.webp` show the actual renderer at stable tag `v0.2.4`, commit `b918a6a819fd31d26470301334aa3a9ade4a4f86`. An isolated source checkout and a deterministic native bridge provide an authored example project. The screenshot inside the canvas is sample project-settings content. No private workspace is used.
 
 `scripts/capture-stable.mjs` records these images with the isolated renderer served on port 4176. Install the tagged app's dependencies and run its Vite renderer before capture. Outputs go to `.qa/stable-capture/` for inspection before copying into `assets/screenshots/`.
 
-The original before/after comparison and social preview remain from the original authored example. Their source capture is documented by `scripts/capture-product.mjs` and `scripts/finish-assets.mjs` at upstream commit `63ddf578141ee2114dbd24c31c36c44950f7dfc1`.
+The Collection 08 screenshots share `scripts/example-annotations.mjs`: the rectangle surrounds only Save changes, the step marker clears the label and the callout stays within the source image. `scripts/finish-assets.mjs` uses the stable renderer to produce `example-after-c08.webp` and refreshes `social-preview-c08.png`.
+
+`prompt-export-c08.webp` is the actual stable Share prompt bundles dialog, captured with 32px surrounding padding after the renderer completed the export. `scripts/capture-prompt-export.mjs` uses the real composition pipeline with deterministic in-memory native persistence and clipboard adapters. The completed PNG and Markdown are retained unchanged as `assets/examples/prompt-1.png` and `prompt-1.md`; `prompt-1.webp` is the web preview. The dialog's Copied state comes from that adapter, not a native OS clipboard test.
+
+`t3-draft-c08.webp` shows the actual T3 Code DEV 0.0.4 composer, from a locally staged copy of the user's T3 source. `scripts/capture-t3-draft.mjs` records it against an isolated app on port 6041. The actual exported Markdown was pasted from the browser clipboard, then the actual PNG was pasted separately. This T3 version suppresses text paste when image files are present, so the page explicitly describes the two-paste fallback. No prompt was sent and no private project state was used. The focused screenshot retains 32px around the full composer bezel; only its scroll position was adjusted, not its UI styles.
+
 
 The Imnota logo and bundled app assets retain the upstream MIT license. IBM Plex Sans retains `assets/fonts/OFL.txt`.

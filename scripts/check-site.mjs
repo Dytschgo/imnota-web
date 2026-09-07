@@ -45,6 +45,45 @@ for (const width of [320, 768, 1024, 1440]) {
     false,
     "Visible dash",
   );
+  await page.locator(".handoff-line[data-ready]").waitFor();
+  const connector = await page.locator(".hero-visual").evaluate((figure) => {
+    const bounds = figure.getBoundingClientRect();
+    const image = figure.querySelector(".workbench").getBoundingClientRect();
+    const card = figure
+      .querySelector(".prompt-preview")
+      .getBoundingClientRect();
+    const svg = figure.querySelector("svg");
+    const points = [...svg.querySelectorAll("circle")].map((dot) => ({
+      x: Number(dot.getAttribute("cx")),
+      y: Number(dot.getAttribute("cy")),
+    }));
+    return {
+      width: bounds.width,
+      height: bounds.height,
+      points,
+      endX: card.left - bounds.left,
+      stackedClear: innerWidth > 1100 || card.top >= image.bottom + 16,
+      annotationClear:
+        innerWidth <= 1100 || card.left >= image.left + image.width * 0.78,
+    };
+  });
+  assert.ok(
+    connector.stackedClear && connector.annotationClear,
+    `Card obscures annotation at ${width}`,
+  );
+  for (const point of connector.points) {
+    assert.ok(
+      point.x >= 5 &&
+        point.x <= connector.width - 5 &&
+        point.y >= 5 &&
+        point.y <= connector.height - 5,
+      `Clipped connector dot at ${width}`,
+    );
+  }
+  assert.ok(
+    Math.abs(connector.points[1].x - connector.endX) < 1,
+    "Connector misses handoff card",
+  );
   const axe = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
     .analyze();
@@ -62,6 +101,15 @@ for (const width of [320, 768, 1024, 1440]) {
     overflow: false,
     axeViolations: axe.violations.length,
   });
+}
+for (const filename of ["prompt-1.md", "prompt-1.png"]) {
+  const response = await context.request.get(
+    `${baseURL}/assets/examples/${filename}`,
+  );
+  assert.equal(response.status(), 200, `Missing example ${filename}`);
+  if (filename.endsWith(".md"))
+    assert.match(await response.text(), /# Checkout review/);
+  else assert.equal((await response.body()).subarray(1, 4).toString(), "PNG");
 }
 await page.locator("#tab-unix").focus();
 await page.keyboard.press("ArrowRight");

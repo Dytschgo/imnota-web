@@ -98,3 +98,42 @@ if (menu) {
     if (!menu.contains(event.target)) menu.open = false;
   });
 }
+
+// Follow the annotated button and the handoff panel at every responsive size.
+const heroVisual = document.querySelector(".hero-visual");
+if (heroVisual) {
+  const source = heroVisual.querySelector(".workbench");
+  const panel = heroVisual.querySelector(".prompt-preview");
+  const line = heroVisual.querySelector(".handoff-line");
+  const positionHandoff = () => {
+    const figure = heroVisual.getBoundingClientRect();
+    const image = source.getBoundingClientRect();
+    const card = panel.getBoundingClientRect();
+    const label = panel.querySelector(".preview-label").getBoundingClientRect();
+    const stacked = matchMedia("(max-width: 1100px)").matches;
+    const anchorX = Number(
+      stacked ? source.dataset.annotationLeftX : source.dataset.annotationX,
+    );
+    const startX = image.left - figure.left + image.width * anchorX;
+    const startY =
+      image.top -
+      figure.top +
+      image.height * Number(source.dataset.annotationY);
+    const endX = card.left - figure.left;
+    const endY = label.bottom - figure.top;
+    const elbowX = stacked ? Math.min(startX, endX) - 16 : endX - 12;
+    line.setAttribute("viewBox", `0 0 ${figure.width} ${figure.height}`);
+    line
+      .querySelector("path")
+      .setAttribute("d", `M${startX} ${startY} H${elbowX} V${endY} H${endX}`);
+    const dots = line.querySelectorAll("circle");
+    dots[0].setAttribute("cx", startX);
+    dots[0].setAttribute("cy", startY);
+    dots[1].setAttribute("cx", endX);
+    dots[1].setAttribute("cy", endY);
+    line.setAttribute("data-ready", "");
+  };
+  const observer = new ResizeObserver(positionHandoff);
+  [heroVisual, source, panel].forEach((element) => observer.observe(element));
+  document.fonts.ready.then(positionHandoff);
+}

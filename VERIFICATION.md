@@ -2,6 +2,14 @@
 
 The v0.2.4 website update was verified locally on 7 September 2026. Production is https://imnota.xyz/. The release process also runs the same browser suite against that domain after deployment; raw run records are stored in ignored `.qa/` and GitHub CI records the reviewed source revision.
 
+## Collection 08 corrections
+
+- Annotation source geometry is shared across captures. Save changes has a fitted rectangle, a clear step marker and a callout fully inside the image.
+- The connector follows actual element bounds; its dots stay within the figure. Tablet and mobile layouts place the handoff card below the screenshot so it cannot obscure the callout.
+- The homepage now includes the real export dialog, unchanged renderer-produced PNG/Markdown downloads and a real unsent T3 Code draft. T3 uses two separate clipboard pastes, explicitly described on the page.
+- New browser assertions check connector bounds/card overlap at all four viewport sizes and confirm both downloadable artifacts respond successfully. Full-page visual review includes the export and T3 examples.
+- Recovery baseline remains `.qa/imnota-web_20260907_215035.zip`. The Collection 08 payload is `.qa/imnota-web_20260907_221809.zip`, SHA-256 `2865a1bbbbdad28c9f650cd5649f6457528bfcf54e9c0cf69d4390f6ca93e83e`.
+
 ## Content and visuals
 
 - The homepage, feature page and public changelog use the published stable v0.2.4 release and versioned upstream sources.
@@ -14,14 +22,14 @@ The v0.2.4 website update was verified locally on 7 September 2026. Production i
 ## Automated checks
 
 - Prettier formatting and HTML validation pass for all four HTML pages and the checked source files.
-- `npm run build` creates a static-only `dist` directory. `npm run package` creates the matching archive with 24 public files, excluding dependencies, developer scripts, source checkout, documentation and repository metadata.
+- `npm run build` creates a static-only `dist` directory. `npm run package` creates the matching archive with 28 public files, excluding dependencies, developer scripts, source checkout, documentation and repository metadata.
 - The browser suite passes against `dist` served on port 4174, across 320, 768, 1024 and 1440 pixel widths for the homepage, Features and Changelog.
 - Axe reports zero WCAG A/AA violations across those 12 page/viewport combinations. No horizontal overflow, broken image decode or browser runtime errors occurred.
 - Installation tabs support arrow keys, Home and End. Clipboard success and denial fallbacks pass; the mobile menu, Escape handling, FAQ, reduced motion and no-JavaScript content checks pass.
 - Feature/changelog navigation, fragment links, stable-release notes and no-JavaScript reference-page reading pass.
 - GitHub Actions runs formatting, HTML, build and browser checks against the generated `dist` payload on PRs and pushes to `main`.
 
-## Lighthouse mobile lab result
+## Previous v0.2.4 Lighthouse mobile lab result
 
 | Category or metric       | Result |
 | ------------------------ | ------ |

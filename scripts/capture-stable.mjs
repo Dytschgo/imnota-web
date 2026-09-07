@@ -1,3 +1,4 @@
+import { annotations } from "./example-annotations.mjs";
 import { chromium } from "playwright";
 import sharp from "sharp";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -10,53 +11,7 @@ await mkdir(output, { recursive: true });
 const dataUrl = `data:image/webp;base64,${(await readFile(new URL("../assets/screenshots/example-before.webp", import.meta.url))).toString("base64")}`;
 const backdropDataUrl = `data:image/webp;base64,${(await readFile(new URL("../assets/art/workspace-slate.webp", import.meta.url))).toString("base64")}`;
 const now = "2026-09-07T18:24:23.000Z";
-const annotations = [
-  {
-    id: "box",
-    kind: "rectangle",
-    x: 302,
-    y: 422,
-    width: 315,
-    height: 78,
-    stroke: "#6857f5",
-    strokeWidth: 3,
-    zIndex: 0,
-  },
-  {
-    id: "arrow",
-    kind: "arrow",
-    x: 720,
-    y: 350,
-    points: [0, 0, -210, 98],
-    stroke: "#6857f5",
-    strokeWidth: 4,
-    zIndex: 1,
-  },
-  {
-    id: "step",
-    kind: "step",
-    x: 289,
-    y: 432,
-    stepNumber: 1,
-    fill: "#6857f5",
-    stroke: "#6857f5",
-    fontSize: 20,
-    zIndex: 2,
-  },
-  {
-    id: "note",
-    kind: "callout",
-    x: 585,
-    y: 274,
-    width: 294,
-    height: 66,
-    text: "Make the primary action clear.",
-    stroke: "#6857f5",
-    fill: "#6857f5",
-    fontSize: 18,
-    zIndex: 3,
-  },
-];
+
 const shots = [
   [
     "shot-settings",
