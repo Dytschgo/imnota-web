@@ -1,3 +1,13 @@
+// Record installer intent without delaying or changing the download link.
+function trackDownload(event) {
+  if (event.type === "auxclick" && event.button !== 1) return;
+  const link = event.target.closest("a[data-download-os]");
+  if (!link || typeof window.plausible !== "function") return;
+  window.plausible("Download", { props: { os: link.dataset.downloadOs } });
+}
+document.addEventListener("click", trackDownload);
+document.addEventListener("auxclick", trackDownload);
+
 // Progressive enhancement: all installation instructions are readable without JS.
 const tabs = [...document.querySelectorAll(".install-tabs a")];
 const panels = [...document.querySelectorAll(".install-panel")];

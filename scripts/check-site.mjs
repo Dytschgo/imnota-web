@@ -1,4 +1,5 @@
 import { checkMotion } from "./check-motion.mjs";
+import { checkDownloads } from "./check-downloads.mjs";
 import { chromium } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
 import assert from "node:assert/strict";
@@ -287,6 +288,7 @@ assert.ok(
   "Download links must point to stable 0.2.5",
 );
 const motion = await checkMotion(browser, baseURL);
+await checkDownloads(browser, baseURL);
 const report = {
   motion,
   layouts: results,

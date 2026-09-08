@@ -71,3 +71,9 @@ npm run audit:performance
 ```
 
 Browser checks cover 320, 768, 1024 and 1440 pixel layouts, overflow, broken assets, keyboard tabs, mobile navigation, FAQ, clipboard success/failure, no-JavaScript reading, reduced motion and axe accessibility. Lighthouse reports and screenshots are written to ignored `.qa/`. See `VERIFICATION.md` for the latest recorded results and remaining deployment checks.
+
+## Download analytics
+
+Installer links send the Plausible custom event `Download` with an `os` property of `Windows`, `macOS` or `Linux`. This measures link clicks, not completed downloads or installations. Example bundle downloads and installation command copies do not count toward this event.
+
+In Plausible, open the settings for `imnota.xyz`, then Goals → Add goal → Custom event and enter `Download` exactly. The goal appears in the dashboard after a conversion. Filter by the `os` property to inspect each platform. No account credentials are stored in the site.
