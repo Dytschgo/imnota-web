@@ -6,9 +6,9 @@
     "preview": "python -m http.server 4173",
     "build": "node scripts/build-site.mjs",
     "package": "python scripts/package-site.py",
-    "format": "prettier --write index.html 404.html features.html changelog.html styles.css script.js scripts README.md VERIFICATION.md package.json .htmlvalidate.json",
-    "format:check": "prettier --check index.html 404.html features.html changelog.html styles.css script.js scripts README.md VERIFICATION.md package.json .htmlvalidate.json",
-    "validate": "html-validate index.html 404.html features.html changelog.html",
+    "format": "prettier --write index.html 404.html features.html changelog.html install.html agents.html styles.css script.js scripts README.md VERIFICATION.md package.json .htmlvalidate.json",
+    "format:check": "prettier --check index.html 404.html features.html changelog.html install.html agents.html styles.css script.js scripts README.md VERIFICATION.md package.json .htmlvalidate.json",
+    "validate": "html-validate index.html 404.html features.html changelog.html install.html agents.html",
     "test": "node scripts/check-site.mjs",
     "audit:performance": "node scripts/audit-performance.mjs"
   },

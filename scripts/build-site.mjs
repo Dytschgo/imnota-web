@@ -9,10 +9,13 @@ const publicFiles = [
   "404.html",
   "features.html",
   "changelog.html",
+  "install.html",
+  "agents.html",
   "styles.css",
   "script.js",
   "robots.txt",
   "sitemap.xml",
+  "llms.txt",
   "LICENSE",
   ".htaccess",
 ];

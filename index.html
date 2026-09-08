@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0d12" />
-    <title>Imnota | Screenshots that AI understands</title>
+    <title>Imnota: Annotated Screenshots for AI Coding Agents</title>
     <meta
       name="description"
-      content="Imnota is a local-first open-source desktop tool for combining annotated screenshots, drawings and Markdown into prompt bundles for coding agents."
+      content="Imnota is a local-first open-source desktop app for annotating screenshots and exporting visual context as AI-ready Markdown and PNG prompt bundles."
     />
     <link rel="canonical" href="https://imnota.xyz/" />
     <meta property="og:type" content="website" />
@@ -32,6 +32,51 @@
       content="Imnota. Screenshots that AI understands. An annotated project settings example."
     />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Imnota: Annotated Screenshots for AI Coding Agents"
+    />
+    <meta
+      name="twitter:description"
+      content="Annotate screenshots, add context and export a prompt bundle for your coding agent."
+    />
+    <meta
+      name="twitter:image"
+      content="https://imnota.xyz/assets/social-preview-c08.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "Imnota",
+            "url": "https://imnota.xyz/",
+            "description": "A local-first desktop app for annotating screenshots and exporting visual context as AI-ready Markdown and PNG prompt bundles.",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Windows, macOS, Linux",
+            "softwareVersion": "0.2.5",
+            "license": "https://github.com/Dytschgo/imnota/blob/main/LICENSE",
+            "downloadUrl": "https://imnota.xyz/install.html",
+            "codeRepository": "https://github.com/Dytschgo/imnota",
+            "isAccessibleForFree": true,
+            "author": { "@id": "https://imnota.xyz/#organization" }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://imnota.xyz/#organization",
+            "name": "Imnota",
+            "url": "https://imnota.xyz/",
+            "sameAs": ["https://github.com/Dytschgo/imnota"]
+          },
+          {
+            "@type": "WebSite",
+            "name": "Imnota",
+            "url": "https://imnota.xyz/"
+          }
+        ]
+      }
+    </script>
     <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
     <link
       rel="preload"
@@ -79,11 +124,12 @@
       <nav class="desktop-nav" aria-label="Main navigation">
         <a href="features.html">Features</a
         ><a href="changelog.html">Changelog</a
+        ><a href="agents.html">For AI agents</a
         ><a href="#how-it-works">How it works</a
         ><a href="#installation">Installation</a
         ><a href="#open-source">Open source</a>
       </nav>
-      <a class="button button-small" href="#installation"
+      <a class="button button-small" href="install.html"
         >Install Imnota <span aria-hidden="true">↗</span></a
       >
       <details class="mobile-menu">
@@ -91,6 +137,7 @@
         <nav aria-label="Mobile navigation">
           <a href="features.html">Features</a
           ><a href="changelog.html">Changelog</a
+          ><a href="agents.html">For AI agents</a
           ><a href="#how-it-works">How it works</a
           ><a href="#installation">Installation</a
           ><a href="#open-source">Open source</a>

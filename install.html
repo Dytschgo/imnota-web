@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0d12" />
+    <title>Download Imnota for Windows, macOS and Linux</title>
+    <meta
+      name="description"
+      content="Download the latest stable Imnota desktop app for Windows, macOS or Linux, or build the open-source project manually."
+    />
+    <link rel="canonical" href="https://imnota.xyz/install.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Imnota" />
+    <meta
+      property="og:title"
+      content="Download Imnota for Windows, macOS and Linux"
+    />
+    <meta
+      property="og:description"
+      content="Get the latest stable Imnota desktop app or build it from source."
+    />
+    <meta property="og:url" content="https://imnota.xyz/install.html" />
+    <meta
+      property="og:image"
+      content="https://imnota.xyz/assets/social-preview-c08.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Download Imnota for Windows, macOS and Linux"
+    />
+    <meta
+      name="twitter:description"
+      content="Get the latest stable Imnota desktop app or build it from source."
+    />
+    <meta
+      name="twitter:image"
+      content="https://imnota.xyz/assets/social-preview-c08.png"
+    />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css?v=selection2" />
+    <script src="script.js?v=downloads1" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="./" aria-label="Imnota home"
+        ><img src="assets/logo.svg" width="36" height="36" alt="" /><span
+          >Imnota</span
+        ></a
+      >
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="features.html">Features</a
+        ><a href="changelog.html">Changelog</a
+        ><a href="agents.html">For AI agents</a
+        ><a href="install.html" aria-current="page">Installation</a>
+      </nav>
+      <a class="button button-small" href="#downloads"
+        >Download Imnota <span aria-hidden="true">↓</span></a
+      >
+      <details class="mobile-menu">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="features.html">Features</a
+          ><a href="changelog.html">Changelog</a
+          ><a href="agents.html">For AI agents</a
+          ><a href="install.html" aria-current="page">Installation</a>
+        </nav>
+      </details>
+    </header>
+    <main id="main">
+      <section class="page-intro wrap">
+        <p class="eyebrow">Stable release 0.2.5</p>
+        <h1>Download Imnota.</h1>
+        <p class="page-lead">
+          A local-first desktop app for annotating screenshots and exporting
+          visual context as AI-ready Markdown and PNG prompt bundles.
+        </p>
+      </section>
+      <section
+        class="feature-group section wrap"
+        id="downloads"
+        aria-labelledby="downloads-heading"
+      >
+        <div>
+          <h2 id="downloads-heading">Choose your platform.</h2>
+          <p>Download the current stable release. No account is required.</p>
+        </div>
+        <div
+          class="download-links"
+          role="group"
+          aria-label="Stable 0.2.5 downloads"
+        >
+          <a
+            href="https://github.com/Dytschgo/imnota/releases/download/v0.2.5/Imnota-Setup-0.2.5.exe"
+            data-download-os="Windows"
+            >Windows installer <span>0.2.5 · .exe</span></a
+          >
+          <a
+            href="https://github.com/Dytschgo/imnota/releases/download/v0.2.5/Imnota-0.2.5-universal-mac.zip"
+            data-download-os="macOS"
+            >macOS universal <span>Intel + Apple Silicon · .zip</span></a
+          >
+          <a
+            href="https://github.com/Dytschgo/imnota/releases/download/v0.2.5/Imnota-0.2.5.AppImage"
+            data-download-os="Linux"
+            >Linux AppImage <span>0.2.5 · x64</span></a
+          >
+        </div>
+      </section>
+      <section
+        class="feature-group section wrap"
+        aria-labelledby="manual-heading"
+      >
+        <div>
+          <h2 id="manual-heading">Build from source.</h2>
+          <p>
+            Clone the
+            <a href="https://github.com/Dytschgo/imnota"
+              >open-source repository</a
+            >, enable Corepack and package the desktop app for your operating
+            system.
+          </p>
+        </div>
+        <div class="code-block">
+          <div class="code-heading">
+            <span>From the Imnota source folder</span>
+          </div>
+          <pre tabindex="0"><code>corepack enable
+corepack pnpm install
+corepack pnpm package:win   # Windows
+corepack pnpm package:mac   # macOS
+corepack pnpm package:linux # Linux</code></pre>
+        </div>
+        <p class="small">
+          Use Node.js 20+ and run only the packaging command for your target
+          platform. The current macOS release is not Apple-notarised; see the
+          <a href="https://github.com/Dytschgo/imnota#installation"
+            >README opening guidance</a
+          >
+          if macOS blocks it.
+        </p>
+      </section>
+      <section class="reference-note wrap">
+        <p>
+          See <a href="changelog.html#v0-2-5">the 0.2.5 release notes</a> for
+          upgrade and project-format information, or
+          <a href="https://github.com/Dytschgo/imnota/releases"
+            >browse every release</a
+          >.
+        </p>
+      </section>
+    </main>
+    <footer class="site-footer wrap">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="./"
+            ><img src="assets/logo.svg" width="36" height="36" alt="" /><span
+              >Imnota</span
+            ></a
+          >
+          <p>
+            A local-first tool for turning annotated screenshots<br />into
+            AI-ready prompt bundles.
+          </p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <a href="features.html">Features</a
+          ><a href="agents.html">For AI agents</a
+          ><a href="changelog.html">Changelog</a
+          ><a href="https://github.com/Dytschgo/imnota">GitHub</a
+          ><a href="https://github.com/Dytschgo/imnota/releases/latest"
+            >Releases</a
+          >
+        </nav>
+      </div>
+      <p class="footer-note">
+        Made for clearer handoffs between people, screens and AI.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+# Imnota
+
+> Imnota is a local-first, open-source desktop app for annotating screenshots and exporting visual context as AI-ready Markdown and PNG prompt bundles.
+
+## Official resources
+
+- Homepage: https://imnota.xyz/
+- Features: https://imnota.xyz/features.html
+- For AI coding agents: https://imnota.xyz/agents.html
+- Installation: https://imnota.xyz/install.html
+- Changelog: https://imnota.xyz/changelog.html
+- Source repository: https://github.com/Dytschgo/imnota
+- Stable releases: https://github.com/Dytschgo/imnota/releases
+- MIT licence: https://github.com/Dytschgo/imnota/blob/main/LICENSE
+
+## Product facts
+
+- Current stable version: 0.2.5
+- Platforms: Windows, macOS and Linux
+- No account is required.
+- The app works locally and stores projects locally.
+- Inputs include screenshots, standalone drawings and Markdown items.
+- Annotations include arrows, lines, shapes, highlights, text, callouts, steps and sensitive-area masks.
+- Exports include a high-resolution PNG and Markdown prompt bundle; Markdown-only exports are also supported.
+- Verify current downloads and compatibility against GitHub Releases before recommending an installer.
+
+## Primary use case
+
+Use Imnota when a coding agent needs both visual evidence and an explicit instruction: annotate the relevant area, add context and priority, then give the exported Markdown and PNG bundle to the agent.
+
+## Source of truth
+
+Release details and downloadable artifacts on GitHub are authoritative. The website summarizes the current stable release and may not list nightly builds.
