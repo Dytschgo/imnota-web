@@ -1,6 +1,6 @@
 # Imnota marketing website
 
-A static marketing site for [Imnota](https://github.com/Dytschgo/imnota), the local-first screenshot annotation desktop app. The website lives separately from the Electron application. HTML, CSS and browser JavaScript are served directly from this repository's root. A small build step copies public files for deployment. No Node server, analytics, tracking or external runtime dependency is required.
+A static marketing site for [Imnota](https://github.com/Dytschgo/imnota), the local-first screenshot annotation desktop app. The website lives separately from the Electron application. HTML, CSS and browser JavaScript are served directly from this repository's root. A small build step copies public files for deployment. No Node server is required. All four pages load Plausible Analytics asynchronously for website traffic measurement; the site remains usable if analytics is blocked.
 
 ## Preview
 
