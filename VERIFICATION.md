@@ -2,6 +2,14 @@
 
 Production is https://imnota.xyz/. The release process runs browser checks locally and against that domain after deployment; raw run records are stored in ignored `.qa/` and GitHub CI records the reviewed source revision.
 
+## Stable 0.2.6 update
+
+- Checked the published stable release on 9 September 2026, tag `v0.2.6`, commit `05fd5a5`, against its tagged changelog and sharing user guide. All three installer filenames match published assets.
+- Updated homepage release highlights, Features, Changelog, Installation, structured version metadata and `llms.txt`. Corrected the upload FAQ to distinguish offline work from optional hosted sharing.
+- Added two built-in ChatGPT Image illustrations with prompts and paths in ASSETS.md. Actual renderer captures remain explicitly labelled 0.2.5.
+- Formatting, HTML validation and production build pass. The browser suite passes on the production build at 320, 768, 1024 and 1440 pixels with zero axe violations, overflow or runtime errors. Navigation, historic and current changelog entries, download analytics, keyboard, clipboard fallbacks, motion and no-JavaScript checks pass.
+- Inspected the rendered release highlight at desktop and mobile sizes, plus the appearance section and changelog banner. Recovery source baseline: `73cb68b`.
+
 ## Stable 0.2.5 update
 
 - Latest stable tag `v0.2.5` resolves to `bd33da45fac5bf05f20e6cdb9f66c5db709b3bdf`, published on 7 September 2026 at 21:55 UTC. The Windows installer, universal Mac ZIP and Linux AppImage links match its published assets.

@@ -1,5 +1,20 @@
 # Website imagery
 
+## Stable 0.2.6 artwork, 9 September 2026
+
+Generated with the built-in ChatGPT Image tool. Both originals were inspected and encoded as 1536 × 864 WebP assets with Sharp, quality 82. These are editorial illustrations, not application screenshots or bundled app backdrops. Existing 0.2.5 renderer captures retain their version labels.
+
+- `assets/art/release-sharing-026.webp`: homepage release highlight and changelog banner.
+- `assets/art/workspace-light-dark-026.webp`: Features appearance section.
+
+### Sharing prompt
+
+Use case: ads-marketing. Asset type: Imnota 0.2.6 website release illustration. Wide 16:9 landscape editorial still life, matte charcoal desk, a carefully ordered bundle of three smoked translucent drafting sheets with a small brushed-metal clip, one precise violet rectangle and arrow marking an abstract diagram, thin graphite note strokes with no readable text. A second matching bundle nearby connected by a single fine violet physical thread, evoking an intentional handoff. Tactile slate, vellum and silver edges, soft raking daylight, restrained violet accent, quiet precise technical mood. Composition on right two thirds with generous dark breathing room at left. No UI, no screen, no device, no logos, no lettering, no watermark, no neon glow.
+
+### Appearance prompt
+
+Use case: stylized-concept. Asset type: supporting editorial artwork for Imnota 0.2.6 workspace appearance features. Wide 16:9 landscape tactile sculptural still life of two adjoining folded mineral surfaces, pale limestone on one side and graphite slate on the other, the same contour line crossing both surfaces as a restrained fine violet mineral seam. Elegant precise quiet composition, real fine stone texture, soft diffuse daylight, legible silhouettes and generous breathing room. Communicate light and dark workspace choices through physical material. No lettering, no logos, no watermark, no interface, no devices, no neon or glowing effects.
+
 The website uses real Imnota renderer captures and two original GPT Image assets. Each product capture records its source version below. Generated artwork is supporting illustration, not an app screenshot.
 
 ## GPT Image

@@ -15,9 +15,10 @@
 
 ## Product facts
 
-- Current stable version: 0.2.5
+- Current stable version: 0.2.6
 - Platforms: Windows, macOS and Linux
-- No account is required.
+- Local editing, copy and export require no account and work offline.
+- Optional hosted sharing uploads approved finalized artifacts and provides expiring, revocable links with browser copy and ZIP downloads. Anyone with the link can access the bundle until expiry or revocation.
 - The app works locally and stores projects locally.
 - Inputs include screenshots, standalone drawings and Markdown items.
 - Annotations include arrows, lines, shapes, highlights, text, callouts, steps and sensitive-area masks.
