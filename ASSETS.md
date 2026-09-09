@@ -2,6 +2,12 @@
 
 ## Stable 0.2.6 artwork, 9 September 2026
 
+### Revised sharing artwork
+
+`assets/art/release-sharing-026-v2.webp` replaces the photographic sharing illustration on the homepage and changelog following visual feedback. Created with the built-in ChatGPT Image tool, then resized to 1536 × 864 WebP at quality 85. The caption now explains the feature; production details remain in this document.
+
+Prompt: Use case: ads-marketing. Create a restrained flat digital editorial illustration for Imnota's dark developer-tool website. Wide 16:9 composition. Background exactly near-black #0b0e12, perfectly flat. A clear left-to-right visual story: on the left two overlapping thin outlined rectangular document panels, one containing a simple screenshot annotation motif (one violet outlined rectangle and arrow), the other containing short grey horizontal text lines. A single fine violet connector with a small circular endpoint leads right to a compact browser-shaped outlined panel showing the same annotation and note lines together, with a small chain-link symbol above it. Precise 2D geometry, consistent thin 1.5px-looking muted slate outlines, modest 6px corner radii, flat charcoal panel fills, off-white marks, restrained solid violet #6b50ff accents. Generous negative space, balanced centered composition with substantial padding, visual language of a polished technical product diagram. No words, no lettering, no fake detailed software controls, no photographic objects, no desk, no paper texture, no stone, no binder clips, no 3D, no perspective, no shadow, no gradients, no glow, no decorative particles, no watermark. This is a conceptual illustration of sharing a screenshot and Markdown bundle via a browser link, not an app screenshot.
+
 Generated with the built-in ChatGPT Image tool. Both originals were inspected and encoded as 1536 × 864 WebP assets with Sharp, quality 82. These are editorial illustrations, not application screenshots or bundled app backdrops. Existing 0.2.5 renderer captures retain their version labels.
 
 - `assets/art/release-sharing-026.webp`: homepage release highlight and changelog banner.
