@@ -39,8 +39,8 @@
       content="https://imnota.xyz/assets/social-preview-c08.png"
     />
     <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=selection2" />
-    <script src="script.js?v=downloads1" defer></script>
+    <link rel="stylesheet" href="styles.css?v=drawings028" />
+    <script src="script.js?v=motion028" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -70,8 +70,8 @@
       </details>
     </header>
     <main id="main">
-      <section class="page-intro wrap">
-        <p class="eyebrow">Stable release 0.2.6</p>
+      <section class="page-intro download-intro wrap" data-motion="intro">
+        <p class="eyebrow">Stable release 0.2.8</p>
         <h1>Download Imnota.</h1>
         <p class="page-lead">
           A local-first desktop app for annotating screenshots and exporting
@@ -79,7 +79,7 @@
         </p>
       </section>
       <section
-        class="feature-group section wrap"
+        class="feature-group download-section section wrap"
         id="downloads"
         aria-labelledby="downloads-heading"
       >
@@ -90,27 +90,35 @@
         <div
           class="download-links"
           role="group"
-          aria-label="Stable 0.2.6 downloads"
+          aria-label="Stable 0.2.8 downloads"
         >
           <a
-            href="https://github.com/Dytschgo/imnota/releases/download/v0.2.6/Imnota-Setup-0.2.6.exe"
+            href="https://github.com/Dytschgo/imnota/releases/download/v0.2.8/Imnota-Setup-0.2.8.exe"
             data-download-os="Windows"
-            >Windows installer <span>0.2.6 · .exe</span></a
+            >Windows installer <span>0.2.8 · .exe</span></a
           >
           <a
-            href="https://github.com/Dytschgo/imnota/releases/download/v0.2.6/Imnota-0.2.6-universal-mac.zip"
+            href="https://github.com/Dytschgo/imnota/releases/download/v0.2.8/Imnota-0.2.8-universal-mac.zip"
             data-download-os="macOS"
             >macOS universal <span>Intel + Apple Silicon · .zip</span></a
           >
           <a
-            href="https://github.com/Dytschgo/imnota/releases/download/v0.2.6/Imnota-0.2.6.AppImage"
+            href="https://github.com/Dytschgo/imnota/releases/download/v0.2.8/Imnota-0.2.8.AppImage"
             data-download-os="Linux"
-            >Linux AppImage <span>0.2.6 · x64</span></a
+            >Linux AppImage <span>0.2.8 · x64</span></a
           >
         </div>
+        <p class="download-compatibility">
+          <strong>macOS 13 or later required.</strong> The universal download
+          supports Intel and Apple Silicon. Mac downloads are ad-hoc signed, not
+          Apple-notarised. Back up your workspace before upgrading.
+          <a href="https://github.com/Dytschgo/imnota#installation"
+            >Opening guidance ↗</a
+          >
+        </p>
       </section>
       <section
-        class="feature-group section wrap"
+        class="feature-group source-section section wrap"
         aria-labelledby="manual-heading"
       >
         <div>
@@ -133,8 +141,8 @@ corepack pnpm package:win   # Windows
 corepack pnpm package:mac   # macOS
 corepack pnpm package:linux # Linux</code></pre>
         </div>
-        <p class="small">
-          Use Node.js 20+ and run only the packaging command for your target
+        <p class="small build-requirements">
+          Use Node.js 22.13+ and run only the packaging command for your target
           platform. The current macOS release is not Apple-notarised; see the
           <a href="https://github.com/Dytschgo/imnota#installation"
             >README opening guidance</a
@@ -144,7 +152,7 @@ corepack pnpm package:linux # Linux</code></pre>
       </section>
       <section class="reference-note wrap">
         <p>
-          See <a href="changelog.html#v0-2-6">the 0.2.6 release notes</a> for
+          See <a href="changelog.html#v0-2-8">the 0.2.8 release notes</a> for
           upgrade and project-format information, or
           <a href="https://github.com/Dytschgo/imnota/releases"
             >browse every release</a

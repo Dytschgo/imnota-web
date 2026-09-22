@@ -221,3 +221,150 @@ if (handoffDiagram) {
   connection?.addEventListener?.("change", setMotionMode);
   setMotionMode();
 }
+
+// Play short, finite scenes as they enter view. The underlying content is
+// always visible; interrupted scenes settle immediately for reduced motion.
+const motionScenes = [...document.querySelectorAll("[data-motion]")];
+if (
+  motionScenes.length &&
+  "IntersectionObserver" in window &&
+  Element.prototype.animate
+) {
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const connection = navigator.connection;
+  const scenes = motionScenes.map((element) => ({
+    element,
+    visible: false,
+    played: false,
+    animations: [],
+  }));
+  let enabled = false;
+  const easing = "cubic-bezier(0.16, 1, 0.3, 1)";
+  const enter = [
+    { opacity: 0.4, transform: "translateY(18px)" },
+    { opacity: 1, transform: "translateY(0)" },
+  ];
+
+  function playScene(scene) {
+    scene.played = true;
+    scene.element.dataset.revealState = "playing";
+    const animate = (element, keyframes, duration, delay = 0) => {
+      scene.animations.push(
+        element.animate(keyframes, {
+          duration,
+          delay,
+          easing,
+          fill: "backwards",
+        }),
+      );
+    };
+    switch (scene.element.dataset.motion) {
+      case "hero":
+        animate(scene.element, enter, 950);
+        scene.element
+          .querySelectorAll(".prompt-content > *")
+          .forEach((line, index) => {
+            animate(
+              line,
+              [
+                { opacity: 0.35, transform: "translateX(-8px)" },
+                { opacity: 1, transform: "translateX(0)" },
+              ],
+              500,
+              260 + index * 100,
+            );
+          });
+        break;
+      case "annotation":
+        animate(
+          scene.element,
+          [{ clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0 0 0)" }],
+          1100,
+        );
+        break;
+      case "artwork":
+        animate(
+          scene.element.querySelector("img"),
+          [
+            { opacity: 0.5, transform: "scale(1.045)" },
+            { opacity: 1, transform: "scale(1)" },
+          ],
+          1400,
+        );
+        animate(
+          scene.element.querySelector(".capture-outline"),
+          [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }],
+          1250,
+          150,
+        );
+        animate(
+          scene.element.querySelector(".capture-handles"),
+          [{ opacity: 0 }, { opacity: 1 }],
+          300,
+          1000,
+        );
+        scene.element
+          .querySelectorAll(".artwork-legend > span")
+          .forEach((label, index) => {
+            animate(label, enter, 500, 300 + index * 180);
+          });
+        break;
+      case "steps":
+        [...scene.element.children].forEach((item, index) => {
+          animate(item, enter, 650, index * 100);
+        });
+        break;
+      case "intro":
+        animate(scene.element.querySelector("h1"), enter, 750);
+        break;
+    }
+    Promise.allSettled(
+      scene.animations.map((animation) => animation.finished),
+    ).then(() => {
+      scene.animations = [];
+      scene.element.dataset.revealState = enabled ? "complete" : "static";
+    });
+  }
+
+  function reconcile(scene) {
+    if (!enabled) {
+      scene.animations.forEach((animation) => animation.cancel());
+      scene.animations = [];
+      scene.element.dataset.revealState = "static";
+      return;
+    }
+    const visible = scene.visible && !document.hidden;
+    if (visible && !scene.played) playScene(scene);
+    else if (scene.animations.length) {
+      scene.animations.forEach((animation) => {
+        if (visible && animation.playState === "paused") animation.play();
+        else if (!visible && animation.playState === "running")
+          animation.pause();
+      });
+      scene.element.dataset.revealState = visible ? "playing" : "paused";
+    }
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const scene = scenes.find((item) => item.element === entry.target);
+        scene.visible = entry.isIntersecting;
+        reconcile(scene);
+      }
+    },
+    { threshold: 0 },
+  );
+  scenes.forEach((scene) => observer.observe(scene.element));
+  const setMode = () => {
+    enabled = !reducedMotion.matches && !connection?.saveData;
+    document.documentElement.dataset.motionMode = enabled ? "full" : "static";
+    scenes.forEach(reconcile);
+  };
+  reducedMotion.addEventListener("change", setMode);
+  connection?.addEventListener?.("change", setMode);
+  document.addEventListener("visibilitychange", () =>
+    scenes.forEach(reconcile),
+  );
+  setMode();
+}

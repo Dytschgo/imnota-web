@@ -1,6 +1,6 @@
 # Imnota marketing website
 
-A static marketing site for [Imnota](https://github.com/Dytschgo/imnota), the local-first screenshot annotation desktop app. The website lives separately from the Electron application. HTML, CSS and browser JavaScript are served directly from this repository's root. A small build step copies public files for deployment. No Node server is required. All four pages load Plausible Analytics asynchronously for website traffic measurement; the site remains usable if analytics is blocked.
+A static marketing site for [Imnota](https://github.com/Dytschgo/imnota), the local-first screenshot annotation desktop app. The website lives separately from the Electron application. HTML, CSS and browser JavaScript are served directly from this repository's root. A small build step copies public files for deployment. No Node server is required. The homepage, Features, Changelog and error page load Plausible Analytics asynchronously for website traffic measurement; the site remains usable if analytics is blocked.
 
 ## Preview
 
@@ -16,7 +16,7 @@ Production domain: https://imnota.xyz/. GitHub repository: `Dytschgo/imnota-web`
 
 The intended normal workflow is a reviewed PR, passing GitHub Actions checks, merge to `main`, then Hostinger Git auto-deployment. The check workflow runs on PRs and pushes to `main`. Hostinger does not commit local changes to GitHub.
 
-The dependency-free `npm run build` copies only public files to `dist`: all four HTML pages, CSS, browser JavaScript, robots/sitemap, `.htaccess`, licensed assets and `LICENSE`. It rejects symlinked inputs. Development scripts, Git metadata and dependencies stay outside the published payload. The app has no server entry file.
+The dependency-free `npm run build` copies only public files to `dist`: six HTML pages, CSS, browser JavaScript, robots/sitemap, `llms.txt`, `.htaccess`, licensed assets and `LICENSE`. It rejects symlinked inputs. Development scripts, Git metadata and dependencies stay outside the published payload. The app has no server entry file.
 
 Hostinger build settings for this workflow:
 
@@ -45,15 +45,19 @@ To roll back normal Git deployment, revert the release commit through a reviewed
 
 ## Content and asset provenance
 
-The homepage, feature list and public changelog reflect stable [Imnota v0.2.6](https://github.com/Dytschgo/imnota/releases/tag/v0.2.6), commit `05fd5a5`. Sharing, navigation, appearance, recovery and compatibility claims were checked against its tagged changelog, implementation and published release notes. The changelog lists downloadable stable releases only. The unpublished 0.2.3 tag and Nightly previews are not listed as stable releases.
+The homepage, feature list and public changelog reflect stable [Imnota v0.2.8](https://github.com/Dytschgo/imnota/releases/tag/v0.2.8), commit `822bd7e`. Release notes and asset filenames were checked against the live GitHub API on 22 September 2026. Templates, capture, clipboard, search, backups and update claims were checked against tagged documentation and implementation; the tagged CHANGELOG.md still stops at 0.2.7. The public changelog includes both 0.2.7 and 0.2.8 and lists downloadable stable releases only. The unpublished 0.2.3 tag and Nightly previews are not listed as stable releases. Current Mac downloads require macOS 13 or later.
 
-Product images show the actual tagged React/Konva renderer with deterministic example data. GPT Image created the workspace backdrop and release artwork. Image prompts, provenance, licenses and capture instructions are in [ASSETS.md](ASSETS.md).
+Product images show the actual tagged React/Konva renderer with deterministic example data. Historical workbench and export captures retain their original version labels. The latest-release spotlight pairs an original generated glass-and-vellum illustration with the guided handoff image bundled in v0.2.8. GPT Image created that illustration, the existing workspace backdrop and historical release artwork. Image prompts, provenance, licenses and capture instructions are in [ASSETS.md](ASSETS.md).
 
 ## Design
 
 Visual thesis: make the handoff between a visual idea and an AI-ready instruction tangible. Precise, focused and quietly expressive, with variance 7/10, motion 5/10 and density 5/10. Native CSS uses the Imnota palette and a 12-column desktop hero. Major surfaces use radii of 5 to 8 pixels. Asymmetric product imagery becomes a single readable composition on mobile.
 
 The motion system follows the annotation workflow: a finite SVG headline drawing and a scroll-driven illustration of a screenshot and context becoming a PNG/Markdown bundle. It uses native SVG, CSS and a throttled animation frame, with no animation dependency. Reduced motion and data-saving preferences show the complete static illustration. The page remains understandable without JavaScript or images. Green identifies local-first information, stable-release status and installation copy success.
+
+The 0.2.8 refinement adds a linked release announcement above the hero, a framed guide image with three release highlights, a latest-release summary on the changelog and larger platform download tiles. Navigation targets are at least 44 CSS pixels tall. Existing typography, colors and motion remain the basis of the design; the release additions use HTML and CSS without another runtime dependency.
+
+The follow-up motion pass adds a staged hero entrance, an annotation wipe, staggered workflow and release highlights, a drawn frame around the generated artwork and responsive feature/download links. Native Web Animations and IntersectionObserver play each entrance once, pause unfinished scenes offscreen or in hidden tabs and cancel them for reduced motion or Save-Data. Content is visible by default, including when JavaScript or animation support is unavailable. New entrance scenes finish within 1.4 seconds of active playback; there are no continuous loops or added animation dependencies.
 
 ## Development checks
 

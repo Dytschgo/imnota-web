@@ -2,6 +2,25 @@
 
 Production is https://imnota.xyz/. The release process runs browser checks locally and against that domain after deployment; raw run records are stored in ignored `.qa/` and GitHub CI records the reviewed source revision.
 
+## Motion and generated artwork, 22 September 2026
+
+- Added finite viewport entrances for the product preview, annotation comparison, workflow steps, release artwork, release highlights and page headings. Feature rows and download tiles respond to hover and keyboard focus. The existing scroll-driven handoff diagram is preserved.
+- New native Web Animations pause while their scene is offscreen or the document is hidden. Reduced motion and Save-Data cancel the animations and restore the complete static presentation. Finished animation segments are not restarted when a partially completed scene resumes. No animation library or continuous rendering loop was added.
+- Generated a conceptual graphite-glass and vellum illustration with the built-in ChatGPT Image tool. Responsive WebP files are 52 KB and 11 KB; the exact prompt and source path are in ASSETS.md. The actual 0.2.8 guide remains available below the artwork and opens its original PNG.
+- The production-build browser suite passes all 20 page/viewport combinations with zero axe violations, overflow or runtime errors. Motion checks cover finite hero timing, annotation completion, offscreen pause/resume, live reduced-motion cancellation, Save-Data and no-JavaScript visibility. The guide link and completed artwork animation were also exercised at a 390-pixel viewport.
+- Inspected the new composition at desktop, tablet and mobile widths, plus a frame during animation. Final local simulated-mobile Lighthouse scores are Performance 98, Accessibility 100, Best Practices 100 and SEO 100; LCP 2.4 s, CLS 0 and total blocking time 50 ms. This is a lab sample, not field performance or a measured smoothness claim on physical mobile hardware.
+- Formatting, HTML validation and production build pass. Changes remain local; `http://localhost:4173` previews the current site.
+
+## Stable 0.2.8 update, 22 September 2026
+
+- Verified the live GitHub latest release as `v0.2.8`, published 20 September 2026 at 18:49 UTC. The annotated tag resolves to commit `822bd7e43cd03d3093869670961a1ec6759f1645`. All seven installer links across the homepage and installation page match published assets, including the version-independent Mac alias.
+- Added the missing 0.2.7 and 0.2.8 changelog entries. Updated current downloads, structured version metadata, features, agent handoff guidance, `llms.txt`, macOS 13+ compatibility and Node.js 22.13+ source-build requirements. The tagged CHANGELOG.md stops at 0.2.7, so the 0.2.8 summary uses published release notes, tagged user documentation and implementation. Windows multi-display capture and copy preferences were checked against code because portions of the guide describe earlier behavior.
+- Added the homepage release announcement, framed built-in guide image, latest-release summary and clearer download tiles. Preserved the existing visual identity and finite motion. Image provenance and the retained historical screenshot versions are recorded in ASSETS.md.
+- Formatting, HTML validation and the production build pass. Browser checks against `dist` pass across all five content pages at 320, 768, 1024 and 1440 pixels: 20 page/viewport combinations with no axe violations or horizontal overflow. Keyboard navigation, installation tabs, clipboard success and denial, mobile menu, FAQ, downloads and analytics, release anchors, reduced motion, Save-Data, no-JavaScript reading and image loading pass without runtime errors.
+- Inspected the rendered desktop homepage, release spotlight, changelog and installation page, plus narrow mobile and tablet layouts. Corrected the guide image link's accessible name after Lighthouse's additional label-matching check flagged it; the focused axe check and full-size image navigation pass after correction.
+- Final local simulated-mobile Lighthouse result: Performance 97, Accessibility 100, Best Practices 100, SEO 100; LCP 2.5 s, CLS 0 and total blocking time 0 ms. The remaining opportunities concern image sizing, CSS delivery and caching/compression on the local Python server. These are lab results, not production field measurements.
+- This update is local and has not been published. Preview: `http://localhost:4173`; generated production payload: `dist`. Starting source revision: `a562c4b`. Raw reports and screenshots are in ignored `.qa/`.
+
 ## Stable 0.2.6 update
 
 - Checked the published stable release on 9 September 2026, tag `v0.2.6`, commit `05fd5a5`, against its tagged changelog and sharing user guide. All three installer filenames match published assets.

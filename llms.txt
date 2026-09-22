@@ -15,12 +15,19 @@
 
 ## Product facts
 
-- Current stable version: 0.2.6
-- Platforms: Windows, macOS and Linux
+- Current stable version: 0.2.8 (20 September 2026)
+- Platforms: Windows, macOS 13 or later, and Linux
 - Local editing, copy and export require no account and work offline.
 - Optional hosted sharing uploads approved finalized artifacts and provides expiring, revocable links with browser copy and ZIP downloads. Anyone with the link can access the bundle until expiry or revocation.
 - The app works locally and stores projects locally.
 - Inputs include screenshots, standalone drawings and Markdown items.
+- Five optional project templates create editable Markdown blocks for bug reports, UI reviews, feature requests, design-to-code briefs and architecture handoffs.
+- Experimental capture is off by default. Windows supports regions across display boundaries; macOS requires Screen Recording permission. Linux capture is unavailable, but import and paste work.
+- Search includes saved descriptions, annotation text, Markdown and drawing text, not OCR of screenshot pixels.
+- Drawing descriptions are included in exported Markdown.
+- Windows defaults to Copy files and remembers the preferred copy format. Separate Markdown, PNG and rich-copy actions are available; receiver support varies.
+- Local backup snapshots support validation, restore and ZIP export. Automatic history is opt-in before migrations and whole-project deletion, not continuous edit history.
+- Background update checks run at startup and about hourly. Downloads and installation require the user's action.
 - Annotations include arrows, lines, shapes, highlights, text, callouts, steps and sensitive-area masks.
 - Exports include a high-resolution PNG and Markdown prompt bundle; Markdown-only exports are also supported.
 - Verify current downloads and compatibility against GitHub Releases before recommending an installer.
