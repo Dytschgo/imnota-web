@@ -56,8 +56,8 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="styles.css?v=selection2" />
-    <script src="script.js?v=downloads1" defer></script>
+    <link rel="stylesheet" href="styles.css?v=drawings028" />
+    <script src="script.js?v=motion028" defer></script>
     <!-- Privacy-friendly analytics by Plausible -->
     <script
       async
@@ -109,7 +109,7 @@
       </details>
     </header>
     <main id="main">
-      <section class="page-intro wrap">
+      <section class="page-intro wrap" data-motion="intro">
         <p class="eyebrow">Imnota features</p>
         <h1>Every detail.<br />In the handoff.</h1>
         <p class="page-lead">
@@ -119,13 +119,14 @@
         <div class="actions">
           <a class="button" href="install.html">Install Imnota</a
           ><a class="text-link" href="changelog.html"
-            >What changed in 0.2.6 <span aria-hidden="true">↗</span></a
+            >What changed in 0.2.8 <span aria-hidden="true">↗</span></a
           >
         </div>
       </section>
       <nav class="section-nav wrap" aria-label="Feature categories">
         <a href="#capture">Capture &amp; organize</a
         ><a href="#annotate">Annotate &amp; refine</a
+        ><a href="#drawings">Drawings</a
         ><a href="#handoff">Context &amp; export</a
         ><a href="#workspace">Your workspace</a>
       </nav>
@@ -139,6 +140,27 @@
           <p>Bring the screens together before explaining the changes.</p>
         </div>
         <dl class="feature-definitions">
+          <div>
+            <dt>
+              Capture a screen region
+              <span class="feature-tag">Experimental</span>
+            </dt>
+            <dd>
+              Enable capture in Settings &gt; Shortcuts, then choose Take
+              screenshot from the Add menu. Windows supports selections across
+              display boundaries. macOS needs Screen Recording permission; Linux
+              users can import or paste from their screenshot tool.
+            </dd>
+          </div>
+          <div>
+            <dt>Start from a template</dt>
+            <dd>
+              Choose Bug report, UI review, Feature request, Design-to-code
+              brief or Architecture handoff when creating a project. Each
+              template gives you editable Markdown blocks; a blank project is
+              still the default.
+            </dd>
+          </div>
           <div>
             <dt>Import, paste or drag and drop</dt>
             <dd>
@@ -167,8 +189,16 @@
             <dd>
               Keep screenshots, drawings and Markdown in a shared order and give
               the collection one overall instruction. Archive and restore
-              collections as the work moves on. Return through collection
-              history, grouped favourites and improved project search.
+              collections as the work moves on. Back and Forward return to the
+              project, collection and item you were viewing.
+            </dd>
+          </div>
+          <div>
+            <dt>Search the context, too</dt>
+            <dd>
+              Find saved screenshot descriptions, annotation text, Markdown and
+              drawing text. Results open the matching item or annotation. Search
+              reads saved text, not words inside screenshot pixels.
             </dd>
           </div>
           <div>
@@ -263,6 +293,75 @@
         </figcaption>
       </figure>
       <section
+        class="drawing-showcase section wrap"
+        id="drawings"
+        aria-labelledby="drawings-heading"
+      >
+        <div class="drawing-intro">
+          <div>
+            <p class="eyebrow">Standalone drawings</p>
+            <h2 id="drawings-heading">Give the idea<br />a shape.</h2>
+          </div>
+          <div>
+            <p class="lead">
+              Open the Add menu and choose Drawing. Use the embedded Excalidraw
+              editor to sketch a flow or explain a layout, then keep it in order
+              with the rest of your collection.
+            </p>
+          </div>
+        </div>
+        <figure class="drawing-preview detail-image">
+          <a
+            href="assets/screenshots/drawing-025.png"
+            aria-label="View the Imnota drawing workspace at full size"
+          >
+            <img
+              src="assets/screenshots/drawing-025.webp"
+              srcset="
+                assets/screenshots/drawing-small-025.webp  800w,
+                assets/screenshots/drawing-025.webp       1600w
+              "
+              sizes="(max-width: 767px) 90vw, 88vw"
+              width="1600"
+              height="1000"
+              loading="lazy"
+              alt="Actual Imnota drawing workspace showing a Capture to Review to Handoff flow with attached connectors and the drawing tool palette."
+            />
+          </a>
+          <figcaption>
+            <span>Actual Imnota 0.2.5 with an example drawing.</span
+            ><a href="assets/screenshots/drawing-025.png"
+              >View full size <span aria-hidden="true">↗</span></a
+            >
+          </figcaption>
+        </figure>
+        <dl class="drawing-facts" data-motion="steps">
+          <div>
+            <dt>Shapes and attached connectors</dt>
+            <dd>
+              Start on a blank canvas with essential Excalidraw tools. Draw
+              shapes, add text and connect the pieces.
+            </dd>
+          </div>
+          <div>
+            <dt>Editable, local and autosaved</dt>
+            <dd>
+              Imnota keeps the drawing's editable JSON and a rendered PNG.
+              Reorder, duplicate or exclude it from a bundle without losing the
+              source.
+            </dd>
+          </div>
+          <div>
+            <dt>Descriptions travel with the drawing</dt>
+            <dd>
+              Add an optional description in Imnota 0.2.8. The rendered sketch
+              goes into the prompt PNG and its description goes into the
+              matching Markdown.
+            </dd>
+          </div>
+        </dl>
+      </section>
+      <section
         class="feature-group section wrap"
         id="handoff"
         aria-labelledby="handoff-heading"
@@ -302,7 +401,8 @@
             <dt>Descriptions and priorities</dt>
             <dd>
               Add an optional Markdown description to each screenshot and set
-              Low, Medium or High priority for your agent.
+              Low, Medium or High priority for your agent. Drawings can have
+              their own descriptions, included in the exported Markdown.
             </dd>
           </div>
           <div>
@@ -330,9 +430,11 @@
           <div>
             <dt>Copy the format your tool accepts</dt>
             <dd>
-              Copy Markdown, the image or both. Combined clipboard support
-              depends on the receiving editor; separate copy actions remain
-              available.
+              Windows starts with Copy files and remembers your preferred copy
+              format. Choose Markdown, PNG or rich copy as needed. Combined copy
+              reports which formats the clipboard kept; the receiving editor
+              still decides what it pastes. Open files and file-path actions
+              provide fallbacks.
             </dd>
           </div>
         </dl>
@@ -358,9 +460,9 @@
           <h2 id="appearance-heading">A background<br />of your own.</h2>
           <p>
             Choose a generic light or dark backdrop, an existing character
-            option, or a local image of your own. Version 0.2.6 improves
-            light-mode contrast and restores backdrop transparency, with
-            appearance controls together in Settings.
+            option, or a local image of your own. Keep one background for both
+            themes or set separate Light and Dark images and opacity. Appearance
+            controls stay together in Settings.
           </p>
           <p class="small">
             Desktop glass is optional <strong>Beta</strong>. Rendering can
@@ -389,6 +491,32 @@
             </dd>
           </div>
           <div>
+            <dt>Local backups and history</dt>
+            <dd>
+              Create a project snapshot, validate its files and restore it as a
+              new project or in place. Export snapshots as ZIP archives.
+              Automatic history is off by default; when enabled, it runs before
+              project migrations and whole-project deletion, not after every
+              edit.
+            </dd>
+          </div>
+          <div>
+            <dt>Shortcuts you can see and change</dt>
+            <dd>
+              Record a key combination in Settings, see conflict explanations
+              and reset or clear individual shortcuts. Mouse controls remain
+              available throughout the workflow.
+            </dd>
+          </div>
+          <div>
+            <dt>A guided first handoff</dt>
+            <dd>
+              Practice importing, annotating and copying with an isolated
+              sample. The guide leaves your real workspace untouched and can be
+              replayed from Settings.
+            </dd>
+          </div>
+          <div>
             <dt>Light, dark or system</dt>
             <dd>
               Choose the appearance that suits your workspace, including curated
@@ -398,9 +526,10 @@
           <div>
             <dt>Stable releases or opt-in previews</dt>
             <dd>
-              Check for updates on demand. Stay on Stable or choose Nightly for
-              previews. Available install actions depend on your platform and
-              package.
+              Stay on Stable or choose Nightly for previews. Background checks
+              run at startup and about hourly, with a compact update indicator
+              and release notes. Downloads and installation start only when you
+              choose them; manual checks remain available.
             </dd>
           </div>
           <div>
@@ -415,11 +544,11 @@
       <section class="reference-note wrap">
         <p>
           Feature details reflect
-          <a href="https://github.com/Dytschgo/imnota/blob/v0.2.6/CHANGELOG.md"
-            >Imnota v0.2.6</a
+          <a href="https://github.com/Dytschgo/imnota/releases/tag/v0.2.8"
+            >Imnota v0.2.8</a
           >. See the
           <a
-            href="https://github.com/Dytschgo/imnota/blob/v0.2.6/docs/user-guide.md"
+            href="https://github.com/Dytschgo/imnota/blob/v0.2.8/docs/user-guide.md"
             >user guide</a
           >
           for controls and the <a href="changelog.html">changelog</a> for

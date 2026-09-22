@@ -9,6 +9,7 @@ export async function checkMotion(browser, baseURL) {
   await page.goto(baseURL);
   await page.locator("html.motion-enhanced").waitFor();
   assert.equal(await page.locator(".hero-annotation").count(), 1);
+  await page.locator('.hero-visual[data-reveal-state="playing"]').waitFor();
   const finite = await page.evaluate(() =>
     document
       .getAnimations()
@@ -17,6 +18,25 @@ export async function checkMotion(browser, baseURL) {
       ),
   );
   assert.ok(finite, "Autoplay motion must settle");
+  await page.locator('.hero-visual[data-reveal-state="complete"]').waitFor();
+  const annotation = page.locator('[data-motion="annotation"]');
+  await annotation.scrollIntoViewIfNeeded();
+  await page
+    .locator('[data-motion="annotation"][data-reveal-state="playing"]')
+    .waitFor();
+  assert.notEqual(
+    await annotation.evaluate((element) => getComputedStyle(element).clipPath),
+    "none",
+    "Annotation should reveal on entry",
+  );
+  await page
+    .locator('[data-motion="annotation"][data-reveal-state="complete"]')
+    .waitFor();
+  assert.equal(
+    await annotation.evaluate((element) => getComputedStyle(element).clipPath),
+    "none",
+    "Completed annotations must remain fully visible",
+  );
   const diagram = page.locator("#handoff-diagram");
   const progress = () =>
     diagram.evaluate((element) =>
@@ -53,11 +73,51 @@ export async function checkMotion(browser, baseURL) {
   );
   const reverse = await scrollToProgress(0.2);
   assert.ok(reverse < after - 0.2, "Scroll sequence does not reverse");
+  const artwork = page.locator(".release-artwork");
+  await artwork.scrollIntoViewIfNeeded();
+  await page.locator('.release-artwork[data-reveal-state="playing"]').waitFor();
+  assert.ok(
+    await artwork.evaluate(
+      (element) => element.getAnimations({ subtree: true }).length > 0,
+    ),
+    "Artwork must animate on entry",
+  );
+  await page.screenshot({ path: ".qa/artwork-animation-start.png" });
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await page.locator('.release-artwork[data-reveal-state="paused"]').waitFor();
+  await page.waitForFunction(() =>
+    document
+      .querySelector(".release-artwork")
+      .getAnimations({ subtree: true })
+      .every((animation) => !animation.pending),
+  );
+  const artworkTimes = () =>
+    artwork.evaluate((element) =>
+      element
+        .getAnimations({ subtree: true })
+        .map((animation) => animation.currentTime),
+    );
+  const pausedAt = await artworkTimes();
+  await page.waitForTimeout(180);
+  assert.deepEqual(
+    await artworkTimes(),
+    pausedAt,
+    "Offscreen animations must pause",
+  );
+  await artwork.scrollIntoViewIfNeeded();
+  await page.locator('.release-artwork[data-reveal-state="playing"]').waitFor();
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.waitForFunction(
     () => !document.documentElement.classList.contains("motion-enhanced"),
   );
   assert.equal(await diagram.getAttribute("data-motion-state"), "static");
+  assert.equal(await artwork.getAttribute("data-reveal-state"), "static");
+  assert.equal(
+    await artwork
+      .locator("img")
+      .evaluate((image) => getComputedStyle(image).transform),
+    "none",
+  );
   assert.equal(
     await page.evaluate(
       () =>
@@ -72,6 +132,8 @@ export async function checkMotion(browser, baseURL) {
   await page.locator("html.motion-enhanced").waitFor();
   await page.goto(`${baseURL}/#how-it-works`);
   assert.ok(await page.locator("#how-it-works").isVisible());
+  await page.goto(`${baseURL}/features.html`);
+  await page.locator('.page-intro[data-reveal-state="complete"]').waitFor();
   await context.close();
 
   const limited = await browser.newContext();
@@ -90,6 +152,16 @@ export async function checkMotion(browser, baseURL) {
       .getAttribute("data-motion-state"),
     "static",
   );
+  assert.equal(
+    await economical.locator('html[data-motion-mode="static"]').count(),
+    1,
+  );
+  assert.equal(
+    await economical
+      .locator('.release-artwork[data-reveal-state="static"]')
+      .count(),
+    1,
+  );
   await limited.close();
 
   const plain = await browser.newContext({
@@ -102,6 +174,19 @@ export async function checkMotion(browser, baseURL) {
   assert.ok(await staticPage.locator("#handoff-diagram").isVisible());
   assert.equal(
     await staticPage
+      .locator('.comparison-image[data-motion="annotation"]')
+      .evaluate((element) => getComputedStyle(element).clipPath),
+    "none",
+    "Annotations must remain visible without JavaScript",
+  );
+  assert.equal(
+    await staticPage
+      .locator(".release-artwork img")
+      .evaluate((element) => getComputedStyle(element).opacity),
+    "1",
+  );
+  assert.equal(
+    await staticPage
       .locator("#handoff-diagram")
       .evaluate(
         (element) => element.getBoundingClientRect().right <= innerWidth,
@@ -111,6 +196,9 @@ export async function checkMotion(browser, baseURL) {
   await plain.close();
   return {
     finiteHero: true,
+    viewportScenes: true,
+    annotationReveal: true,
+    offscreenPause: true,
     forwardAndReverseScroll: true,
     liveReducedMotion: true,
     saveData: true,

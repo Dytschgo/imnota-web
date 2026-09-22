@@ -208,7 +208,12 @@ await plain.screenshot({ path: ".qa/no-js-no-images.png", fullPage: true });
 await page.goto(`${baseURL}/404.html`);
 assert.equal(await page.locator("h1").textContent(), "This page is missing.");
 const referencePages = [];
-for (const route of ["features.html", "changelog.html"]) {
+for (const route of [
+  "features.html",
+  "changelog.html",
+  "install.html",
+  "agents.html",
+]) {
   for (const width of [320, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     const response = await page.goto(`${baseURL}/${route}`);
@@ -269,7 +274,7 @@ for (const route of ["features.html", "changelog.html"]) {
 await page.goto(`${baseURL}/changelog.html#v0-2-4`);
 assert.match(await page.locator("#v0-2-4").innerText(), /Beta/);
 assert.match(await page.locator("#v0-2-4").innerText(), /Back up/);
-assert.equal(await page.locator(".release-entry").count(), 7);
+assert.equal(await page.locator(".release-entry").count(), 9);
 assert.match(await page.locator("#v0-2-5").innerText(), /schema 4/);
 assert.match(await page.locator("#v0-2-5").innerText(), /Text-only/);
 await page.goto(baseURL);
@@ -279,15 +284,28 @@ await page.locator('.desktop-nav a[href="changelog.html"]').click();
 assert.equal(new URL(page.url()).pathname, "/changelog.html");
 assert.deepEqual(errors, []);
 assert.match(await page.locator("#v0-2-6").innerText(), /Hosted prompt links/);
-await page.goto(baseURL);
-const stableLinks = await page
-  .locator(".download-links a")
-  .evaluateAll((links) => links.map((link) => link.href));
-assert.equal(stableLinks.length, 3);
-assert.ok(
-  stableLinks.every((link) => link.includes("/releases/download/v0.2.6/")),
-  "Download links must point to stable 0.2.6",
+assert.match(await page.locator("#v0-2-7").innerText(), /macOS 13 or later/);
+assert.match(
+  await page.locator("#v0-2-8").innerText(),
+  /across display boundaries/,
 );
+await page.goto(baseURL);
+await page.locator(".release-announcement").click();
+assert.equal(new URL(page.url()).hash, "#latest");
+await page.locator('#latest a[href="changelog.html#v0-2-8"]').first().click();
+assert.equal(new URL(page.url()).hash, "#v0-2-8");
+for (const route of ["", "install.html"]) {
+  await page.goto(`${baseURL}/${route}`);
+  const stableLinks = await page
+    .locator(".download-links a")
+    .evaluateAll((links) => links.map((link) => link.href));
+  assert.equal(stableLinks.length, 3);
+  assert.ok(
+    stableLinks.every((link) => link.includes("/releases/download/v0.2.8/")),
+    `${route || "Homepage"} download links must point to stable 0.2.8`,
+  );
+  assert.match(await page.locator("main").innerText(), /macOS 13 or later/);
+}
 const motion = await checkMotion(browser, baseURL);
 await checkDownloads(browser, baseURL);
 const report = {

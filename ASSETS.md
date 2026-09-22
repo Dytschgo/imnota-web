@@ -1,5 +1,26 @@
 # Website imagery
 
+## Capture and handoff illustration, 22 September 2026
+
+Generated with the built-in ChatGPT Image tool for the release spotlight. This is conceptual editorial artwork, not a product screenshot. The original PNG remains at `C:/Users/DylanFerraro/.codex/generated_images/01a0ca12-e9cf-70d2-acb4-ca012dadf84d/exec-db1dc779-af8a-4b10-ad71-e2cc64a686b2.png`.
+
+The inspected 1672 × 941 output was resized and encoded with Sharp for the website:
+
+- `assets/art/capture-handoff-028.webp`: 1536 × 864, quality 84, 52,148 bytes.
+- `assets/art/capture-handoff-small-028.webp`: 768 × 432, quality 82, 11,208 bytes.
+
+The image loads lazily with responsive sources. HTML labels and a native SVG selection frame remain separate from the raster asset. The real 0.2.8 guide is retained directly below it as a thumbnail linking to the original PNG.
+
+### Final generation prompt
+
+Use case: editorial website illustration. Create one polished, original raster illustration for Imnota, a local-first screenshot annotation app. Wide 16:9 landscape composition, 1536 by 864. A restrained dimensional study of a visual handoff: two thin overlapping landscape panes of smoked graphite glass suspended at a slight oblique angle on the left, their surfaces bearing just a few abstract silver lines and a single small violet annotation bracket; on the right, three precisely aligned translucent vellum sheets form one compact bundle. A fine physical violet filament connects the panes to the bundle. The objects occupy the central 75 percent of the image with generous dark breathing space on all sides. Dark charcoal background close to #0b0d12, matte graphite, frosted silver, subtle lavender #a99bff highlights and one saturated violet #6857f5 accent. Sculptural editorial rendering with tactile microtexture, clean silhouettes, delicate edge lighting and soft grounded shadows. Crisp understated premium developer-tool art direction, no dramatic bloom, no rainbow iridescence, no floating particles. Think architectural model photography, with shallow depth and precise careful material detail, not a generic sci-fi scene. No readable text, no logos, no numerals, no watermark, no computer hardware, no people, no literal app interface or fake screenshot. Keep every pane and sheet fully in frame, no cropped objects. The image is a conceptual illustration; all website text will be separate HTML.
+
+## Stable 0.2.8 guide image, 22 September 2026
+
+`assets/screenshots/handoff-guide-028.webp` is the unaltered composition of `src/renderer/assets/whats-new-copy-preference.png` from Imnota tag `v0.2.8`, commit `822bd7e43cd03d3093869670961a1ec6759f1645`. It was extracted with `git show`, visually inspected and encoded from the original 1280 × 800 PNG to WebP at quality 90 using Sharp. The source belongs to the MIT-licensed Imnota repository.
+
+This is an upstream image of the built-in guided sample included with the release, not a new native-app verification capture. Its example content demonstrates the matching image, Markdown and copy choices. The website labels it as the built-in guide and links to the original PNG, retained as `assets/screenshots/handoff-guide-028.png`, for full-size viewing. The optimized WebP is used for page display; the PNG also avoids the Windows Python preview server's generic MIME type for direct WebP navigation. Historical workbench, drawing, Markdown and export captures remain labelled with their original versions.
+
 ## Stable 0.2.6 artwork, 9 September 2026
 
 ### Revised sharing artwork
@@ -42,6 +63,8 @@ Use case: ads-marketing. Asset type: public changelog release artwork for Imnota
 
 `drawing-025.webp` and `markdown-025.webp` show the actual Imnota v0.2.5 renderer at commit `bd33da45fac5bf05f20e6cdb9f66c5db709b3bdf`. The example contains a standalone drawing and Markdown item in a shared collection. The drawing uses attached connectors and system-font labels; the Markdown preview contains an authored checkout review. Captures retain the full 1600 by 1000 application frame.
 
+The homepage and Features drawing showcases now display `drawing-025.webp`. `drawing-small-025.webp` is an 800 × 500 responsive derivative encoded at quality 88 (12,584 bytes). `drawing-025.png` is the unchanged original capture copied from `.qa/v025-capture/drawing-025.png` for full-size viewing. Both showcases retain the 0.2.5 caption; current drawing descriptions and export behavior were checked against the v0.2.8 user guide.
+
 `scripts/capture-content-025.mjs` reproduces these captures with an isolated tagged renderer served on port 4177. It uses an in-memory replacement for Electron file access. It demonstrates the drawing and Markdown editors, not native on-disk persistence or export validation. The drawing editor emits upstream CSP warnings for unused remote font URLs; CSP was not relaxed and the example uses the system font. Existing 0.2.4 export and T3 examples retain their explicit version labels.
 
 `workbench-c08.webp`, `workbench-small-c08.webp` and `settings-024.webp` show the actual renderer at stable tag `v0.2.4`, commit `b918a6a819fd31d26470301334aa3a9ade4a4f86`. An isolated source checkout and a deterministic native bridge provide an authored example project. The screenshot inside the canvas is sample project-settings content. No private workspace is used.
@@ -53,6 +76,5 @@ The Collection 08 screenshots share `scripts/example-annotations.mjs`: the recta
 `prompt-export-c08.webp` is the actual stable Share prompt bundles dialog, captured with 32px surrounding padding after the renderer completed the export. `scripts/capture-prompt-export.mjs` uses the real composition pipeline with deterministic in-memory native persistence and clipboard adapters. The completed PNG and Markdown are retained unchanged as `assets/examples/prompt-1.png` and `prompt-1.md`; `prompt-1.webp` is the web preview. The dialog's Copied state comes from that adapter, not a native OS clipboard test.
 
 `t3-draft-c08.webp` shows the actual T3 Code DEV 0.0.4 composer, from a locally staged copy of the user's T3 source. `scripts/capture-t3-draft.mjs` records it against an isolated app on port 6041. The actual exported Markdown was pasted from the browser clipboard, then the actual PNG was pasted separately. This T3 version suppresses text paste when image files are present, so the page explicitly describes the two-paste fallback. No prompt was sent and no private project state was used. The focused screenshot retains 32px around the full composer bezel; only its scroll position was adjusted, not its UI styles.
-
 
 The Imnota logo and bundled app assets retain the upstream MIT license. IBM Plex Sans retains `assets/fonts/OFL.txt`.
