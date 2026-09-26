@@ -44,20 +44,20 @@
     <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
     <link
       rel="preload"
-      href="assets/fonts/plex-regular.woff2"
+      href="assets/fonts/schibsted-400.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="assets/fonts/plex-semibold.woff2"
+      href="assets/fonts/schibsted-800.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="styles.css?v=drawings028" />
-    <script src="script.js?v=motion028" defer></script>
+    <link rel="stylesheet" href="styles.css?v=cinematic030" />
+    <script src="script.js?v=cinematic030" defer></script>
     <!-- Privacy-friendly analytics by Plausible -->
     <script
       async
@@ -119,7 +119,7 @@
         <div class="actions">
           <a class="button" href="install.html">Install Imnota</a
           ><a class="text-link" href="changelog.html"
-            >What changed in 0.2.8 <span aria-hidden="true">↗</span></a
+            >What changed in 0.3.0 <span aria-hidden="true">↗</span></a
           >
         </div>
       </section>
@@ -141,14 +141,15 @@
         </div>
         <dl class="feature-definitions">
           <div>
-            <dt>
-              Capture a screen region
-              <span class="feature-tag">Experimental</span>
-            </dt>
+            <dt>Capture an area, window or screen</dt>
             <dd>
-              Enable capture in Settings &gt; Shortcuts, then choose Take
-              screenshot from the Add menu. Windows supports selections across
-              display boundaries. macOS needs Screen Recording permission; Linux
+              Press the capture shortcut (Ctrl+Shift+5 by default, Control not
+              Command on macOS), use the tray or menu-bar icon, or the toolbar.
+              Drag across screens, pick a window or a whole display, add a 3 or
+              5 second delay and repeat the last area. Then save, annotate, copy
+              or discard from the capture overlay. Capture is on by default for
+              new Windows and macOS profiles and can be turned off in Settings
+              &gt; Features. macOS needs Screen Recording permission; Linux
               users can import or paste from their screenshot tool.
             </dd>
           </div>
@@ -406,6 +407,26 @@
             </dd>
           </div>
           <div>
+            <dt>Marks your agent can read</dt>
+            <dd>
+              Prompt Markdown lists arrows, boxes and steps as positions, so the
+              agent gets the geometry as text as well as in the image. Each
+              screenshot also records its source size.
+            </dd>
+          </div>
+          <div>
+            <dt>
+              Visible text
+              <span class="feature-tag">Beta</span>
+            </dt>
+            <dd>
+              Turn on Include recognised text in Markdown in Settings &gt;
+              Features to add on-device OCR to the bundle. It is off by default,
+              honours crops and skips blurred or pixelated screenshots. Linux
+              skips recognition.
+            </dd>
+          </div>
+          <div>
             <dt>Markdown and PNG prompt bundles</dt>
             <dd>
               Export screenshots, drawings and written explanations in
@@ -544,11 +565,11 @@
       <section class="reference-note wrap">
         <p>
           Feature details reflect
-          <a href="https://github.com/Dytschgo/imnota/releases/tag/v0.2.8"
-            >Imnota v0.2.8</a
+          <a href="https://github.com/Dytschgo/imnota/releases/tag/v0.3.0"
+            >Imnota v0.3.0</a
           >. See the
           <a
-            href="https://github.com/Dytschgo/imnota/blob/v0.2.8/docs/user-guide.md"
+            href="https://github.com/Dytschgo/imnota/blob/v0.3.0/docs/user-guide.md"
             >user guide</a
           >
           for controls and the <a href="changelog.html">changelog</a> for

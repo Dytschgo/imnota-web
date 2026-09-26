@@ -45,11 +45,17 @@ To roll back normal Git deployment, revert the release commit through a reviewed
 
 ## Content and asset provenance
 
-The homepage, feature list and public changelog reflect stable [Imnota v0.2.8](https://github.com/Dytschgo/imnota/releases/tag/v0.2.8), commit `822bd7e`. Release notes and asset filenames were checked against the live GitHub API on 22 September 2026. Templates, capture, clipboard, search, backups and update claims were checked against tagged documentation and implementation; the tagged CHANGELOG.md still stops at 0.2.7. The public changelog includes both 0.2.7 and 0.2.8 and lists downloadable stable releases only. The unpublished 0.2.3 tag and Nightly previews are not listed as stable releases. Current Mac downloads require macOS 13 or later.
+The homepage, feature list, agent guide and public changelog reflect stable [Imnota v0.3.0](https://github.com/Dytschgo/imnota/releases/tag/v0.3.0), commit `10e7fef`. Capture, readable marks, OCR and local agent access claims were checked against the user guide and agent-access documentation at that commit. The homepage films are described in [ASSETS.md](ASSETS.md). Release notes and asset filenames were checked against the live GitHub API on 22 September 2026. Templates, capture, clipboard, search, backups and update claims were checked against tagged documentation and implementation; the tagged CHANGELOG.md still stops at 0.2.7. The public changelog includes both 0.2.7 and 0.2.8 and lists downloadable stable releases only. The unpublished 0.2.3 tag and Nightly previews are not listed as stable releases. Current Mac downloads require macOS 13 or later.
 
 Product images show the actual tagged React/Konva renderer with deterministic example data. Historical workbench and export captures retain their original version labels. The latest-release spotlight pairs an original generated glass-and-vellum illustration with the guided handoff image bundled in v0.2.8. GPT Image created that illustration, the existing workspace backdrop and historical release artwork. Image prompts, provenance, licenses and capture instructions are in [ASSETS.md](ASSETS.md).
 
 ## Design
+
+The 0.3.0 redesign moves the site to a cinematic direction: a near-black stage, Schibsted Grotesk set heavy and tight for display type, indigo and cyan light, and the product film as the hero. The homepage has its own `home.css`; the final layer of `styles.css` restyles the shared chrome (header, buttons, type scale, page intros) for every page.
+
+Homepage motion: the hero screen tilts back and settles flat as it scrolls into view and plays a muted product-film loop while visible; the problem statement lights up word by word with scroll (forwards and in reverse); the workflow step in the middle of the viewport is emphasised; release cards and existing scenes enter once. Films with sound use native controls and `preload="none"`. Reduced motion and Save-Data keep the poster, the fully lit statement and no video download. Without JavaScript every section is complete and still.
+
+Earlier notes on the previous design follow for history.
 
 Visual thesis: make the handoff between a visual idea and an AI-ready instruction tangible. Precise, focused and quietly expressive, with variance 7/10, motion 5/10 and density 5/10. Native CSS uses the Imnota palette and a 12-column desktop hero. Major surfaces use radii of 5 to 8 pixels. Asymmetric product imagery becomes a single readable composition on mobile.
 

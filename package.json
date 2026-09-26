@@ -6,8 +6,8 @@
     "preview": "python -m http.server 4173",
     "build": "node scripts/build-site.mjs",
     "package": "python scripts/package-site.py",
-    "format": "prettier --write index.html 404.html features.html changelog.html install.html agents.html styles.css script.js scripts README.md VERIFICATION.md package.json .htmlvalidate.json",
-    "format:check": "prettier --check index.html 404.html features.html changelog.html install.html agents.html styles.css script.js scripts README.md VERIFICATION.md package.json .htmlvalidate.json",
+    "format": "prettier --write index.html 404.html features.html changelog.html install.html agents.html styles.css home.css script.js scripts README.md VERIFICATION.md package.json .htmlvalidate.json",
+    "format:check": "prettier --check index.html 404.html features.html changelog.html install.html agents.html styles.css home.css script.js scripts README.md VERIFICATION.md package.json .htmlvalidate.json",
     "validate": "html-validate index.html 404.html features.html changelog.html install.html agents.html",
     "test": "node scripts/check-site.mjs",
     "audit:performance": "node scripts/audit-performance.mjs"
@@ -19,6 +19,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
     "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@fontsource/schibsted-grotesk": "^5.3.0",
     "html-validate": "^11.14.0",
     "lighthouse": "^13.4.1",
     "playwright": "^1.63.0",

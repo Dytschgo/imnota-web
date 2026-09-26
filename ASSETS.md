@@ -1,5 +1,16 @@
 # Website imagery
 
+## Product films, 26 September 2026
+
+`assets/video/` holds the product films used by the homepage. They contain no camera footage, stock media or real user data.
+
+- `imnota-film.mp4` (63 s, 1920×1080, 60 fps, H.264 + AAC) and `imnota-reel.mp4` (15 s, 1080×1920) are the full product film and the vertical short.
+- `imnota-hero-loop.mp4` and `imnota-hero-loop.webm` are a silent 27 s excerpt of the product film (12.4 s to 39.4 s) for the hero. The WebM (VP9) is for browsers without H.264.
+- `imnota-*-poster.webp` are single frames from those films.
+
+Each film is an HTML/CSS scene rendered frame by frame in Electron with deterministic timing and example content that mirrors Imnota's interface, then encoded with ffmpeg. The soundtrack and sound effects are original, synthesized from oscillators and noise in Python (NumPy/SciPy), with no samples or licensed music, and normalized to about −14 LUFS. The films illustrate the workflow; they are not screen recordings of the app. The claims they make (capture modes, readable marks, optional OCR, local agent access, local-first files) were checked against the Imnota 0.3.0 user guide and agent-access documentation.
+
+
 ## Capture and handoff illustration, 22 September 2026
 
 Generated with the built-in ChatGPT Image tool for the release spotlight. This is conceptual editorial artwork, not a product screenshot. The original PNG remains at `C:/Users/DylanFerraro/.codex/generated_images/01a0ca12-e9cf-70d2-acb4-ca012dadf84d/exec-db1dc779-af8a-4b10-ad71-e2cc64a686b2.png`.
@@ -77,4 +88,4 @@ The Collection 08 screenshots share `scripts/example-annotations.mjs`: the recta
 
 `t3-draft-c08.webp` shows the actual T3 Code DEV 0.0.4 composer, from a locally staged copy of the user's T3 source. `scripts/capture-t3-draft.mjs` records it against an isolated app on port 6041. The actual exported Markdown was pasted from the browser clipboard, then the actual PNG was pasted separately. This T3 version suppresses text paste when image files are present, so the page explicitly describes the two-paste fallback. No prompt was sent and no private project state was used. The focused screenshot retains 32px around the full composer bezel; only its scroll position was adjusted, not its UI styles.
 
-The Imnota logo and bundled app assets retain the upstream MIT license. IBM Plex Sans retains `assets/fonts/OFL.txt`.
+The Imnota logo and bundled app assets retain the upstream MIT license. IBM Plex Sans retains `assets/fonts/OFL.txt`. Schibsted Grotesk (Latin 400, 500, 600 and 800, from `@fontsource/schibsted-grotesk` 5.3.0) retains `assets/fonts/OFL-schibsted-grotesk.txt`.
