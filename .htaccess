@@ -1,5 +1,8 @@
 ErrorDocument 404 /404.html
 
+# Serve the hero loop fallback with its media type; the host does not map .webm.
+AddType video/webm .webm
+
 # Keep development and repository metadata out of the public web surface.
 <IfModule mod_rewrite.c>
   RewriteEngine On
