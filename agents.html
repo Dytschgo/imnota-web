@@ -33,8 +33,8 @@
       content="https://imnota.xyz/assets/social-preview-c08.png"
     />
     <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=drawings028" />
-    <script src="script.js?v=motion028" defer></script>
+    <link rel="stylesheet" href="styles.css?v=cinematic030" />
+    <script src="script.js?v=cinematic030" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -96,6 +96,9 @@
             <li>Callout notes and numbered steps</li>
             <li>Agent priority and collection order</li>
             <li>Drawing descriptions and standalone Markdown items</li>
+            <li>Arrows, boxes and steps listed as positions</li>
+            <li>The source size of each screenshot</li>
+            <li>Optional on-device visible text</li>
           </ul>
         </div>
       </section>
@@ -119,7 +122,13 @@ Review the interaction details before the next product release.
 
 Priority for agent: High
 
-Make the primary action clear and align it with the form fields.</code></pre>
+Make the primary action clear and align it with the form fields.
+
+### Picture 1 / Marks
+
+- arrow `a1` from 53.8%,72.0% to 75.9%,83.0%
+- rectangle `r1` at 77.5%,81.0% 19.4%×12.5%
+- step `s1` number 1 at 77.5%,81.0%</code></pre>
         </div>
       </section>
       <section
@@ -142,6 +151,40 @@ Make the primary action clear and align it with the form fields.</code></pre>
           <p class="handoff-help">
             Imnota reports what the clipboard kept. Check the draft for both the
             image and the instructions before sending it.
+          </p>
+        </div>
+      </section>
+      <section
+        class="feature-group section wrap"
+        id="local-agent-access"
+        aria-labelledby="mcp-heading"
+      >
+        <div>
+          <h2 id="mcp-heading">Or let the agent read it.</h2>
+          <p>Optional local agent access, new in 0.3.0. No clipboard paste.</p>
+        </div>
+        <div>
+          <p>
+            Turn on MCP access in Settings &gt; Features. Choose Copy prompt and
+            paste it into your coding agent. The prompt contains the local
+            server address, a stdio alternative and the tool list, and asks the
+            agent to write its own MCP configuration. Imnota does not edit agent
+            configuration itself.
+          </p>
+          <ul>
+            <li>list_projects: active projects in the workspace</li>
+            <li>list_collection_items: ordered items and their priorities</li>
+            <li>
+              get_latest_bundle: the latest prepared Markdown and PNG paths
+            </li>
+            <li>get_item: one item's Markdown and image path</li>
+            <li>search_saved_text: matches in saved text</li>
+          </ul>
+          <p class="handoff-help">
+            It is off by default and listens only on 127.0.0.1. Agents read
+            bundles you already prepared with Copy Bundle; they cannot create
+            exports, and backups, recovery files and sharing secrets are not
+            exposed.
           </p>
         </div>
       </section>

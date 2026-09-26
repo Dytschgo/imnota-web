@@ -109,118 +109,129 @@ if (menu) {
   });
 }
 
-// Follow the annotated button and the handoff panel at every responsive size.
-const heroVisual = document.querySelector(".hero-visual");
-if (heroVisual) {
-  const source = heroVisual.querySelector(".workbench");
-  const panel = heroVisual.querySelector(".prompt-preview");
-  const line = heroVisual.querySelector(".handoff-line");
-  const positionHandoff = () => {
-    const figure = heroVisual.getBoundingClientRect();
-    const image = source.getBoundingClientRect();
-    const card = panel.getBoundingClientRect();
-    const label = panel.querySelector(".preview-label").getBoundingClientRect();
-    const stacked = matchMedia("(max-width: 1100px)").matches;
-    const anchorX = Number(
-      stacked ? source.dataset.annotationLeftX : source.dataset.annotationX,
-    );
-    const startX = image.left - figure.left + image.width * anchorX;
-    const startY =
-      image.top -
-      figure.top +
-      image.height * Number(source.dataset.annotationY);
-    const endX = card.left - figure.left;
-    const endY = label.bottom - figure.top;
-    const elbowX = stacked ? Math.min(startX, endX) - 16 : endX - 12;
-    line.setAttribute("viewBox", `0 0 ${figure.width} ${figure.height}`);
-    line
-      .querySelector("path")
-      .setAttribute("d", `M${startX} ${startY} H${elbowX} V${endY} H${endX}`);
-    const dots = line.querySelectorAll("circle");
-    dots[0].setAttribute("cx", startX);
-    dots[0].setAttribute("cy", startY);
-    dots[1].setAttribute("cx", endX);
-    dots[1].setAttribute("cy", endY);
-    line.setAttribute("data-ready", "");
+// Homepage motion: a hero screen that settles flat as you scroll, a looping
+// product film, words that light up as you read and the active workflow step.
+// Everything is complete without JavaScript; reduced motion and Save-Data
+// keep the static poster and the fully lit text.
+const homeRoot = document.documentElement;
+const homeReducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+const homeConnection = navigator.connection;
+const heroScreen = document.querySelector("[data-tilt]");
+const heroVideo = document.querySelector("[data-autoplay-loop]");
+const litText = document.querySelector("[data-lit]");
+const steps = [...document.querySelectorAll("[data-steps] > .step")];
+if (heroScreen || litText || steps.length) {
+  let homeActive = false;
+  let homeFrame;
+  let heroVisible = false;
+  const clamp = (value) => Math.min(1, Math.max(0, value));
+  let words = [];
+  if (litText) {
+    const text = litText.textContent.trim().replace(/\s+/g, " ");
+    litText.setAttribute("aria-label", text);
+    litText.textContent = "";
+    words = text.split(" ").map((word, index) => {
+      const span = document.createElement("span");
+      span.className = "word";
+      span.setAttribute("aria-hidden", "true");
+      span.textContent = word;
+      if (index) litText.append(" ");
+      litText.append(span);
+      return span;
+    });
+  }
+  const updateHome = () => {
+    homeFrame = undefined;
+    if (!homeActive) return;
+    if (heroScreen) {
+      const top = heroScreen.getBoundingClientRect().top;
+      const tilt = clamp(1 - (top - innerHeight * 0.12) / (innerHeight * 0.6));
+      heroScreen.style.setProperty("--tilt", tilt.toFixed(3));
+    }
+    if (litText) {
+      const box = litText.getBoundingClientRect();
+      const progress = clamp(
+        (innerHeight * 0.82 - box.top) / (box.height + innerHeight * 0.3),
+      );
+      const lit = Math.round(progress * words.length);
+      words.forEach((word, index) =>
+        word.classList.toggle("is-lit", index < lit),
+      );
+      litText.dataset.litProgress = progress.toFixed(3);
+    }
   };
-  const observer = new ResizeObserver(positionHandoff);
-  [heroVisual, source, panel].forEach((element) => observer.observe(element));
-  document.fonts.ready.then(positionHandoff);
+  const requestHome = () => {
+    if (homeActive && !homeFrame) homeFrame = requestAnimationFrame(updateHome);
+  };
+  const syncVideo = () => {
+    if (!heroVideo) return;
+    if (homeActive && heroVisible && !document.hidden) {
+      if (heroVideo.preload !== "auto") heroVideo.preload = "auto";
+      heroVideo.play().catch(() => {
+        heroVideo.dataset.videoState = "unavailable";
+      });
+    } else if (!heroVideo.paused) heroVideo.pause();
+    if (!homeActive) {
+      heroVideo.classList.remove("is-playing");
+      heroVideo.dataset.videoState = "static";
+    }
+  };
+  if (heroVideo) {
+    heroVideo.addEventListener("playing", () => {
+      heroVideo.classList.add("is-playing");
+      heroVideo.dataset.videoState = "playing";
+    });
+    heroVideo.addEventListener("pause", () => {
+      if (homeActive) heroVideo.dataset.videoState = "paused";
+    });
+    heroVideo.addEventListener("error", () => {
+      heroVideo.dataset.videoState = "unavailable";
+    });
+    new IntersectionObserver((entries) => {
+      heroVisible = entries[0].isIntersecting;
+      syncVideo();
+    }).observe(heroVideo);
+  }
+  const setHomeMode = () => {
+    homeActive = !homeReducedMotion.matches && !homeConnection?.saveData;
+    homeRoot.classList.toggle("motion-enhanced", homeActive);
+    if (!homeActive) {
+      heroScreen?.style.setProperty("--tilt", "1");
+      words.forEach((word) => word.classList.add("is-lit"));
+      if (litText) litText.dataset.litProgress = "1";
+      steps.forEach((step) => step.classList.add("is-active"));
+    } else {
+      steps.forEach((step) => step.classList.remove("is-active"));
+      requestHome();
+    }
+    syncVideo();
+  };
+  if (steps.length) {
+    const stepObserver = new IntersectionObserver(
+      (entries) => {
+        if (!homeActive) return;
+        for (const entry of entries)
+          entry.target.classList.toggle("is-active", entry.isIntersecting);
+      },
+      { rootMargin: "-40% 0px -40% 0px" },
+    );
+    steps.forEach((step) => stepObserver.observe(step));
+  }
+  window.addEventListener("scroll", requestHome, { passive: true });
+  window.addEventListener("resize", requestHome, { passive: true });
+  document.addEventListener("visibilitychange", syncVideo);
+  homeReducedMotion.addEventListener("change", setHomeMode);
+  homeConnection?.addEventListener?.("change", setHomeMode);
+  setHomeMode();
 }
 
-// One scroll-linked explanation: the annotation, written context, then the bundle.
-// The complete diagram remains visible without JS and for low-power preferences.
-const handoffDiagram = document.querySelector(".handoff-diagram");
-if (handoffDiagram) {
-  const root = document.documentElement;
-  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-  const connection = navigator.connection;
-  let frame;
-  let active = false;
-  const clamp = (value) => Math.min(1, Math.max(0, value));
-  const ease = (value, start, end) => clamp((value - start) / (end - start));
-  const setStatic = () => {
-    root.classList.remove("motion-enhanced");
-    handoffDiagram.dataset.motionState = "static";
-    [
-      "route-progress",
-      "stage-1",
-      "stage-2",
-      "stage-3",
-      "token-progress",
-    ].forEach((property) =>
-      handoffDiagram.style.setProperty(`--${property}`, "1"),
-    );
-  };
-  const updateDiagram = () => {
-    frame = undefined;
-    if (!active) return;
-    const top = handoffDiagram.getBoundingClientRect().top;
-    const start = window.innerHeight * 0.78;
-    const end = window.innerHeight * 0.27;
-    const progress = clamp((start - top) / (start - end));
-    handoffDiagram.style.setProperty(
-      "--route-progress",
-      String(ease(progress, 0.1, 0.92)),
-    );
-    handoffDiagram.style.setProperty(
-      "--stage-1",
-      String(ease(progress, 0, 0.2)),
-    );
-    handoffDiagram.style.setProperty(
-      "--stage-2",
-      String(ease(progress, 0.2, 0.52)),
-    );
-    handoffDiagram.style.setProperty(
-      "--stage-3",
-      String(ease(progress, 0.55, 0.88)),
-    );
-    handoffDiagram.style.setProperty(
-      "--token-progress",
-      String(ease(progress, 0.22, 0.87)),
-    );
-  };
-  const requestUpdate = () => {
-    if (active && !frame) frame = requestAnimationFrame(updateDiagram);
-  };
-  const setMotionMode = () => {
-    const shouldReduce = reducedMotion.matches || Boolean(connection?.saveData);
-    if (shouldReduce) {
-      active = false;
-      setStatic();
-      return;
-    }
-    active = true;
-    root.classList.add("motion-enhanced");
-    handoffDiagram.dataset.motionState = "active";
-    requestUpdate();
-  };
-  window.addEventListener("scroll", requestUpdate, { passive: true });
-  window.addEventListener("resize", requestUpdate, { passive: true });
-  reducedMotion.addEventListener("change", setMotionMode);
-  connection?.addEventListener?.("change", setMotionMode);
-  setMotionMode();
-}
+// Watch the film: jump to the player and start it with sound.
+document.querySelectorAll("[data-play-film]").forEach((link) => {
+  link.addEventListener("click", () => {
+    const film = document.getElementById("film-video");
+    if (film) film.play().catch(() => {});
+  });
+});
 
 // Play short, finite scenes as they enter view. The underlying content is
 // always visible; interrupted scenes settle immediately for reduced motion.
@@ -259,55 +270,12 @@ if (
       );
     };
     switch (scene.element.dataset.motion) {
-      case "hero":
-        animate(scene.element, enter, 950);
-        scene.element
-          .querySelectorAll(".prompt-content > *")
-          .forEach((line, index) => {
-            animate(
-              line,
-              [
-                { opacity: 0.35, transform: "translateX(-8px)" },
-                { opacity: 1, transform: "translateX(0)" },
-              ],
-              500,
-              260 + index * 100,
-            );
-          });
-        break;
       case "annotation":
         animate(
           scene.element,
           [{ clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0 0 0)" }],
           1100,
         );
-        break;
-      case "artwork":
-        animate(
-          scene.element.querySelector("img"),
-          [
-            { opacity: 0.5, transform: "scale(1.045)" },
-            { opacity: 1, transform: "scale(1)" },
-          ],
-          1400,
-        );
-        animate(
-          scene.element.querySelector(".capture-outline"),
-          [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }],
-          1250,
-          150,
-        );
-        animate(
-          scene.element.querySelector(".capture-handles"),
-          [{ opacity: 0 }, { opacity: 1 }],
-          300,
-          1000,
-        );
-        scene.element
-          .querySelectorAll(".artwork-legend > span")
-          .forEach((label, index) => {
-            animate(label, enter, 500, 300 + index * 180);
-          });
         break;
       case "steps":
         [...scene.element.children].forEach((item, index) => {
@@ -316,6 +284,19 @@ if (
         break;
       case "intro":
         animate(scene.element.querySelector("h1"), enter, 750);
+        break;
+      case "cards":
+        [...scene.element.children].forEach((item, index) => {
+          animate(
+            item,
+            [
+              { opacity: 0.35, transform: "translateY(40px) scale(0.97)" },
+              { opacity: 1, transform: "none" },
+            ],
+            1100,
+            index * 120,
+          );
+        });
         break;
     }
     Promise.allSettled(

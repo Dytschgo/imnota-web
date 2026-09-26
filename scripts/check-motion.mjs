@@ -8,8 +8,9 @@ export async function checkMotion(browser, baseURL) {
   const page = await context.newPage();
   await page.goto(baseURL);
   await page.locator("html.motion-enhanced").waitFor();
-  assert.equal(await page.locator(".hero-annotation").count(), 1);
-  await page.locator('.hero-visual[data-reveal-state="playing"]').waitFor();
+
+  // The hero entrance is finite and settles.
+  await page.locator('.stage-hero[data-reveal-state="playing"]').waitFor();
   const finite = await page.evaluate(() =>
     document
       .getAnimations()
@@ -18,7 +19,46 @@ export async function checkMotion(browser, baseURL) {
       ),
   );
   assert.ok(finite, "Autoplay motion must settle");
-  await page.locator('.hero-visual[data-reveal-state="complete"]').waitFor();
+  await page.locator('.stage-hero[data-reveal-state="complete"]').waitFor();
+
+  // The looping product film plays muted while the hero is visible.
+  const video = page.locator("[data-autoplay-loop]");
+  await page.waitForFunction(
+    () =>
+      document.querySelector("[data-autoplay-loop]").dataset.videoState ===
+      "playing",
+  );
+  assert.equal(await video.evaluate((element) => element.muted), true);
+  assert.match(
+    await video.evaluate((element) => element.currentSrc),
+    /\/assets\/video\/imnota-hero-loop\.(mp4|webm)$/,
+    "The hero loop plays one of its published sources",
+  );
+
+  // The hero screen tilts back and settles flat as it scrolls into view.
+  const tilt = () =>
+    page
+      .locator(".hero-screen")
+      .evaluate((element) =>
+        Number(getComputedStyle(element).getPropertyValue("--tilt")),
+      );
+  const tiltAtTop = await tilt();
+  await page.evaluate(() => window.scrollTo({ top: 500, behavior: "instant" }));
+  await page.waitForTimeout(150);
+  const tiltScrolled = await tilt();
+  assert.ok(tiltAtTop < 1, `Hero should start tilted, got ${tiltAtTop}`);
+  assert.ok(
+    tiltScrolled > tiltAtTop + 0.2,
+    `Hero tilt does not advance: ${tiltAtTop} -> ${tiltScrolled}`,
+  );
+
+  // The hero video pauses once it leaves the viewport.
+  await page.locator("#how-it-works").scrollIntoViewIfNeeded();
+  await page.waitForFunction(
+    () => document.querySelector("[data-autoplay-loop]").paused,
+  );
+
+  // The annotation still reveals on entry and ends fully visible.
   const annotation = page.locator('[data-motion="annotation"]');
   await annotation.scrollIntoViewIfNeeded();
   await page
@@ -37,86 +77,105 @@ export async function checkMotion(browser, baseURL) {
     "none",
     "Completed annotations must remain fully visible",
   );
-  const diagram = page.locator("#handoff-diagram");
-  const progress = () =>
-    diagram.evaluate((element) =>
-      Number(getComputedStyle(element).getPropertyValue("--route-progress")),
-    );
-  const scrollToProgress = async (position) => {
-    await diagram.evaluate((element, fraction) => {
+
+  // Words light up with scroll, forwards and in reverse.
+  const statement = page.locator("[data-lit]");
+  const scrollToProgress = async (fraction) => {
+    await statement.evaluate((element, position) => {
       const top = element.getBoundingClientRect().top + scrollY;
       window.scrollTo({
         top:
-          top - innerHeight + (innerHeight + element.offsetHeight) * fraction,
+          top - innerHeight + (innerHeight + element.offsetHeight) * position,
         behavior: "instant",
       });
-    }, position);
-    await page.waitForTimeout(100);
-    return progress();
+    }, fraction);
+    await page.waitForTimeout(120);
+    return statement.evaluate((element) => ({
+      progress: Number(element.dataset.litProgress),
+      lit: element.querySelectorAll(".word.is-lit").length,
+    }));
   };
-  const stroke = () =>
-    diagram
-      .locator(".handoff-route")
-      .first()
-      .evaluate((element) => getComputedStyle(element).strokeDashoffset);
-  const before = await scrollToProgress(0.1);
-  const strokeBefore = await stroke();
-  const after = await scrollToProgress(0.9);
-  assert.notEqual(
-    await stroke(),
-    strokeBefore,
-    "SVG route does not visibly draw with scroll",
-  );
+  const before = await scrollToProgress(0.15);
+  const after = await scrollToProgress(0.85);
   assert.ok(
-    after > before + 0.3,
-    `Scroll sequence does not advance: ${before} -> ${after}`,
+    after.progress > before.progress + 0.3 && after.lit > before.lit,
+    `Statement does not advance: ${JSON.stringify(before)} -> ${JSON.stringify(after)}`,
   );
   const reverse = await scrollToProgress(0.2);
-  assert.ok(reverse < after - 0.2, "Scroll sequence does not reverse");
-  const artwork = page.locator(".release-artwork");
-  await artwork.scrollIntoViewIfNeeded();
-  await page.locator('.release-artwork[data-reveal-state="playing"]').waitFor();
-  assert.ok(
-    await artwork.evaluate(
-      (element) => element.getAnimations({ subtree: true }).length > 0,
+  assert.ok(reverse.lit < after.lit, "Statement does not reverse");
+  assert.equal(
+    await statement.getAttribute("aria-label"),
+    await statement.evaluate((element) =>
+      [...element.querySelectorAll(".word")]
+        .map((word) => word.textContent)
+        .join(" "),
     ),
-    "Artwork must animate on entry",
+    "Split statement keeps its accessible text",
   );
-  await page.screenshot({ path: ".qa/artwork-animation-start.png" });
-  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-  await page.locator('.release-artwork[data-reveal-state="paused"]').waitFor();
+
+  // Exactly the workflow step in the middle of the viewport is active.
+  const secondStep = page.locator('.step[data-step="1"]');
+  await secondStep.evaluate((element) =>
+    element.scrollIntoView({ block: "center", behavior: "instant" }),
+  );
   await page.waitForFunction(() =>
     document
-      .querySelector(".release-artwork")
+      .querySelector('.step[data-step="1"]')
+      .classList.contains("is-active"),
+  );
+  assert.equal(
+    await page
+      .locator('.step[data-step="3"]')
+      .evaluate((element) => element.classList.contains("is-active")),
+    false,
+  );
+
+  // Card entrances pause offscreen and resume on return.
+  const cards = page.locator('[data-motion="cards"]');
+  await cards.scrollIntoViewIfNeeded();
+  await page
+    .locator('[data-motion="cards"][data-reveal-state="playing"]')
+    .waitFor();
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await page
+    .locator('[data-motion="cards"][data-reveal-state="paused"]')
+    .waitFor();
+  await page.waitForFunction(() =>
+    document
+      .querySelector('[data-motion="cards"]')
       .getAnimations({ subtree: true })
       .every((animation) => !animation.pending),
   );
-  const artworkTimes = () =>
-    artwork.evaluate((element) =>
+  const cardTimes = () =>
+    cards.evaluate((element) =>
       element
         .getAnimations({ subtree: true })
         .map((animation) => animation.currentTime),
     );
-  const pausedAt = await artworkTimes();
+  const pausedAt = await cardTimes();
   await page.waitForTimeout(180);
   assert.deepEqual(
-    await artworkTimes(),
+    await cardTimes(),
     pausedAt,
     "Offscreen animations must pause",
   );
-  await artwork.scrollIntoViewIfNeeded();
-  await page.locator('.release-artwork[data-reveal-state="playing"]').waitFor();
+  await cards.scrollIntoViewIfNeeded();
+  await page
+    .locator('[data-motion="cards"][data-reveal-state="playing"]')
+    .waitFor();
+
+  // A live reduced-motion change settles everything.
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.waitForFunction(
     () => !document.documentElement.classList.contains("motion-enhanced"),
   );
-  assert.equal(await diagram.getAttribute("data-motion-state"), "static");
-  assert.equal(await artwork.getAttribute("data-reveal-state"), "static");
+  assert.equal(await cards.getAttribute("data-reveal-state"), "static");
+  assert.equal(await video.getAttribute("data-video-state"), "static");
+  assert.equal(await video.evaluate((element) => element.paused), true);
   assert.equal(
-    await artwork
-      .locator("img")
-      .evaluate((image) => getComputedStyle(image).transform),
-    "none",
+    await page.locator(".lit-text .word:not(.is-lit)").count(),
+    0,
+    "Reduced motion must light the whole statement",
   );
   assert.equal(
     await page.evaluate(
@@ -136,6 +195,7 @@ export async function checkMotion(browser, baseURL) {
   await page.locator('.page-intro[data-reveal-state="complete"]').waitFor();
   await context.close();
 
+  // Save-Data keeps the static poster and does not fetch the loop.
   const limited = await browser.newContext();
   await limited.addInitScript(() =>
     Object.defineProperty(navigator, "connection", {
@@ -144,34 +204,44 @@ export async function checkMotion(browser, baseURL) {
     }),
   );
   const economical = await limited.newPage();
+  const videoRequests = [];
+  economical.on("request", (request) => {
+    if (
+      request.url().includes("/assets/video/") &&
+      /\.(mp4|webm)/.test(request.url())
+    )
+      videoRequests.push(request.url());
+  });
   await economical.goto(baseURL);
+  await economical.waitForTimeout(500);
   assert.equal(await economical.locator("html.motion-enhanced").count(), 0);
-  assert.equal(
-    await economical
-      .locator("#handoff-diagram")
-      .getAttribute("data-motion-state"),
-    "static",
-  );
   assert.equal(
     await economical.locator('html[data-motion-mode="static"]').count(),
     1,
   );
   assert.equal(
     await economical
-      .locator('.release-artwork[data-reveal-state="static"]')
-      .count(),
-    1,
+      .locator("[data-autoplay-loop]")
+      .getAttribute("data-video-state"),
+    "static",
   );
+  assert.deepEqual(videoRequests, [], "Save-Data must not download video");
   await limited.close();
 
+  // Without JavaScript the page is complete and still.
   const plain = await browser.newContext({
     javaScriptEnabled: false,
     viewport: { width: 320, height: 740 },
   });
   const staticPage = await plain.newPage();
   await staticPage.goto(baseURL);
-  assert.ok(await staticPage.locator(".hero-annotation").isVisible());
-  assert.ok(await staticPage.locator("#handoff-diagram").isVisible());
+  assert.ok(await staticPage.locator(".screen-poster").isVisible());
+  assert.equal(
+    await staticPage
+      .locator(".screen-video")
+      .evaluate((element) => getComputedStyle(element).opacity),
+    "0",
+  );
   assert.equal(
     await staticPage
       .locator('.comparison-image[data-motion="annotation"]')
@@ -181,13 +251,7 @@ export async function checkMotion(browser, baseURL) {
   );
   assert.equal(
     await staticPage
-      .locator(".release-artwork img")
-      .evaluate((element) => getComputedStyle(element).opacity),
-    "1",
-  );
-  assert.equal(
-    await staticPage
-      .locator("#handoff-diagram")
+      .locator(".hero-screen")
       .evaluate(
         (element) => element.getBoundingClientRect().right <= innerWidth,
       ),
@@ -196,10 +260,13 @@ export async function checkMotion(browser, baseURL) {
   await plain.close();
   return {
     finiteHero: true,
+    heroFilmLoop: true,
+    heroTilt: true,
     viewportScenes: true,
     annotationReveal: true,
     offscreenPause: true,
     forwardAndReverseScroll: true,
+    activeStep: true,
     liveReducedMotion: true,
     saveData: true,
     staticWithoutJS: true,

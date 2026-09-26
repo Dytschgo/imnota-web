@@ -12,6 +12,7 @@ const publicFiles = [
   "install.html",
   "agents.html",
   "styles.css",
+  "home.css",
   "script.js",
   "robots.txt",
   "sitemap.xml",

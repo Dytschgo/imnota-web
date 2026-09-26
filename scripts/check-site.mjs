@@ -47,45 +47,29 @@ for (const width of [320, 768, 1024, 1440]) {
     false,
     "Visible dash",
   );
-  await page.locator(".handoff-line[data-ready]").waitFor();
-  const connector = await page.locator(".hero-visual").evaluate((figure) => {
-    const bounds = figure.getBoundingClientRect();
-    const image = figure.querySelector(".workbench").getBoundingClientRect();
-    const card = figure
-      .querySelector(".prompt-preview")
-      .getBoundingClientRect();
-    const svg = figure.querySelector("svg");
-    const points = [...svg.querySelectorAll("circle")].map((dot) => ({
-      x: Number(dot.getAttribute("cx")),
-      y: Number(dot.getAttribute("cy")),
-    }));
+  const hero = await page.locator(".hero-screen").evaluate((figure) => {
+    const frameElement = figure.querySelector(".screen-frame");
+    const frame = frameElement.getBoundingClientRect();
+    const poster = figure.querySelector(".screen-poster");
+    const sources = [...figure.querySelectorAll("video source")].map(
+      (source) => source.getAttribute("type").split(";")[0],
+    );
     return {
-      width: bounds.width,
-      height: bounds.height,
-      points,
-      endX: card.left - bounds.left,
-      stackedClear: innerWidth > 1100 || card.top >= image.bottom + 16,
-      annotationClear:
-        innerWidth <= 1100 || card.left >= image.left + image.width * 0.78,
+      left: frame.left,
+      right: frame.right,
+      // Layout size, independent of the scroll-driven tilt transform.
+      ratio: frameElement.offsetWidth / frameElement.offsetHeight,
+      posterLoaded: poster.complete && poster.naturalWidth > 0,
+      sources,
     };
   });
   assert.ok(
-    connector.stackedClear && connector.annotationClear,
-    `Card obscures annotation at ${width}`,
+    hero.left >= 0 && hero.right <= width,
+    `Hero screen overflows at ${width}`,
   );
-  for (const point of connector.points) {
-    assert.ok(
-      point.x >= 5 &&
-        point.x <= connector.width - 5 &&
-        point.y >= 5 &&
-        point.y <= connector.height - 5,
-      `Clipped connector dot at ${width}`,
-    );
-  }
-  assert.ok(
-    Math.abs(connector.points[1].x - connector.endX) < 1,
-    "Connector misses handoff card",
-  );
+  assert.ok(Math.abs(hero.ratio - 16 / 9) < 0.02, "Hero screen is not 16:9");
+  assert.ok(hero.posterLoaded, `Hero poster missing at ${width}`);
+  assert.deepEqual(hero.sources, ["video/mp4", "video/webm"]);
   const axe = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
     .analyze();
@@ -104,6 +88,28 @@ for (const width of [320, 768, 1024, 1440]) {
     axeViolations: axe.violations.length,
   });
 }
+for (const [filename, type, minimum] of [
+  ["imnota-hero-loop.mp4", "video/mp4", 500_000],
+  ["imnota-hero-loop.webm", "video/webm", 500_000],
+  ["imnota-film.mp4", "video/mp4", 2_000_000],
+  ["imnota-reel.mp4", "video/mp4", 1_000_000],
+]) {
+  const response = await context.request.get(
+    `${baseURL}/assets/video/${filename}`,
+  );
+  assert.equal(response.status(), 200, `Missing video ${filename}`);
+  assert.match(response.headers()["content-type"], new RegExp(type));
+  assert.ok((await response.body()).length > minimum, `${filename} too small`);
+}
+for (const selector of [".film-video", ".reel-video"]) {
+  const player = page.locator(selector);
+  assert.equal(await player.getAttribute("controls"), "");
+  assert.equal(await player.getAttribute("preload"), "none");
+  assert.ok(await player.getAttribute("poster"));
+}
+await page.locator("[data-play-film]").click();
+assert.equal(new URL(page.url()).hash, "#film");
+await page.evaluate(() => document.getElementById("film-video").pause());
 for (const filename of ["prompt-1.md", "prompt-1.png"]) {
   const response = await context.request.get(
     `${baseURL}/assets/examples/${filename}`,
@@ -174,11 +180,21 @@ assert.equal(await page.locator(".mobile-menu").getAttribute("open"), "");
 await page.keyboard.press("Escape");
 assert.equal(await page.locator(".mobile-menu").getAttribute("open"), null);
 await page.emulateMedia({ reducedMotion: "reduce" });
+await page.waitForFunction(
+  () =>
+    document.querySelector("[data-autoplay-loop]").dataset.videoState ===
+    "static",
+);
 assert.equal(
   await page
-    .locator(".handoff-line path")
-    .evaluate((el) => getComputedStyle(el).animationName),
+    .locator(".screen-frame")
+    .evaluate((el) => getComputedStyle(el).transform),
   "none",
+);
+assert.equal(
+  await page.locator(".lit-text .word:not(.is-lit)").count(),
+  0,
+  "Reduced motion must show the complete statement",
 );
 await page.goto(`${baseURL}/#install-manual`);
 assert.equal(await page.locator("#install-manual").isVisible(), true);
@@ -200,6 +216,11 @@ assert.equal(
 await plain.route("**/assets/screenshots/**", (route) => route.abort());
 await plain.reload();
 assert.equal(await plain.locator("#installation").isVisible(), true);
+assert.equal(await plain.locator(".screen-poster").isVisible(), true);
+assert.match(
+  await plain.locator(".lit-text").innerText(),
+  /what should change\./,
+);
 assert.equal(
   await plain.evaluate(() => document.documentElement.scrollWidth > innerWidth),
   false,
@@ -274,7 +295,7 @@ for (const route of [
 await page.goto(`${baseURL}/changelog.html#v0-2-4`);
 assert.match(await page.locator("#v0-2-4").innerText(), /Beta/);
 assert.match(await page.locator("#v0-2-4").innerText(), /Back up/);
-assert.equal(await page.locator(".release-entry").count(), 9);
+assert.equal(await page.locator(".release-entry").count(), 10);
 assert.match(await page.locator("#v0-2-5").innerText(), /schema 4/);
 assert.match(await page.locator("#v0-2-5").innerText(), /Text-only/);
 await page.goto(baseURL);
@@ -289,11 +310,14 @@ assert.match(
   await page.locator("#v0-2-8").innerText(),
   /across display boundaries/,
 );
+assert.match(await page.locator("#v0-3-0").innerText(), /127\.0\.0\.1/);
+assert.match(await page.locator("#v0-3-0").innerText(), /window/);
+assert.match(await page.locator(".release-overview").innerText(), /0\.3\.0/);
 await page.goto(baseURL);
 await page.locator(".release-announcement").click();
 assert.equal(new URL(page.url()).hash, "#latest");
-await page.locator('#latest a[href="changelog.html#v0-2-8"]').first().click();
-assert.equal(new URL(page.url()).hash, "#v0-2-8");
+await page.locator('#latest a[href="changelog.html#v0-3-0"]').first().click();
+assert.equal(new URL(page.url()).hash, "#v0-3-0");
 for (const route of ["", "install.html"]) {
   await page.goto(`${baseURL}/${route}`);
   const stableLinks = await page
@@ -301,8 +325,8 @@ for (const route of ["", "install.html"]) {
     .evaluateAll((links) => links.map((link) => link.href));
   assert.equal(stableLinks.length, 3);
   assert.ok(
-    stableLinks.every((link) => link.includes("/releases/download/v0.2.8/")),
-    `${route || "Homepage"} download links must point to stable 0.2.8`,
+    stableLinks.every((link) => link.includes("/releases/download/v0.3.0/")),
+    `${route || "Homepage"} download links must point to stable 0.3.0`,
   );
   assert.match(await page.locator("main").innerText(), /macOS 13 or later/);
 }

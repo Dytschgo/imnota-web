@@ -2422,3 +2422,234 @@ html[data-motion-mode="full"]
     margin: 24px 0 0 auto;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Cinematic design layer (0.3.0).
+   Near-black stage, heavy tight display type, indigo and cyan light.
+   Declared last so it restyles the shared chrome on every page.
+   ------------------------------------------------------------------------ */
+@font-face {
+  font-family: Schibsted;
+  src: url("assets/fonts/schibsted-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Schibsted;
+  src: url("assets/fonts/schibsted-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Schibsted;
+  src: url("assets/fonts/schibsted-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Schibsted;
+  src: url("assets/fonts/schibsted-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --bg: #06070b;
+  --surface: #101319;
+  --raised: #171b24;
+  --text: #f4f5f7;
+  --muted: #b3bac8;
+  --faint: #8a92a3;
+  --accent: #6857f5;
+  --accent-light: #a99dff;
+  --cyan: #3ec6e0;
+  --border: #232833;
+  --line-soft: rgba(244, 245, 247, 0.09);
+  --font: Schibsted, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --display-tracking: -0.045em;
+  --radius: 14px;
+  --gradient: linear-gradient(100deg, #9d90ff 8%, #3ec6e0 92%);
+}
+body {
+  font: 400 17px/1.6 var(--font);
+  background:
+    radial-gradient(
+      60% 50% at 50% -8%,
+      rgba(104, 87, 245, 0.2),
+      transparent 70%
+    ),
+    var(--bg);
+  background-repeat: no-repeat;
+}
+h1,
+h2,
+h3 {
+  font-weight: 800;
+  letter-spacing: var(--display-tracking);
+  text-wrap: balance;
+}
+h1 {
+  font-size: clamp(48px, 8.4vw, 132px);
+  line-height: 0.94;
+}
+h2 {
+  font-size: clamp(36px, 5.2vw, 76px);
+  line-height: 0.98;
+}
+h3 {
+  font-size: clamp(22px, 2vw, 28px);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+.section {
+  padding-block: clamp(80px, 11vw, 150px);
+}
+.eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.lead,
+.page-lead {
+  color: var(--muted);
+  text-wrap: balance;
+}
+.accent-word,
+.grad-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Header: floating glass bar */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 64px;
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(6, 7, 11, 0.72);
+  -webkit-backdrop-filter: saturate(1.5) blur(18px);
+  backdrop-filter: saturate(1.5) blur(18px);
+  width: 100%;
+  padding-inline: max(var(--space), calc((100% - 1320px) / 2));
+}
+.brand {
+  font-size: 21px;
+  font-weight: 800;
+}
+.brand img {
+  width: 30px;
+  height: 30px;
+}
+.desktop-nav {
+  gap: 26px;
+}
+/* Buttons: pills */
+.button {
+  gap: 12px;
+  min-height: 50px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
+  font-weight: 600;
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.7, 0.1, 1),
+    background 0.2s,
+    box-shadow 0.25s;
+}
+.button:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  transform: scale(1.03);
+  box-shadow: 0 10px 40px rgba(104, 87, 245, 0.35);
+}
+.button-small {
+  min-height: 44px;
+  padding: 8px 18px;
+  font-size: 14px;
+  gap: 10px;
+}
+.button-secondary,
+.button-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: rgba(244, 245, 247, 0.22);
+}
+.button-secondary:hover,
+.button-ghost:hover {
+  background: rgba(244, 245, 247, 0.07);
+  border-color: rgba(244, 245, 247, 0.4);
+  box-shadow: none;
+}
+.text-link {
+  color: var(--accent-light);
+}
+.release-announcement {
+  padding: 6px 14px 6px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line-soft);
+  background: rgba(16, 19, 25, 0.7);
+}
+.release-badge {
+  border-radius: 999px;
+  padding: 3px 11px;
+}
+/* Subpage intros share the display scale */
+.page-intro {
+  padding-top: clamp(64px, 9vw, 130px);
+  padding-bottom: clamp(48px, 6vw, 90px);
+}
+.page-intro h1 {
+  font-size: clamp(46px, 7.4vw, 112px);
+  max-width: 14ch;
+}
+.page-lead {
+  font-size: clamp(18px, 1.6vw, 21px);
+}
+.feature-group h2,
+.release-entry h2 {
+  font-size: clamp(32px, 4vw, 56px);
+}
+.detail-image img,
+.wide-product img {
+  border-radius: var(--radius);
+}
+.code-block {
+  border-radius: var(--radius);
+}
+.site-footer {
+  border-top-color: var(--line-soft);
+}
+@media (max-width: 1100px) {
+  .site-header {
+    padding-inline: var(--space);
+  }
+}
+@media (max-width: 767px) {
+  .site-header {
+    gap: 12px;
+  }
+}
+@media (max-width: 420px) {
+  .site-header .button-small {
+    display: none;
+  }
+  .mobile-menu {
+    margin-left: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button:hover {
+    transition: none;
+    transform: none;
+  }
+}
