@@ -2,6 +2,13 @@
 
 Production is https://imnota.xyz/. The release process runs browser checks locally and against that domain after deployment; raw run records are stored in ignored `.qa/` and GitHub CI records the reviewed source revision.
 
+## Stable 0.4.0 update, 14 October 2026
+
+- Verified GitHub's latest stable release as `v0.4.0`, published 29 September 2026. All six versioned installer URLs on the homepage and installation page match published release assets.
+- Updated the release announcement, spotlight, downloads, structured version metadata, feature reference and `llms.txt`. Added the 0.4.0 changelog entry from published release notes and preserved the current 0.3.0 redesign and product films; historical screenshot labels and older release entries retain their original versions.
+- Formatting, HTML validation and the production build pass. The browser suite passes all 20 page/viewport combinations against `dist`, with zero axe violations, horizontal overflow or runtime errors. Latest-release navigation, download links and existing interaction and motion checks pass. Inspected the desktop homepage and mobile changelog in the collaborative preview.
+- These changes are verified locally; production deployment has not been performed for this update.
+
 ## Motion and generated artwork, 22 September 2026
 
 - Added finite viewport entrances for the product preview, annotation comparison, workflow steps, release artwork, release highlights and page headings. Feature rows and download tiles respond to hover and keyboard focus. The existing scroll-driven handoff diagram is preserved.

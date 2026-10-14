@@ -295,7 +295,11 @@ for (const route of [
 await page.goto(`${baseURL}/changelog.html#v0-2-4`);
 assert.match(await page.locator("#v0-2-4").innerText(), /Beta/);
 assert.match(await page.locator("#v0-2-4").innerText(), /Back up/);
-assert.equal(await page.locator(".release-entry").count(), 10);
+assert.equal(await page.locator(".release-entry").count(), 11);
+assert.equal(
+  await page.locator(".release-entry-latest").getAttribute("id"),
+  "v0-4-0",
+);
 assert.match(await page.locator("#v0-2-5").innerText(), /schema 4/);
 assert.match(await page.locator("#v0-2-5").innerText(), /Text-only/);
 await page.goto(baseURL);
@@ -312,12 +316,12 @@ assert.match(
 );
 assert.match(await page.locator("#v0-3-0").innerText(), /127\.0\.0\.1/);
 assert.match(await page.locator("#v0-3-0").innerText(), /window/);
-assert.match(await page.locator(".release-overview").innerText(), /0\.3\.0/);
+assert.match(await page.locator(".release-overview").innerText(), /0\.4\.0/);
 await page.goto(baseURL);
 await page.locator(".release-announcement").click();
 assert.equal(new URL(page.url()).hash, "#latest");
-await page.locator('#latest a[href="changelog.html#v0-3-0"]').first().click();
-assert.equal(new URL(page.url()).hash, "#v0-3-0");
+await page.locator('#latest a[href="changelog.html#v0-4-0"]').first().click();
+assert.equal(new URL(page.url()).hash, "#v0-4-0");
 for (const route of ["", "install.html"]) {
   await page.goto(`${baseURL}/${route}`);
   const stableLinks = await page
@@ -325,8 +329,8 @@ for (const route of ["", "install.html"]) {
     .evaluateAll((links) => links.map((link) => link.href));
   assert.equal(stableLinks.length, 3);
   assert.ok(
-    stableLinks.every((link) => link.includes("/releases/download/v0.3.0/")),
-    `${route || "Homepage"} download links must point to stable 0.3.0`,
+    stableLinks.every((link) => link.includes("/releases/download/v0.4.0/")),
+    `${route || "Homepage"} download links must point to stable 0.4.0`,
   );
   assert.match(await page.locator("main").innerText(), /macOS 13 or later/);
 }
