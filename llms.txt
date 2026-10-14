@@ -15,7 +15,7 @@
 
 ## Product facts
 
-- Current stable version: 0.3.0 (26 September 2026)
+- Current stable version: 0.4.0 (29 September 2026)
 - Platforms: Windows, macOS 13 or later, and Linux
 - Local editing, copy and export require no account and work offline.
 - Optional hosted sharing uploads approved finalized artifacts and provides expiring, revocable links with browser copy and ZIP downloads. Anyone with the link can access the bundle until expiry or revocation.
@@ -27,7 +27,7 @@
 - Optional local agent access (MCP) lets coding agents on the same computer read prepared bundles. It is off by default and listens only on 127.0.0.1.
 - Search includes saved descriptions, annotation text, Markdown and drawing text, not OCR of screenshot pixels.
 - Drawing descriptions are included in exported Markdown.
-- Windows defaults to Copy files and remembers the preferred copy format. Separate Markdown, PNG and rich-copy actions are available; receiver support varies.
+- Windows and macOS default to Copy files. Choose a format in the card copy menu. Separate Markdown, PNG and rich-copy actions are available; receiver support varies.
 - Local backup snapshots support validation, restore and ZIP export. Automatic history is opt-in before migrations and whole-project deletion, not continuous edit history.
 - Background update checks run at startup and about hourly. Downloads and installation require the user's action.
 - Annotations include arrows, lines, shapes, highlights, text, callouts, steps and sensitive-area masks.
