@@ -13,7 +13,7 @@ Each film is an HTML/CSS scene rendered frame by frame in Electron with determin
 
 ## Capture and handoff illustration, 22 September 2026
 
-Generated with the built-in ChatGPT Image tool for the release spotlight. This is conceptual editorial artwork, not a product screenshot. The original PNG remains at `C:/Users/DylanFerraro/.codex/generated_images/01a0ca12-e9cf-70d2-acb4-ca012dadf84d/exec-db1dc779-af8a-4b10-ad71-e2cc64a686b2.png`.
+Generated with the built-in ChatGPT Image tool for the release spotlight. This is conceptual editorial artwork, not a product screenshot. The original PNG remains in a local generated-images directory.
 
 The inspected 1672 × 941 output was resized and encoded with Sharp for the website:
 
